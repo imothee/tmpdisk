@@ -1,0 +1,525 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4103FF9214440A2900618177 /* eject.png in Resources */ = {isa = PBXBuildFile; fileRef = 4103FF9114440A2900618177 /* eject.png */; };
+		410B9B2E1456E7EC003FE088 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B2D1456E7EC003FE088 /* status.png */; };
+		410B9B331456F18C003FE088 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B321456F18B003FE088 /* icon.icns */; };
+		412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 412EC7E6146DF1C600D569F1 /* eject_a.png */; };
+		418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A2894144299DE00D4BCB0 /* Cocoa.framework */; };
+		418A289F144299DE00D4BCB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A289D144299DE00D4BCB0 /* InfoPlist.strings */; };
+		418A28A1144299DE00D4BCB0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28A0144299DE00D4BCB0 /* main.m */; };
+		418A28A5144299DE00D4BCB0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 418A28A3144299DE00D4BCB0 /* Credits.rtf */; };
+		418A28A8144299DE00D4BCB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28A7144299DE00D4BCB0 /* AppDelegate.m */; };
+		418A28AB144299DF00D4BCB0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418A28A9144299DE00D4BCB0 /* MainMenu.xib */; };
+		418A28B3144299DF00D4BCB0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */; };
+		418A28B4144299DF00D4BCB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A2894144299DE00D4BCB0 /* Cocoa.framework */; };
+		418A28BC144299DF00D4BCB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A28BA144299DF00D4BCB0 /* InfoPlist.strings */; };
+		418A28BF144299DF00D4BCB0 /* TmpDiskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28BE144299DF00D4BCB0 /* TmpDiskTests.m */; };
+		418A28D31442A08D00D4BCB0 /* TmpDiskStatusBarListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28D21442A08D00D4BCB0 /* TmpDiskStatusBarListener.m */; };
+		418A28D71442A2B400D4BCB0 /* NewTmpDisk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418A28D51442A2B400D4BCB0 /* NewTmpDisk.xib */; };
+		418A28DA1442A2F800D4BCB0 /* NewTmpDiskWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28D91442A2F800D4BCB0 /* NewTmpDiskWindow.m */; };
+		418A28E51442CE8D00D4BCB0 /* TmpDiskMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */; };
+		418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		418A28B5144299DF00D4BCB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 418A2887144299DE00D4BCB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 418A288F144299DE00D4BCB0;
+			remoteInfo = TmpDisk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4103FF9114440A2900618177 /* eject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject.png; sourceTree = "<group>"; };
+		410B9B2D1456E7EC003FE088 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
+		410B9B321456F18B003FE088 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		412EC7E6146DF1C600D569F1 /* eject_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_a.png; sourceTree = "<group>"; };
+		418A2890144299DE00D4BCB0 /* TmpDisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		418A2894144299DE00D4BCB0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		418A2897144299DE00D4BCB0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		418A2898144299DE00D4BCB0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		418A2899144299DE00D4BCB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		418A289C144299DE00D4BCB0 /* TmpDisk-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TmpDisk-Info.plist"; sourceTree = "<group>"; };
+		418A289E144299DE00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		418A28A0144299DE00D4BCB0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		418A28A2144299DE00D4BCB0 /* TmpDisk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TmpDisk-Prefix.pch"; sourceTree = "<group>"; };
+		418A28A4144299DE00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		418A28A6144299DE00D4BCB0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		418A28A7144299DE00D4BCB0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		418A28AA144299DF00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		418A28B1144299DF00D4BCB0 /* TmpDiskTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TmpDiskTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		418A28B9144299DF00D4BCB0 /* TmpDiskTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TmpDiskTests-Info.plist"; sourceTree = "<group>"; };
+		418A28BB144299DF00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		418A28BD144299DF00D4BCB0 /* TmpDiskTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TmpDiskTests.h; sourceTree = "<group>"; };
+		418A28BE144299DF00D4BCB0 /* TmpDiskTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TmpDiskTests.m; sourceTree = "<group>"; };
+		418A28D11442A08D00D4BCB0 /* TmpDiskStatusBarListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskStatusBarListener.h; path = Classes/TmpDiskStatusBarListener.h; sourceTree = "<group>"; };
+		418A28D21442A08D00D4BCB0 /* TmpDiskStatusBarListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskStatusBarListener.m; path = Classes/TmpDiskStatusBarListener.m; sourceTree = "<group>"; };
+		418A28D61442A2B400D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NewTmpDisk.xib; sourceTree = "<group>"; };
+		418A28D81442A2F800D4BCB0 /* NewTmpDiskWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewTmpDiskWindow.h; path = Classes/NewTmpDiskWindow.h; sourceTree = "<group>"; };
+		418A28D91442A2F800D4BCB0 /* NewTmpDiskWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewTmpDiskWindow.m; path = Classes/NewTmpDiskWindow.m; sourceTree = "<group>"; };
+		418A28E31442CE8D00D4BCB0 /* TmpDiskMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskMenuItem.h; path = Classes/TmpDiskMenuItem.h; sourceTree = "<group>"; };
+		418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskMenuItem.m; path = Classes/TmpDiskMenuItem.m; sourceTree = "<group>"; };
+		418A28E61442D05100D4BCB0 /* TmpDiskMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskMenuItemView.h; path = Classes/TmpDiskMenuItemView.h; sourceTree = "<group>"; };
+		418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskMenuItemView.m; path = Classes/TmpDiskMenuItemView.m; sourceTree = "<group>"; };
+		41A5021C146268F600BC762D /* TmpDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TmpDisk.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		418A288D144299DE00D4BCB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		418A28AD144299DF00D4BCB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A28B3144299DF00D4BCB0 /* SenTestingKit.framework in Frameworks */,
+				418A28B4144299DF00D4BCB0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4103FF9014440A2900618177 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				412EC7E6146DF1C600D569F1 /* eject_a.png */,
+				410B9B2D1456E7EC003FE088 /* status.png */,
+				4103FF9114440A2900618177 /* eject.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		418A2885144299DE00D4BCB0 = {
+			isa = PBXGroup;
+			children = (
+				418A289A144299DE00D4BCB0 /* TmpDisk */,
+				418A28B7144299DF00D4BCB0 /* TmpDiskTests */,
+				418A2893144299DE00D4BCB0 /* Frameworks */,
+				418A2891144299DE00D4BCB0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		418A2891144299DE00D4BCB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				418A2890144299DE00D4BCB0 /* TmpDisk.app */,
+				418A28B1144299DF00D4BCB0 /* TmpDiskTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		418A2893144299DE00D4BCB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				418A2894144299DE00D4BCB0 /* Cocoa.framework */,
+				418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */,
+				418A2896144299DE00D4BCB0 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		418A2896144299DE00D4BCB0 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				418A2897144299DE00D4BCB0 /* AppKit.framework */,
+				418A2898144299DE00D4BCB0 /* CoreData.framework */,
+				418A2899144299DE00D4BCB0 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		418A289A144299DE00D4BCB0 /* TmpDisk */ = {
+			isa = PBXGroup;
+			children = (
+				41A5021C146268F600BC762D /* TmpDisk.entitlements */,
+				410B9B321456F18B003FE088 /* icon.icns */,
+				4103FF9014440A2900618177 /* Images */,
+				418A28D41442A09300D4BCB0 /* StatusBar */,
+				418A28A6144299DE00D4BCB0 /* AppDelegate.h */,
+				418A28A7144299DE00D4BCB0 /* AppDelegate.m */,
+				418A28A9144299DE00D4BCB0 /* MainMenu.xib */,
+				418A28D51442A2B400D4BCB0 /* NewTmpDisk.xib */,
+				418A289B144299DE00D4BCB0 /* Supporting Files */,
+			);
+			path = TmpDisk;
+			sourceTree = "<group>";
+		};
+		418A289B144299DE00D4BCB0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				418A289C144299DE00D4BCB0 /* TmpDisk-Info.plist */,
+				418A289D144299DE00D4BCB0 /* InfoPlist.strings */,
+				418A28A0144299DE00D4BCB0 /* main.m */,
+				418A28A2144299DE00D4BCB0 /* TmpDisk-Prefix.pch */,
+				418A28A3144299DE00D4BCB0 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		418A28B7144299DF00D4BCB0 /* TmpDiskTests */ = {
+			isa = PBXGroup;
+			children = (
+				418A28BD144299DF00D4BCB0 /* TmpDiskTests.h */,
+				418A28BE144299DF00D4BCB0 /* TmpDiskTests.m */,
+				418A28B8144299DF00D4BCB0 /* Supporting Files */,
+			);
+			path = TmpDiskTests;
+			sourceTree = "<group>";
+		};
+		418A28B8144299DF00D4BCB0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				418A28B9144299DF00D4BCB0 /* TmpDiskTests-Info.plist */,
+				418A28BA144299DF00D4BCB0 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		418A28D41442A09300D4BCB0 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				418A28D11442A08D00D4BCB0 /* TmpDiskStatusBarListener.h */,
+				418A28D21442A08D00D4BCB0 /* TmpDiskStatusBarListener.m */,
+				418A28D81442A2F800D4BCB0 /* NewTmpDiskWindow.h */,
+				418A28D91442A2F800D4BCB0 /* NewTmpDiskWindow.m */,
+				418A28E31442CE8D00D4BCB0 /* TmpDiskMenuItem.h */,
+				418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */,
+				418A28E61442D05100D4BCB0 /* TmpDiskMenuItemView.h */,
+				418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */,
+			);
+			name = StatusBar;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		418A288F144299DE00D4BCB0 /* TmpDisk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 418A28C2144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDisk" */;
+			buildPhases = (
+				418A288C144299DE00D4BCB0 /* Sources */,
+				418A288D144299DE00D4BCB0 /* Frameworks */,
+				418A288E144299DE00D4BCB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TmpDisk;
+			productName = TmpDisk;
+			productReference = 418A2890144299DE00D4BCB0 /* TmpDisk.app */;
+			productType = "com.apple.product-type.application";
+		};
+		418A28B0144299DF00D4BCB0 /* TmpDiskTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 418A28C5144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDiskTests" */;
+			buildPhases = (
+				418A28AC144299DF00D4BCB0 /* Sources */,
+				418A28AD144299DF00D4BCB0 /* Frameworks */,
+				418A28AE144299DF00D4BCB0 /* Resources */,
+				418A28AF144299DF00D4BCB0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				418A28B6144299DF00D4BCB0 /* PBXTargetDependency */,
+			);
+			name = TmpDiskTests;
+			productName = TmpDiskTests;
+			productReference = 418A28B1144299DF00D4BCB0 /* TmpDiskTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		418A2887144299DE00D4BCB0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Ink Scribbles Pty Ltd";
+			};
+			buildConfigurationList = 418A288A144299DE00D4BCB0 /* Build configuration list for PBXProject "TmpDisk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 418A2885144299DE00D4BCB0;
+			productRefGroup = 418A2891144299DE00D4BCB0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				418A288F144299DE00D4BCB0 /* TmpDisk */,
+				418A28B0144299DF00D4BCB0 /* TmpDiskTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		418A288E144299DE00D4BCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A289F144299DE00D4BCB0 /* InfoPlist.strings in Resources */,
+				418A28A5144299DE00D4BCB0 /* Credits.rtf in Resources */,
+				418A28AB144299DF00D4BCB0 /* MainMenu.xib in Resources */,
+				418A28D71442A2B400D4BCB0 /* NewTmpDisk.xib in Resources */,
+				4103FF9214440A2900618177 /* eject.png in Resources */,
+				410B9B2E1456E7EC003FE088 /* status.png in Resources */,
+				410B9B331456F18C003FE088 /* icon.icns in Resources */,
+				412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		418A28AE144299DF00D4BCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A28BC144299DF00D4BCB0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		418A28AF144299DF00D4BCB0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		418A288C144299DE00D4BCB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A28A1144299DE00D4BCB0 /* main.m in Sources */,
+				418A28A8144299DE00D4BCB0 /* AppDelegate.m in Sources */,
+				418A28D31442A08D00D4BCB0 /* TmpDiskStatusBarListener.m in Sources */,
+				418A28DA1442A2F800D4BCB0 /* NewTmpDiskWindow.m in Sources */,
+				418A28E51442CE8D00D4BCB0 /* TmpDiskMenuItem.m in Sources */,
+				418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		418A28AC144299DF00D4BCB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418A28BF144299DF00D4BCB0 /* TmpDiskTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		418A28B6144299DF00D4BCB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 418A288F144299DE00D4BCB0 /* TmpDisk */;
+			targetProxy = 418A28B5144299DF00D4BCB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		418A289D144299DE00D4BCB0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				418A289E144299DE00D4BCB0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		418A28A3144299DE00D4BCB0 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				418A28A4144299DE00D4BCB0 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		418A28A9144299DE00D4BCB0 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				418A28AA144299DF00D4BCB0 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		418A28BA144299DF00D4BCB0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				418A28BB144299DF00D4BCB0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		418A28D51442A2B400D4BCB0 /* NewTmpDisk.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				418A28D61442A2B400D4BCB0 /* en */,
+			);
+			name = NewTmpDisk.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		418A28C0144299DF00D4BCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		418A28C1144299DF00D4BCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		418A28C3144299DF00D4BCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
+				INFOPLIST_FILE = "TmpDisk/TmpDisk-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		418A28C4144299DF00D4BCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
+				INFOPLIST_FILE = "TmpDisk/TmpDisk-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		418A28C6144299DF00D4BCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TmpDisk.app/Contents/MacOS/TmpDisk";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
+				INFOPLIST_FILE = "TmpDiskTests/TmpDiskTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		418A28C7144299DF00D4BCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TmpDisk.app/Contents/MacOS/TmpDisk";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
+				INFOPLIST_FILE = "TmpDiskTests/TmpDiskTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		418A288A144299DE00D4BCB0 /* Build configuration list for PBXProject "TmpDisk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				418A28C0144299DF00D4BCB0 /* Debug */,
+				418A28C1144299DF00D4BCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		418A28C2144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDisk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				418A28C3144299DF00D4BCB0 /* Debug */,
+				418A28C4144299DF00D4BCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		418A28C5144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDiskTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				418A28C6144299DF00D4BCB0 /* Debug */,
+				418A28C7144299DF00D4BCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 418A2887144299DE00D4BCB0 /* Project object */;
+}
