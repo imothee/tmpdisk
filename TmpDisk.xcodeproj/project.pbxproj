@@ -11,6 +11,7 @@
 		410B9B2E1456E7EC003FE088 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B2D1456E7EC003FE088 /* status.png */; };
 		410B9B331456F18C003FE088 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B321456F18B003FE088 /* icon.icns */; };
 		412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 412EC7E6146DF1C600D569F1 /* eject_a.png */; };
+		413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413A37541470B12500C07D59 /* CoreServices.framework */; };
 		418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A2894144299DE00D4BCB0 /* Cocoa.framework */; };
 		418A289F144299DE00D4BCB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A289D144299DE00D4BCB0 /* InfoPlist.strings */; };
 		418A28A1144299DE00D4BCB0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28A0144299DE00D4BCB0 /* main.m */; };
@@ -43,6 +44,7 @@
 		410B9B2D1456E7EC003FE088 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
 		410B9B321456F18B003FE088 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		412EC7E6146DF1C600D569F1 /* eject_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_a.png; sourceTree = "<group>"; };
+		413A37541470B12500C07D59 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		418A2890144299DE00D4BCB0 /* TmpDisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		418A2894144299DE00D4BCB0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		418A2897144299DE00D4BCB0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -79,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */,
 				418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +130,7 @@
 		418A2893144299DE00D4BCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				413A37541470B12500C07D59 /* CoreServices.framework */,
 				418A2894144299DE00D4BCB0 /* Cocoa.framework */,
 				418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */,
 				418A2896144299DE00D4BCB0 /* Other Frameworks */,

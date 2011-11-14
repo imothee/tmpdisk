@@ -25,6 +25,41 @@
 @implementation TmpDiskStatusBarListener
 
 
+- (void)awakeFromNib {
+    
+    NSString * appPath = [[NSBundle mainBundle] bundlePath];
+	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath]; 
+    
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL,
+                                                            kLSSharedFileListSessionLoginItems, NULL);
+    
+    if (loginItems) {
+        UInt32 seedValue;
+        //Retrieve the list of Login Items and cast them to
+        // a NSArray so that it will be easier to iterate.
+        NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+        
+        for(int i = 0 ; i< [loginItemsArray count]; i++){
+            LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray
+                                                                        objectAtIndex:i];
+            //Resolve the item with URL
+            if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
+                NSString * urlPath = [(NSURL*)url path];
+                if ([urlPath compare:appPath] == NSOrderedSame){
+                    
+                    // We have a login startup item so set the menu to checked
+                    [startLoginMenuItem setState:NSOnState];
+                    
+                }
+            }
+        }
+        [loginItemsArray release];
+    }
+
+    CFRelease(loginItems);
+    
+}
+
 - (IBAction)newTmpDisk:(id)sender {
     
     if ([ntdwc window] == nil) {
@@ -58,6 +93,67 @@
     NSAlert *a = [NSAlert alertWithMessageText:@"TmpDisk Help" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Ram Disks are temporary disks that use your RAM (Memory) for storage. They are incredibly fast and can be very useful when used for performance or temporary files."];
     [a runModal];
     
+}
+
+/***
+ Toggle whether the Application should start on Login
+ */
+- (IBAction)startLogin:(id)sender {
+    
+    NSMenuItem *button = (NSMenuItem*) sender;
+    
+    NSString * appPath = [[NSBundle mainBundle] bundlePath];
+	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath]; 
+    
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL,
+                                                            kLSSharedFileListSessionLoginItems, NULL);
+    
+    if (button.state == NSOffState) {
+        
+        // Button is off, so switch to on and add to LoginItems
+        [button setState:NSOnState];
+        
+        if (loginItems) {
+            
+            //Insert an item to the list.
+            LSSharedFileListItemRef item = LSSharedFileListInsertItemURL(loginItems,
+                                                                         kLSSharedFileListItemLast, NULL, NULL,
+                                                                         url, NULL, NULL);
+            if (item){
+                CFRelease(item);
+            }
+            
+        }
+    } else {
+        
+        // Button is on, so switch to on and remove entry from LoginItems
+        [button setState:NSOffState];
+        
+        // Remove the login startup item
+        if (loginItems) {
+            UInt32 seedValue;
+            //Retrieve the list of Login Items and cast them to
+            // a NSArray so that it will be easier to iterate.
+            NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+            
+            for(int i = 0 ; i< [loginItemsArray count]; i++){
+                LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray
+                                                                            objectAtIndex:i];
+                //Resolve the item with URL
+                if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
+                    NSString * urlPath = [(NSURL*)url path];
+                    if ([urlPath compare:appPath] == NSOrderedSame){
+                        LSSharedFileListItemRemove(loginItems,itemRef);
+                    }
+                }
+            }
+            [loginItemsArray release];
+        }
+        
+        
+    }
+    
+    CFRelease(loginItems);
 }
 
 @end

@@ -22,10 +22,13 @@
 
 
 #import <Foundation/Foundation.h>
+#import <CoreServices/CoreServices.h>
 
 @interface TmpDiskStatusBarListener : NSObject {
     
     NSWindowController *ntdwc;
+    
+    IBOutlet NSMenuItem *startLoginMenuItem;
     
 }
 
@@ -36,6 +39,7 @@
 
 - (IBAction)quit:(id)sender;
 - (IBAction)about:(id)sender;
+- (IBAction)startLogin:(id)sender;
 - (IBAction)helpCenter:(id)sender;
 
 @end
