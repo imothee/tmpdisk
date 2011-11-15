@@ -12,6 +12,9 @@
 		410B9B331456F18C003FE088 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B321456F18B003FE088 /* icon.icns */; };
 		412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 412EC7E6146DF1C600D569F1 /* eject_a.png */; };
 		413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413A37541470B12500C07D59 /* CoreServices.framework */; };
+		418320CA14722C1D000D8488 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418320C914722C1D000D8488 /* Sparkle.framework */; };
+		418320CC14722C41000D8488 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 418320C914722C1D000D8488 /* Sparkle.framework */; };
+		418320CE14722EB5000D8488 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 418320CD14722EB5000D8488 /* dsa_pub.pem */; };
 		418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A2894144299DE00D4BCB0 /* Cocoa.framework */; };
 		418A289F144299DE00D4BCB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A289D144299DE00D4BCB0 /* InfoPlist.strings */; };
 		418A28A1144299DE00D4BCB0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28A0144299DE00D4BCB0 /* main.m */; };
@@ -39,12 +42,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		418320CB14722C34000D8488 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				418320CC14722C41000D8488 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4103FF9114440A2900618177 /* eject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject.png; sourceTree = "<group>"; };
 		410B9B2D1456E7EC003FE088 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
 		410B9B321456F18B003FE088 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		412EC7E6146DF1C600D569F1 /* eject_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_a.png; sourceTree = "<group>"; };
 		413A37541470B12500C07D59 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		418320C914722C1D000D8488 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		418320CD14722EB5000D8488 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		418A2890144299DE00D4BCB0 /* TmpDisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		418A2894144299DE00D4BCB0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		418A2897144299DE00D4BCB0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -83,6 +101,7 @@
 			files = (
 				413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */,
 				418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */,
+				418320CA14722C1D000D8488 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +149,7 @@
 		418A2893144299DE00D4BCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				418320C914722C1D000D8488 /* Sparkle.framework */,
 				413A37541470B12500C07D59 /* CoreServices.framework */,
 				418A2894144299DE00D4BCB0 /* Cocoa.framework */,
 				418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */,
@@ -167,6 +187,7 @@
 		418A289B144299DE00D4BCB0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				418320CD14722EB5000D8488 /* dsa_pub.pem */,
 				418A289C144299DE00D4BCB0 /* TmpDisk-Info.plist */,
 				418A289D144299DE00D4BCB0 /* InfoPlist.strings */,
 				418A28A0144299DE00D4BCB0 /* main.m */,
@@ -220,6 +241,7 @@
 				418A288C144299DE00D4BCB0 /* Sources */,
 				418A288D144299DE00D4BCB0 /* Frameworks */,
 				418A288E144299DE00D4BCB0 /* Resources */,
+				418320CB14722C34000D8488 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -289,6 +311,7 @@
 				410B9B2E1456E7EC003FE088 /* status.png in Resources */,
 				410B9B331456F18C003FE088 /* icon.icns in Resources */,
 				412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */,
+				418320CE14722EB5000D8488 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +466,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
@@ -456,6 +483,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
