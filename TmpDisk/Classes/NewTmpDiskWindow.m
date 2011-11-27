@@ -48,57 +48,36 @@
     int dsizeval = [diskSize intValue];
     int dsize = (dsizeval * 1024 * 1000) / 512;
     
-    if ([name length] == 0) {
-        NSAlert *a = [NSAlert alertWithMessageText:@"Error Creating TmpDisk" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"You must provide a Disk Name"];
-        [a runModal];
-        return;
-    }
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", name] isDirectory:nil]) {
-        NSAlert *a = [NSAlert alertWithMessageText:@"Error Creating TmpDisk" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"A Volume named %@ already exists.", name];
-        [a runModal];
-        return;
-    }
-    
-    
-    // We need a task to run the sys call to create a new tmpdisk volume
-    
-    NSTask *task;
-    task = [[[NSTask alloc] init] autorelease];
-    [task setLaunchPath: @"/bin/sh"];
-    
-    NSArray *arguments;
-    arguments = [NSArray arrayWithObjects: @"-c",
-                 [NSString stringWithFormat:@"diskutil erasevolume HFS+ \"%@\" `hdiutil attach -nomount ram://%d`", name, dsize], nil];
-    
-    [task setArguments:arguments];
-    
-    [task setTerminationHandler:^(NSTask* task) {
-        
-        
-        NSDictionary *tmpProps = [NSDictionary dictionaryWithObjects:
-                                  [NSArray arrayWithObjects:[NSNumber numberWithBool:NO], nil] forKeys:
-                                  [NSArray arrayWithObjects:@"backup", nil]];
-        
-        [tmpProps writeToFile:[NSString stringWithFormat:@"/Volumes/%@/.tmpdisk", name] atomically:YES];
-        
-        [self.window close];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TmpDiskCreated" object:name];
-        
-        
-        
-    }];
-    
     [diskNameLabel setHidden:YES];
     [diskSizeLabel setHidden:YES];
     [diskName setHidden:YES];
     [diskSize setHidden:YES];
     [sizeLabel setHidden:YES];
+    [diskAutoCreate setHidden:YES];
+    [createDisk setHidden:YES];
     
     [spinner startAnimation:self];
     
-    [task launch];
+    bool created = [TmpDiskManager createTmpDiskWithName:name size:dsize autoCreate:([diskAutoCreate state] == NSOnState) onSuccess:^(void) {
+       
+        [self.window close];
+        
+    }];
+    
+    // Failure so allow to re-renter information
+    if (!created) {
+        
+        [diskNameLabel setHidden:NO];
+        [diskSizeLabel setHidden:NO];
+        [diskName setHidden:NO];
+        [diskSize setHidden:NO];
+        [sizeLabel setHidden:NO];
+        [diskAutoCreate setHidden:NO];
+        [createDisk setHidden:NO];
+        
+        [spinner stopAnimation:self];
+        
+    }
     
 }
 

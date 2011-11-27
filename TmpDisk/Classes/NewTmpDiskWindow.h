@@ -22,6 +22,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TmpDiskManager.h"
+
 @interface NewTmpDiskWindow : NSObject {
     
     IBOutlet NSTextField *diskNameLabel;
@@ -31,6 +33,9 @@
     
     IBOutlet NSStepper *diskSize;
     IBOutlet NSTextField *sizeLabel;
+    IBOutlet NSButton *diskAutoCreate;
+    
+    IBOutlet NSButton *createDisk;
     
     IBOutlet NSProgressIndicator *spinner;
 }

@@ -27,6 +27,7 @@
 @interface TmpDiskStatusBarListener : NSObject {
     
     NSWindowController *ntdwc;
+    NSWindowController *acmwc;
     
     IBOutlet NSMenuItem *startLoginMenuItem;
     
@@ -39,6 +40,7 @@
 
 - (IBAction)quit:(id)sender;
 - (IBAction)about:(id)sender;
+- (IBAction)manageAutoCreate:(id)sender;
 - (IBAction)startLogin:(id)sender;
 - (IBAction)helpCenter:(id)sender;
 

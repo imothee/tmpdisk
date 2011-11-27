@@ -34,6 +34,29 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"]) {
+    
+        NSArray *autoCreateArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"];
+        
+        for (NSDictionary *d in autoCreateArray) {
+            
+            NSString *name = [d objectForKey:@"name"];
+            NSNumber *size = [d objectForKey:@"size"];
+            
+            if (name && size) {
+                
+                if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", name] isDirectory:nil]) {
+                    continue;
+                }
+                
+                [TmpDiskManager createTmpDiskWithName:name size:[size intValue] autoCreate:NO onSuccess:nil];
+                
+            }
+            
+        }
+        
+    }
 }
 
 - (void)awakeFromNib {

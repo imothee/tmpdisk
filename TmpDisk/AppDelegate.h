@@ -23,6 +23,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "TmpDiskMenuItem.h"
+#import "TmpDiskManager.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     

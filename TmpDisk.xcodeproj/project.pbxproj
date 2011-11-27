@@ -10,6 +10,7 @@
 		4103FF9214440A2900618177 /* eject.png in Resources */ = {isa = PBXBuildFile; fileRef = 4103FF9114440A2900618177 /* eject.png */; };
 		410B9B2E1456E7EC003FE088 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B2D1456E7EC003FE088 /* status.png */; };
 		410B9B331456F18C003FE088 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B321456F18B003FE088 /* icon.icns */; };
+		41283F8C147C88B7005EDE88 /* AutoCreateManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41283F8A147C88B7005EDE88 /* AutoCreateManager.xib */; };
 		412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 412EC7E6146DF1C600D569F1 /* eject_a.png */; };
 		413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413A37541470B12500C07D59 /* CoreServices.framework */; };
 		418320CA14722C1D000D8488 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418320C914722C1D000D8488 /* Sparkle.framework */; };
@@ -30,6 +31,8 @@
 		418A28DA1442A2F800D4BCB0 /* NewTmpDiskWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28D91442A2F800D4BCB0 /* NewTmpDiskWindow.m */; };
 		418A28E51442CE8D00D4BCB0 /* TmpDiskMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */; };
 		418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */; };
+		418DD4C2147DF2E400488297 /* AutoCreateManagerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */; };
+		418DF6A0147B57CD0069EEAC /* TmpDiskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DF69F147B57CD0069EEAC /* TmpDiskManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,7 @@
 		4103FF9114440A2900618177 /* eject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject.png; sourceTree = "<group>"; };
 		410B9B2D1456E7EC003FE088 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
 		410B9B321456F18B003FE088 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		41283F8B147C88B7005EDE88 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AutoCreateManager.xib; sourceTree = "<group>"; };
 		412EC7E6146DF1C600D569F1 /* eject_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_a.png; sourceTree = "<group>"; };
 		413A37541470B12500C07D59 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		418320C914722C1D000D8488 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -91,6 +95,10 @@
 		418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskMenuItem.m; path = Classes/TmpDiskMenuItem.m; sourceTree = "<group>"; };
 		418A28E61442D05100D4BCB0 /* TmpDiskMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskMenuItemView.h; path = Classes/TmpDiskMenuItemView.h; sourceTree = "<group>"; };
 		418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskMenuItemView.m; path = Classes/TmpDiskMenuItemView.m; sourceTree = "<group>"; };
+		418DD4C0147DF2E400488297 /* AutoCreateManagerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCreateManagerWindow.h; path = Classes/AutoCreateManagerWindow.h; sourceTree = "<group>"; };
+		418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoCreateManagerWindow.m; path = Classes/AutoCreateManagerWindow.m; sourceTree = "<group>"; };
+		418DF69E147B57CD0069EEAC /* TmpDiskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskManager.h; path = Classes/TmpDiskManager.h; sourceTree = "<group>"; };
+		418DF69F147B57CD0069EEAC /* TmpDiskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskManager.m; path = Classes/TmpDiskManager.m; sourceTree = "<group>"; };
 		41A5021C146268F600BC762D /* TmpDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TmpDisk.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,11 +182,13 @@
 				41A5021C146268F600BC762D /* TmpDisk.entitlements */,
 				410B9B321456F18B003FE088 /* icon.icns */,
 				4103FF9014440A2900618177 /* Images */,
+				418DF69C147B57A80069EEAC /* TmpDisks */,
 				418A28D41442A09300D4BCB0 /* StatusBar */,
 				418A28A6144299DE00D4BCB0 /* AppDelegate.h */,
 				418A28A7144299DE00D4BCB0 /* AppDelegate.m */,
 				418A28A9144299DE00D4BCB0 /* MainMenu.xib */,
 				418A28D51442A2B400D4BCB0 /* NewTmpDisk.xib */,
+				41283F8A147C88B7005EDE88 /* AutoCreateManager.xib */,
 				418A289B144299DE00D4BCB0 /* Supporting Files */,
 			);
 			path = TmpDisk;
@@ -227,8 +237,19 @@
 				418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */,
 				418A28E61442D05100D4BCB0 /* TmpDiskMenuItemView.h */,
 				418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */,
+				418DD4C0147DF2E400488297 /* AutoCreateManagerWindow.h */,
+				418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */,
 			);
 			name = StatusBar;
+			sourceTree = "<group>";
+		};
+		418DF69C147B57A80069EEAC /* TmpDisks */ = {
+			isa = PBXGroup;
+			children = (
+				418DF69E147B57CD0069EEAC /* TmpDiskManager.h */,
+				418DF69F147B57CD0069EEAC /* TmpDiskManager.m */,
+			);
+			name = TmpDisks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +333,7 @@
 				410B9B331456F18C003FE088 /* icon.icns in Resources */,
 				412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */,
 				418320CE14722EB5000D8488 /* dsa_pub.pem in Resources */,
+				41283F8C147C88B7005EDE88 /* AutoCreateManager.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +374,8 @@
 				418A28DA1442A2F800D4BCB0 /* NewTmpDiskWindow.m in Sources */,
 				418A28E51442CE8D00D4BCB0 /* TmpDiskMenuItem.m in Sources */,
 				418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */,
+				418DF6A0147B57CD0069EEAC /* TmpDiskManager.m in Sources */,
+				418DD4C2147DF2E400488297 /* AutoCreateManagerWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +398,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		41283F8A147C88B7005EDE88 /* AutoCreateManager.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				41283F8B147C88B7005EDE88 /* en */,
+			);
+			name = AutoCreateManager.xib;
+			sourceTree = "<group>";
+		};
 		418A289D144299DE00D4BCB0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

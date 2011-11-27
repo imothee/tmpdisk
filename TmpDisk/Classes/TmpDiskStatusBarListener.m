@@ -95,6 +95,24 @@
     
 }
 
+
+/***
+ Show the AutoCreate Window
+ */
+- (IBAction)manageAutoCreate:(id)sender {
+    
+    if ([acmwc window] == nil) {
+        [acmwc release];
+        
+        acmwc = [[NSWindowController alloc] initWithWindowNibName:@"AutoCreateManager"];
+        
+    }
+    
+    [[acmwc window] makeKeyAndOrderFront:nil];
+    [NSApp activateIgnoringOtherApps:YES];
+    
+}
+
 /***
  Toggle whether the Application should start on Login
  */

@@ -1321,6 +1321,14 @@
 							<array class="NSMutableArray" key="NSMenuItems"/>
 						</object>
 					</object>
+					<object class="NSMenuItem" id="1050817211">
+						<reference key="NSMenu" ref="866521198"/>
+						<string key="NSTitle">AutoCreate Manager</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
 					<object class="NSMenuItem" id="944507849">
 						<reference key="NSMenu" ref="866521198"/>
 						<bool key="NSIsDisabled">YES</bool>
@@ -2143,6 +2151,14 @@
 						<reference key="destination" ref="956612722"/>
 					</object>
 					<int key="connectionID">558</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">manageAutoCreate:</string>
+						<reference key="source" ref="772040219"/>
+						<reference key="destination" ref="1050817211"/>
+					</object>
+					<int key="connectionID">563</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -3153,6 +3169,7 @@
 							<reference ref="956612722"/>
 							<reference ref="1033724130"/>
 							<reference ref="827237546"/>
+							<reference ref="1050817211"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -3228,6 +3245,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">560</int>
 						<reference key="object" ref="827237546"/>
+						<reference key="parent" ref="866521198"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">562</int>
+						<reference key="object" ref="1050817211"/>
 						<reference key="parent" ref="866521198"/>
 					</object>
 				</array>
@@ -3385,6 +3407,7 @@
 				<string key="559.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="560.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="562.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -3403,7 +3426,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">561</int>
+			<int key="maxID">563</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3511,6 +3534,7 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="about:">id</string>
 						<string key="helpCenter:">id</string>
+						<string key="manageAutoCreate:">id</string>
 						<string key="newTmpDisk:">id</string>
 						<string key="quit:">id</string>
 						<string key="startLogin:">id</string>
@@ -3522,6 +3546,10 @@
 						</object>
 						<object class="IBActionInfo" key="helpCenter:">
 							<string key="name">helpCenter:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="manageAutoCreate:">
+							<string key="name">manageAutoCreate:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="newTmpDisk:">
