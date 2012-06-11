@@ -59,8 +59,19 @@
     [spinner startAnimation:self];
     
     bool created = [TmpDiskManager createTmpDiskWithName:name size:dsize autoCreate:([diskAutoCreate state] == NSOnState) onSuccess:^(void) {
-       
+        
         [self.window close];
+        
+        [diskNameLabel setHidden:NO];
+        [diskName setStringValue:@""];
+        [diskSizeLabel setHidden:NO];
+        [diskName setHidden:NO];
+        [diskSize setHidden:NO];
+        [sizeLabel setHidden:NO];
+        [diskAutoCreate setHidden:NO];
+        [createDisk setHidden:NO];
+        
+        [spinner stopAnimation:self];
         
     }];
     
