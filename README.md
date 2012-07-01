@@ -18,3 +18,9 @@ Usage
 -----
 
 TmpDisk installs as a Status Bar application. You can use the menu to create new tmpdisks, eject existing tmpdisks and click on a disk to open it in finder.
+
+As of 1.0.4 you can also run the app from the command line and pass in arguments to create a TmpDisk on startup.
+
+`open -a /Applications/TmpDisk.app --args -name=TestDisk -size=64`
+
+Will create a TmpDisk name TestDisk with 64MB space.

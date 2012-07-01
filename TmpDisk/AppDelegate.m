@@ -35,6 +35,39 @@
 {
     // Insert code here to initialize your application
     
+    // Check if TmpDisk was launched with command line args
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    
+    NSString *argName = nil;
+    NSString *argSize = nil;
+    // TODO: There's likely a better way to parse command line args
+    for (int i=0, n=[arguments count]; i<n; i++) {
+        NSString *s = [arguments objectAtIndex:i];
+        
+        // We expect args in the format -argname=argval
+        
+        NSArray *arg = [s componentsSeparatedByString:@"="];
+        if ([arg count] == 2) {
+            if ([[arg objectAtIndex:0] isEqualToString:@"-name"]) {
+                argName = [NSString stringWithString:[arg objectAtIndex:1]];
+            } else if ([[arg objectAtIndex:0] isEqualToString:@"-size"]) {
+                argSize = [NSString stringWithString:[arg objectAtIndex:1]];
+            }
+        }
+    }
+    
+    if (argName != nil && argSize != nil) {
+        
+        int dsize = [argSize intValue];
+        int size = (dsize * 1024 * 1000) / 512;
+        
+        if(![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", argName] isDirectory:nil]) {
+            [TmpDiskManager createTmpDiskWithName:argName size:size autoCreate:NO onSuccess:nil];
+        }   
+        
+    }
+    
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"]) {
     
         NSArray *autoCreateArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"];
