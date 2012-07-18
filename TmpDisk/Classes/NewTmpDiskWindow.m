@@ -39,13 +39,39 @@
     
 }
 
+- (IBAction)toggleAdvancedMode:(id)sender {
+    
+    if ([sender state] == NSOnState) {
+        // Advanced mode enabled so change the sizeLabel to a text input box
+        [sizeLabel setBezeled:YES];
+        [sizeLabel setBezelStyle:NSTextFieldSquareBezel];
+        [sizeLabel setDrawsBackground:YES];
+        [sizeLabel setEditable:YES];
+    } else {
+        // Advanced mode disabled so reset to a spinner + text combo
+        [[sizeLabel window] makeFirstResponder:nil];
+        [sizeLabel setBezeled:NO];
+        [sizeLabel setDrawsBackground:NO];
+        [sizeLabel setEditable:NO];
+        [sizeLabel setStringValue:[NSString stringWithFormat:@"%dMB", [diskSize intValue]]];
+    }
+    
+}
+
 - (IBAction)createTmpDisk:(id)sender {
     
     // We have a window to setup the various requirements of a new TmpDisk
     
     NSString *name = [diskName stringValue];
     
-    int dsizeval = [diskSize intValue];
+    int dsizeval = 0;
+    if ([advancedMode state] == NSOnState) {
+        // Grab disksize from the textField instead
+        dsizeval = [sizeLabel intValue];
+    } else {
+        dsizeval = [diskSize intValue];
+    }
+    
     int dsize = (dsizeval * 1024 * 1000) / 512;
     
     [diskNameLabel setHidden:YES];
@@ -55,6 +81,7 @@
     [sizeLabel setHidden:YES];
     [diskAutoCreate setHidden:YES];
     [createDisk setHidden:YES];
+    [advancedMode setHidden:YES];
     
     [spinner startAnimation:self];
     
@@ -70,6 +97,7 @@
         [sizeLabel setHidden:NO];
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
+        [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];
         
@@ -85,6 +113,7 @@
         [sizeLabel setHidden:NO];
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
+        [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];
         

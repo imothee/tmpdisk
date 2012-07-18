@@ -37,6 +37,8 @@
     
     IBOutlet NSButton *createDisk;
     
+    IBOutlet NSButton *advancedMode;
+    
     IBOutlet NSProgressIndicator *spinner;
 }
 
@@ -44,5 +46,7 @@
 
 - (IBAction)sizeDidChange:(id)sender;
 - (IBAction)createTmpDisk:(id)sender;
+
+- (IBAction)toggleAdvancedMode:(id)sender;
 
 @end
