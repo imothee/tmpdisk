@@ -72,7 +72,9 @@
         dsizeval = [diskSize intValue];
     }
     
-    int dsize = (dsizeval * 1024 * 1000) / 512;
+    // Change to long and unsigned int to handle larger disk values without silently failing
+    // Credit to Russ Nelson
+    int unsigned dsize = (((long long int) dsizeval) * 1024 * 1024 / 512);
     
     [diskNameLabel setHidden:YES];
     [diskSizeLabel setHidden:YES];
