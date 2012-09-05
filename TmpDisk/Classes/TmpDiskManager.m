@@ -92,6 +92,9 @@
     
     [task setArguments:arguments];
     
+#if __MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7
+    // Check for termination handler existences
+    
     [task setTerminationHandler:^(NSTask* task) {
         
         
@@ -111,6 +114,25 @@
     }];
     
     [task launch];
+    
+#else
+
+    [task launch];
+    [task waitUntilExit];
+    
+    NSDictionary *tmpProps = [NSDictionary dictionaryWithObjects:
+                              [NSArray arrayWithObjects:[NSNumber numberWithBool:NO], nil] forKeys:
+                              [NSArray arrayWithObjects:@"backup", nil]];
+    
+    [tmpProps writeToFile:[NSString stringWithFormat:@"/Volumes/%@/.tmpdisk", name] atomically:YES];
+    
+    if (success != nil) {
+        success();
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TmpDiskCreated" object:name];
+    
+#endif
     
     return YES;
 }
