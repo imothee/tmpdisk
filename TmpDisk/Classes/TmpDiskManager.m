@@ -24,7 +24,7 @@
 
 @implementation TmpDiskManager
 
-+ (bool)createTmpDiskWithName:(NSString*)name size:(int)size autoCreate:(bool)autoCreate onSuccess:(void (^)())success {
++ (bool)createTmpDiskWithName:(NSString*)name size:(int)size autoCreate:(bool)autoCreate indexed:(bool)indexed onSuccess:(void (^)())success {
     
     if ([name length] == 0) {
         NSAlert *a = [NSAlert alertWithMessageText:@"Error Creating TmpDisk" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"You must provide a Disk Name"];
@@ -60,6 +60,7 @@
         NSMutableDictionary *curDisk = [NSMutableDictionary dictionary];
         [curDisk setObject:name forKey:@"name"];
         [curDisk setObject:[NSNumber numberWithInt:size] forKey:@"size"];
+        [curDisk setObject:[NSNumber numberWithBool:indexed] forKey:@"indexed"];
         
         // Check whether same name exists in autoCreate already
         bool exists = false;
@@ -92,6 +93,19 @@
     
     [task setArguments:arguments];
     
+    NSTask *indexTask = nil;
+    if (indexed) {
+        // If the indexed flag was set we need to run another task to index the drive
+        indexTask = [[[NSTask alloc] init] autorelease];
+        [indexTask setLaunchPath: @"/bin/sh"];
+        
+        NSArray *arguments;
+        arguments = [NSArray arrayWithObjects: @"-c",
+                     [NSString stringWithFormat:@"mdutil -i on /Volumes/%@", name], nil];
+        
+        [indexTask setArguments:arguments];
+    }
+    
 #if __MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7
     // Check for termination handler existences
     
@@ -103,6 +117,10 @@
                                   [NSArray arrayWithObjects:@"backup", nil]];
         
         [tmpProps writeToFile:[NSString stringWithFormat:@"/Volumes/%@/.tmpdisk", name] atomically:YES];
+        
+        if (indexTask != nil) {
+            [indexTask launch];
+        }
         
         if (success != nil) {
             success();
@@ -125,6 +143,10 @@
                               [NSArray arrayWithObjects:@"backup", nil]];
     
     [tmpProps writeToFile:[NSString stringWithFormat:@"/Volumes/%@/.tmpdisk", name] atomically:YES];
+    
+    if (indexTask != nil) {
+        [indexTask launch];
+    }
     
     if (success != nil) {
         success();

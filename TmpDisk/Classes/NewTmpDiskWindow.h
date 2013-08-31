@@ -34,6 +34,7 @@
     IBOutlet NSStepper *diskSize;
     IBOutlet NSTextField *sizeLabel;
     IBOutlet NSButton *diskAutoCreate;
+    IBOutlet NSButton *diskIndex;
     
     IBOutlet NSButton *createDisk;
     

@@ -83,11 +83,16 @@
     [sizeLabel setHidden:YES];
     [diskAutoCreate setHidden:YES];
     [createDisk setHidden:YES];
+    [diskIndex setHidden:YES];
     [advancedMode setHidden:YES];
     
     [spinner startAnimation:self];
     
-    bool created = [TmpDiskManager createTmpDiskWithName:name size:dsize autoCreate:([diskAutoCreate state] == NSOnState) onSuccess:^(void) {
+    bool created = [TmpDiskManager createTmpDiskWithName:name
+                                                    size:dsize
+                                              autoCreate:([diskAutoCreate state] == NSOnState)
+                                                 indexed:([diskIndex state] == NSOnState)
+                                               onSuccess:^(void) {
         
         [self.window close];
         
@@ -99,6 +104,7 @@
         [sizeLabel setHidden:NO];
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
+        [diskIndex setHidden:NO];
         [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];
@@ -115,6 +121,7 @@
         [sizeLabel setHidden:NO];
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
+        [diskIndex setHidden:NO];
         [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];
