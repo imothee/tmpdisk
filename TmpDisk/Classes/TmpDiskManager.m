@@ -24,7 +24,7 @@
 
 @implementation TmpDiskManager
 
-+ (bool)createTmpDiskWithName:(NSString*)name size:(int)size autoCreate:(bool)autoCreate indexed:(bool)indexed hidden:(bool)hidden onSuccess:(void (^)())success {
++ (bool)createTmpDiskWithName:(NSString*)name size:(u_int64_t)size autoCreate:(bool)autoCreate indexed:(bool)indexed hidden:(bool)hidden onSuccess:(void (^)())success {
     
     if ([name length] == 0) {
         NSAlert *a = [NSAlert alertWithMessageText:@"Error Creating TmpDisk" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"You must provide a Disk Name"];
@@ -59,7 +59,7 @@
         // Holds the current disk values to replicate
         NSMutableDictionary *curDisk = [NSMutableDictionary dictionary];
         [curDisk setObject:name forKey:@"name"];
-        [curDisk setObject:[NSNumber numberWithInt:size] forKey:@"size"];
+        [curDisk setObject:[NSNumber numberWithUnsignedLongLong:size] forKey:@"size"];
         [curDisk setObject:[NSNumber numberWithBool:indexed] forKey:@"indexed"];
         [curDisk setObject:[NSNumber numberWithBool:hidden] forKey:@"hidden"];
         
@@ -92,13 +92,13 @@
     
     NSString *command;
     if (hidden) {
-        NSString *pattern = @"d=$(hdiutil attach -nomount ram://%d) && diskutil partitionDisk $d 1 GPT HFS+ %%noformat%% 100%% && "
+        NSString *pattern = @"d=$(hdiutil attach -nomount ram://%llu) && diskutil partitionDisk $d 1 GPT HFS+ %%noformat%% 100%% && "
                             @"newfs_hfs -v \"%@\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && "
                             @"hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\"";
         
         command = [NSString stringWithFormat:pattern, size, name];
     } else {
-        command = [NSString stringWithFormat:@"diskutil erasevolume HFS+ \"%@\" `hdiutil attach -nomount ram://%d`", name, size];
+        command = [NSString stringWithFormat:@"diskutil erasevolume HFS+ \"%@\" `hdiutil attach -nomount ram://%llu`", name, size];
     }
     
     NSArray *arguments = [NSArray arrayWithObjects: @"-c", command, nil];

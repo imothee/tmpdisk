@@ -74,7 +74,7 @@
     
     // Change to long and unsigned int to handle larger disk values without silently failing
     // Credit to Russ Nelson
-    int unsigned dsize = (((long long int) dsizeval) * 1024 * 1024 / 512);
+    u_int64_t dsize = (((u_int64_t) dsizeval) * 1024 * 1024 / 512);
     
     [diskNameLabel setHidden:YES];
     [diskSizeLabel setHidden:YES];

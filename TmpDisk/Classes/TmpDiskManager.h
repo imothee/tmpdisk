@@ -24,6 +24,6 @@
 
 @interface TmpDiskManager : NSObject
 
-+ (bool)createTmpDiskWithName:(NSString*)name size:(int)size autoCreate:(bool)autoCreate indexed:(bool)indexed hidden:(bool)hidden onSuccess:(void (^)())success;
++ (bool)createTmpDiskWithName:(NSString*)name size:(u_int64_t)size autoCreate:(bool)autoCreate indexed:(bool)indexed hidden:(bool)hidden onSuccess:(void (^)())success;
 
 @end
