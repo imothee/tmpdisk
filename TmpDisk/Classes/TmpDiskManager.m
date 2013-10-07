@@ -24,7 +24,7 @@
 
 @implementation TmpDiskManager
 
-+ (bool)createTmpDiskWithName:(NSString*)name size:(int)size autoCreate:(bool)autoCreate indexed:(bool)indexed onSuccess:(void (^)())success {
++ (bool)createTmpDiskWithName:(NSString*)name size:(int)size autoCreate:(bool)autoCreate indexed:(bool)indexed hidden:(bool)hidden onSuccess:(void (^)())success {
     
     if ([name length] == 0) {
         NSAlert *a = [NSAlert alertWithMessageText:@"Error Creating TmpDisk" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"You must provide a Disk Name"];
@@ -61,6 +61,7 @@
         [curDisk setObject:name forKey:@"name"];
         [curDisk setObject:[NSNumber numberWithInt:size] forKey:@"size"];
         [curDisk setObject:[NSNumber numberWithBool:indexed] forKey:@"indexed"];
+        [curDisk setObject:[NSNumber numberWithBool:hidden] forKey:@"hidden"];
         
         // Check whether same name exists in autoCreate already
         bool exists = false;
@@ -87,9 +88,20 @@
     task = [[[NSTask alloc] init] autorelease];
     [task setLaunchPath: @"/bin/sh"];
     
-    NSArray *arguments;
-    arguments = [NSArray arrayWithObjects: @"-c",
-                 [NSString stringWithFormat:@"diskutil erasevolume HFS+ \"%@\" `hdiutil attach -nomount ram://%d`", name, size], nil];
+    
+    
+    NSString *command;
+    if (hidden) {
+        NSString *pattern = @"d=$(hdiutil attach -nomount ram://%d) && diskutil partitionDisk $d 1 GPT HFS+ %%noformat%% 100%% && "
+                            @"newfs_hfs -v \"%@\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && "
+                            @"hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\"";
+        
+        command = [NSString stringWithFormat:pattern, size, name];
+    } else {
+        command = [NSString stringWithFormat:@"diskutil erasevolume HFS+ \"%@\" `hdiutil attach -nomount ram://%d`", name, size];
+    }
+    
+    NSArray *arguments = [NSArray arrayWithObjects: @"-c", command, nil];
     
     [task setArguments:arguments];
     

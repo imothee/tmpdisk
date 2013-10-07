@@ -84,6 +84,7 @@
     [diskAutoCreate setHidden:YES];
     [createDisk setHidden:YES];
     [diskIndex setHidden:YES];
+    [diskHide setHidden:YES];
     [advancedMode setHidden:YES];
     
     [spinner startAnimation:self];
@@ -92,6 +93,7 @@
                                                     size:dsize
                                               autoCreate:([diskAutoCreate state] == NSOnState)
                                                  indexed:([diskIndex state] == NSOnState)
+                                                  hidden:([diskHide state] == NSOnState)
                                                onSuccess:^(void) {
         
         [self.window close];
@@ -105,6 +107,7 @@
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
         [diskIndex setHidden:NO];
+        [diskHide setHidden:NO];
         [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];
@@ -122,6 +125,7 @@
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
         [diskIndex setHidden:NO];
+        [diskHide setHidden:NO];
         [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];

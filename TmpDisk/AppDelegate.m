@@ -62,7 +62,7 @@
         int size = (dsize * 1024 * 1000) / 512;
         
         if(![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", argName] isDirectory:nil]) {
-            [TmpDiskManager createTmpDiskWithName:argName size:size autoCreate:NO indexed:NO onSuccess:nil];
+            [TmpDiskManager createTmpDiskWithName:argName size:size autoCreate:NO indexed:NO hidden:NO onSuccess:nil];
         }   
         
     }
@@ -77,6 +77,7 @@
             NSString *name = [d objectForKey:@"name"];
             NSNumber *size = [d objectForKey:@"size"];
             NSNumber *indexed = [d objectForKey:@"indexed"];
+            NSNumber *hidden = [d objectForKey:@"hidden"];
             
             if (name && size) {
                 
@@ -84,7 +85,7 @@
                     continue;
                 }
                 
-                [TmpDiskManager createTmpDiskWithName:name size:[size intValue] autoCreate:NO indexed:[indexed boolValue] onSuccess:nil];
+                [TmpDiskManager createTmpDiskWithName:name size:[size intValue] autoCreate:NO indexed:[indexed boolValue] hidden:[hidden boolValue] onSuccess:nil];
                 
             }
             
