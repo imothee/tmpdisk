@@ -92,7 +92,7 @@
     
     NSString *command;
     if (hidden) {
-        NSString *pattern = @"d=$(hdiutil attach -nomount ram://%llu) && diskutil partitionDisk $d 1 GPT HFS+ %%noformat%% 100%% && "
+        NSString *pattern = @"d=$(hdiutil attach -nomount ram://%llu) && diskutil eraseDisk HFS+ %%noformat%% $d && "
                             @"newfs_hfs -v \"%@\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && "
                             @"hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\"";
         
