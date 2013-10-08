@@ -68,9 +68,9 @@
     
     if ([[aTableColumn identifier] isEqualToString:@"name"]) {
         return [[autoCreateDisks objectAtIndex:rowIndex] objectForKey:[aTableColumn identifier]];
-    }else {
-        int size = [[[autoCreateDisks objectAtIndex:rowIndex] objectForKey:[aTableColumn identifier]] intValue];        
-        return [NSString stringWithFormat:@"%d MB", ((size * 512)/(1024*1000))];
+    } else {
+        u_int64_t size = [[[autoCreateDisks objectAtIndex:rowIndex] objectForKey:[aTableColumn identifier]] unsignedLongLongValue];
+        return [NSString stringWithFormat:@"%llu MB", ((size * 512)/(1024 * 1024))];
     }
     
 }

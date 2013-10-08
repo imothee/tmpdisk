@@ -41,7 +41,7 @@
     NSString *argName = nil;
     NSString *argSize = nil;
     // TODO: There's likely a better way to parse command line args
-    for (int i=0, n=[arguments count]; i<n; i++) {
+    for (NSUInteger i=0, n=[arguments count]; i<n; i++) {
         NSString *s = [arguments objectAtIndex:i];
         
         // We expect args in the format -argname=argval
@@ -59,10 +59,10 @@
     if (argName != nil && argSize != nil) {
         
         int dsize = [argSize intValue];
-        int size = (dsize * 1024 * 1000) / 512;
+        u_int64_t size = (((u_int64_t) dsize) * 1024 * 1024 / 512);
         
         if(![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", argName] isDirectory:nil]) {
-            [TmpDiskManager createTmpDiskWithName:argName size:size autoCreate:NO indexed:NO onSuccess:nil];
+            [TmpDiskManager createTmpDiskWithName:argName size:size autoCreate:NO indexed:NO hidden:NO onSuccess:nil];
         }   
         
     }
@@ -77,6 +77,7 @@
             NSString *name = [d objectForKey:@"name"];
             NSNumber *size = [d objectForKey:@"size"];
             NSNumber *indexed = [d objectForKey:@"indexed"];
+            NSNumber *hidden = [d objectForKey:@"hidden"];
             
             if (name && size) {
                 
@@ -84,7 +85,7 @@
                     continue;
                 }
                 
-                [TmpDiskManager createTmpDiskWithName:name size:[size intValue] autoCreate:NO indexed:[indexed boolValue] onSuccess:nil];
+                [TmpDiskManager createTmpDiskWithName:name size:[size unsignedLongLongValue] autoCreate:NO indexed:[indexed boolValue] hidden:[hidden boolValue] onSuccess:nil];
                 
             }
             

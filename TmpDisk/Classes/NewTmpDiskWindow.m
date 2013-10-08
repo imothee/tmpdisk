@@ -74,7 +74,7 @@
     
     // Change to long and unsigned int to handle larger disk values without silently failing
     // Credit to Russ Nelson
-    int unsigned dsize = (((long long int) dsizeval) * 1024 * 1024 / 512);
+    u_int64_t dsize = (((u_int64_t) dsizeval) * 1024 * 1024 / 512);
     
     [diskNameLabel setHidden:YES];
     [diskSizeLabel setHidden:YES];
@@ -84,6 +84,7 @@
     [diskAutoCreate setHidden:YES];
     [createDisk setHidden:YES];
     [diskIndex setHidden:YES];
+    [diskHide setHidden:YES];
     [advancedMode setHidden:YES];
     
     [spinner startAnimation:self];
@@ -92,6 +93,7 @@
                                                     size:dsize
                                               autoCreate:([diskAutoCreate state] == NSOnState)
                                                  indexed:([diskIndex state] == NSOnState)
+                                                  hidden:([diskHide state] == NSOnState)
                                                onSuccess:^(void) {
         
         [self.window close];
@@ -105,6 +107,7 @@
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
         [diskIndex setHidden:NO];
+        [diskHide setHidden:NO];
         [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];
@@ -122,6 +125,7 @@
         [diskAutoCreate setHidden:NO];
         [createDisk setHidden:NO];
         [diskIndex setHidden:NO];
+        [diskHide setHidden:NO];
         [advancedMode setHidden:NO];
         
         [spinner stopAnimation:self];
