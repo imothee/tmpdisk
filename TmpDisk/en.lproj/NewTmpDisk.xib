@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1060</int>
-		<string key="IBDocument.SystemVersion">13A598</string>
+		<string key="IBDocument.SystemVersion">12F37</string>
 		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
-		<string key="IBDocument.AppKitVersion">1265</string>
-		<string key="IBDocument.HIToolboxVersion">695.00</string>
+		<string key="IBDocument.AppKitVersion">1187.39</string>
+		<string key="IBDocument.HIToolboxVersion">626.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">4510</string>
@@ -68,7 +68,7 @@
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents"/>
 								<object class="NSFont" key="NSSupport" id="679872860">
-									<string key="NSName">.LucidaGrandeUI</string>
+									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">1044</int>
 								</object>
@@ -95,7 +95,6 @@
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSTextField" id="105886271">
 							<reference key="NSNextResponder" ref="787622296"/>
@@ -128,7 +127,6 @@
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSTextField" id="763963865">
 							<reference key="NSNextResponder" ref="787622296"/>
@@ -148,7 +146,6 @@
 								<reference key="NSTextColor" ref="219883850"/>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSButton" id="764598732">
 							<reference key="NSNextResponder" ref="787622296"/>
@@ -168,7 +165,7 @@
 								<int key="NSButtonFlags">-2038284288</int>
 								<int key="NSButtonFlags2">129</int>
 								<object class="NSFont" key="NSAlternateImage">
-									<string key="NSName">.LucidaGrandeUI</string>
+									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -217,7 +214,6 @@
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSStepper" id="278708098">
 							<reference key="NSNextResponder" ref="787622296"/>
@@ -362,7 +358,6 @@
 								<reference key="NSTextColor" ref="616567529"/>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 					</array>
 					<object class="NSPSMatrix" key="NSFrameMatrix"/>
@@ -505,14 +500,6 @@
 						<reference key="destination" ref="110943740"/>
 					</object>
 					<string key="id">44</string>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">toggleAdvancedMode:</string>
-						<reference key="source" ref="958430590"/>
-						<reference key="destination" ref="712686337"/>
-					</object>
-					<string key="id">kFC-73-IaZ</string>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
