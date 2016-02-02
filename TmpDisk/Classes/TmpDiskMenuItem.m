@@ -57,15 +57,16 @@
   
 }
 
-- (instancetype)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode ejectBlock:(void (^)(NSString*))block {
+- (instancetype)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode recreateBlock:(void (^)(NSString *))recreate ejectBlock:(void (^)(NSString*))eject {
   
   
   self = [super initWithTitle:aString action:aSelector keyEquivalent:charCode];
   
   if (self) {
-    
-    ejectBlock = [block copy];
-    
+
+    recreateBlock = [recreate copy];
+    ejectBlock = [eject copy];
+
     NSView *v = [[TmpDiskMenuItemView alloc] initWithFrame:NSMakeRect(0.0, 0.0, 150.0, 25.0)];
     v.autoresizingMask = NSViewWidthSizable;
     
@@ -87,18 +88,31 @@
      [[settings cell] setImageScaling:NSImageScaleProportionallyUpOrDown];
      [v addSubview:settings];
      */
-    
-    NSButton *b = [[NSButton alloc] initWithFrame:NSMakeRect(130.0, 5.0, 15.0, 15.0)];
-    b.image = [NSImage imageNamed:@"eject.png"];
-    b.alternateImage = [NSImage imageNamed:@"eject_a.png"];
-    [b setButtonType:NSMomentaryChangeButton];
-    b.imagePosition = NSImageOnly;
-    [b setBordered:NO];
-    b.target = self;
-    b.action = @selector(runSelectBlock:);
-    
-    [v addSubview:b];
-    
+
+    [v addSubview:({
+         NSButton *b = [[NSButton alloc] initWithFrame:NSMakeRect(110.0, 5.0, 15.0, 15.0)];
+         b.image = [NSImage imageNamed:@"recreate.png"];
+         b.alternateImage = [NSImage imageNamed:@"recreate_a.png"];
+         [b setButtonType:NSMomentaryChangeButton];
+         b.imagePosition = NSImageOnly;
+         [b setBordered:NO];
+         b.target = self;
+         b.action = @selector(runRecreateBlock:);
+         b;
+       })];
+
+    [v addSubview:({
+         NSButton *b = [[NSButton alloc] initWithFrame:NSMakeRect(130.0, 5.0, 15.0, 15.0)];
+         b.image = [NSImage imageNamed:@"eject.png"];
+         b.alternateImage = [NSImage imageNamed:@"eject_a.png"];
+         [b setButtonType:NSMomentaryChangeButton];
+         b.imagePosition = NSImageOnly;
+         [b setBordered:NO];
+         b.target = self;
+         b.action = @selector(runEjectBlock:);
+         b;
+       })];
+
     self.view = v;
     
   }
@@ -106,13 +120,22 @@
   
 }
 
-- (void)runSelectBlock:(id)sender {
-  
-  NSLog(@"Clicked eject");
-  
-  // Run the block passed in from AppDelegate to eject the Volume
-  ejectBlock(self.title);
-  
+- (void)runRecreateBlock:(id)sender {
+
+  NSLog(@"Clicked recreate");
+
+  // Run the block passed in from AppDelegate to recreate the Volume
+  recreateBlock(self.title);
+
+}
+
+- (void)runEjectBlock:(id)sender {
+
+    NSLog(@"Clicked eject");
+
+    // Run the block passed in from AppDelegate to eject the Volume
+    ejectBlock(self.title);
+
 }
 
 @end

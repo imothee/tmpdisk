@@ -22,6 +22,8 @@
 
 #import "TmpDiskStatusBarListener.h"
 
+#import "TmpDiskManager.h"
+
 @implementation TmpDiskStatusBarListener
 
 
@@ -89,6 +91,9 @@
   
 }
 
+- (IBAction)recreateAll:(id)sender {
+  [TmpDiskManager ejectVolumesWithNames:nil recreate:YES];
+}
 
 /***
  Show the AutoCreate Window

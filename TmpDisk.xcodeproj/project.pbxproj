@@ -33,6 +33,8 @@
 		418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */; };
 		418DD4C2147DF2E400488297 /* AutoCreateManagerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */; };
 		418DF6A0147B57CD0069EEAC /* TmpDiskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DF69F147B57CD0069EEAC /* TmpDiskManager.m */; };
+		A96E4E7A1C5FDCEA0086FE71 /* recreate_a.png in Resources */ = {isa = PBXBuildFile; fileRef = A96E4E781C5FDCEA0086FE71 /* recreate_a.png */; };
+		A96E4E7B1C5FDCEA0086FE71 /* recreate.png in Resources */ = {isa = PBXBuildFile; fileRef = A96E4E791C5FDCEA0086FE71 /* recreate.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		418DF69E147B57CD0069EEAC /* TmpDiskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskManager.h; path = Classes/TmpDiskManager.h; sourceTree = "<group>"; };
 		418DF69F147B57CD0069EEAC /* TmpDiskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskManager.m; path = Classes/TmpDiskManager.m; sourceTree = "<group>"; };
 		41A5021C146268F600BC762D /* TmpDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TmpDisk.entitlements; sourceTree = "<group>"; };
+		A96E4E781C5FDCEA0086FE71 /* recreate_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recreate_a.png; sourceTree = "<group>"; };
+		A96E4E791C5FDCEA0086FE71 /* recreate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recreate.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +132,11 @@
 		4103FF9014440A2900618177 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A96E4E781C5FDCEA0086FE71 /* recreate_a.png */,
+				A96E4E791C5FDCEA0086FE71 /* recreate.png */,
+				4103FF9114440A2900618177 /* eject.png */,
 				412EC7E6146DF1C600D569F1 /* eject_a.png */,
 				410B9B2D1456E7EC003FE088 /* status.png */,
-				4103FF9114440A2900618177 /* eject.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -334,6 +340,8 @@
 				410B9B331456F18C003FE088 /* icon.icns in Resources */,
 				412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */,
 				418320CE14722EB5000D8488 /* dsa_pub.pem in Resources */,
+				A96E4E7A1C5FDCEA0086FE71 /* recreate_a.png in Resources */,
+				A96E4E7B1C5FDCEA0086FE71 /* recreate.png in Resources */,
 				41283F8C147C88B7005EDE88 /* AutoCreateManager.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
