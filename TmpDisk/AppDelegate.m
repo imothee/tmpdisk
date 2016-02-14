@@ -57,44 +57,13 @@
     int dsize = argSize.intValue;
     u_int64_t size = (((u_int64_t) dsize) * 1024 * 1024 / 512);
     
-    if(![[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", argName] isDirectory:nil]) {
+    if(![[NSFileManager defaultManager] fileExistsAtPath:[TmpDiskManager pathForName:argName] isDirectory:nil]) {
       [TmpDiskManager createTmpDiskWithName:argName size:size autoCreate:NO indexed:NO hidden:NO folders:[[NSArray alloc] init] onSuccess:nil];
     }
     
   }
-  
-  
-  if ([[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"]) {
-    
-    NSArray *autoCreateArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"];
-    
-    for (NSDictionary *d in autoCreateArray) {
-      
-      NSString *name = d[@"name"];
-      NSNumber *size = d[@"size"];
-      NSNumber *indexed = d[@"indexed"];
-      NSNumber *hidden = d[@"hidden"];
-      NSArray *folders = nil;
-      
-      if ([d objectForKey:@"folders"]) {
-        folders = [d objectForKey:@"folders"];
-      }else {
-        folders = [[NSArray alloc] init];
-      }
-      
-      if (name && size) {
-        
-        if([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", name] isDirectory:nil]) {
-          continue;
-        }
-        
-        [TmpDiskManager createTmpDiskWithName:name size:size.unsignedLongLongValue autoCreate:NO indexed:indexed.boolValue hidden:hidden.boolValue folders:folders onSuccess:nil];
-        
-      }
-      
-    }
-    
-  }
+
+  [TmpDiskManager autoCreateVolumesWithNames:nil];
 }
 
 - (void)awakeFromNib {
@@ -142,54 +111,49 @@
       continue;
     }
     
-    NSMenuItem *mi = [[TmpDiskMenuItem alloc] initWithTitle:s action:@selector(tmpDiskSelected:) keyEquivalent:@"" ejectBlock:^(NSString* s){
+    NSMenuItem *mi = [[TmpDiskMenuItem alloc] initWithTitle:s action:@selector(tmpDiskSelected:) keyEquivalent:@""
+                                                 recreateBlock:^(NSString* s){
+      
+      // Recreate Block passed to menu to run when the recreate button is clicked for a TmpDisk
+      
+      [statusMenu cancelTrackingWithoutAnimation];
+      
+        [self ejectVolumeWithName:s recreate:YES];
+      
+      return;
+
+    }
+                                                 ejectBlock:^(NSString* s){
       
       // Eject Block passed to menu to run when the eject button is clicked for a TmpDisk
       
       [statusMenu cancelTrackingWithoutAnimation];
       
-      
-      NSString *volumePath = [NSString stringWithFormat:@"/Volumes/%@", s];
-      
-      BOOL isRemovable, isWritable, isUnmountable;
-      NSString *description, *type;
-      
-      NSWorkspace *ws = [[NSWorkspace alloc] init];
-      
-      // Make sure the Volume is inmountable first
-      [ws getFileSystemInfoForPath:volumePath
-                       isRemovable:&isRemovable
-                        isWritable:&isWritable
-                     isUnmountable:&isUnmountable
-                       description:&description
-                              type:&type];
-      if (isUnmountable) {
-        [ws unmountAndEjectDeviceAtPath:volumePath];
-      }
-      
+        [self ejectVolumeWithName:s recreate:NO];
       
       return;
-      
-    }];
-    
+
+    }
+                      ];
+
     [diskMenu addItem:mi];
-    
+
   }
-  
+
+}
+
+- (void)ejectVolumeWithName:(NSString *)name recreate:(BOOL)recreate {
+  [TmpDiskManager ejectVolumesWithNames:[NSSet setWithObject:name]
+                               recreate:recreate];
 }
 
 - (void)tmpDiskSelected:(id)sender {
-  
+
   // When a tmpDisk menu option is selected, we open the volume in Finder
-  
+
   NSString *s = [sender title];
-  
-  NSString *volumePath = [NSString stringWithFormat:@"/Volumes/%@", s];
-  
-  NSWorkspace *ws = [[NSWorkspace alloc] init];
-  
-  [ws openFile:volumePath];
-  
+
+  [TmpDiskManager openVolumeWithName:s];
 }
 
 @end

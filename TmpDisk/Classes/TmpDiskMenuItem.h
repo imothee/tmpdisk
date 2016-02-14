@@ -23,19 +23,23 @@
 #import <AppKit/AppKit.h>
 #import "TmpDiskMenuItemView.h"
 
+typedef void (^RecreateBlock)(NSString*);
 typedef void (^EjectBlock)(NSString*);
 
 @interface TmpDiskMenuItem : NSMenuItem {
   
+  RecreateBlock recreateBlock;
   EjectBlock ejectBlock;
-  
+
 }
 
 
 - (instancetype)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode eject:(SEL)ejSelector NS_DESIGNATED_INITIALIZER;
 
-- (instancetype)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode ejectBlock:(void (^)(NSString*))block NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTitle:(NSString *)aString action:(SEL)aSelector keyEquivalent:(NSString *)charCode recreateBlock:(void (^)(NSString*))block ejectBlock:(void (^)(NSString*))block NS_DESIGNATED_INITIALIZER;
 
-- (void)runSelectBlock:(id)sender;
+- (void)runEjectBlock:(id)sender;
+
+- (void)runRecreateBlock:(id)sender;
 
 @end

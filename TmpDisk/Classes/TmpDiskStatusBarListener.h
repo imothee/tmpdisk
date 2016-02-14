@@ -40,6 +40,7 @@
 
 - (IBAction)quit:(id)sender;
 - (IBAction)about:(id)sender;
+- (IBAction)recreateAll:(id)sender;
 - (IBAction)manageAutoCreate:(id)sender;
 - (IBAction)startLogin:(id)sender;
 - (IBAction)helpCenter:(id)sender;

@@ -22,7 +22,112 @@
 
 #import "TmpDiskManager.h"
 
+@implementation TmpDiskFile
+
+- (BOOL)exists {
+  return [[NSFileManager defaultManager]
+      fileExistsAtPath:[TmpDiskManager pathForName:self.name]
+           isDirectory:nil];
+}
+
+@end
+
 @implementation TmpDiskManager
+
++ (NSString *)pathForName:(NSString *)name {
+  return [NSString stringWithFormat:@"/Volumes/%@", name];
+}
+
++ (void)autoCreateVolumesWithNames:(NSSet<NSString *> *)names {
+
+  for (TmpDiskFile *disk in [self knownVolumesWithNames:names]) {
+    if (disk.exists) {
+      continue;
+    }
+
+    [self createTmpDiskWithName:disk.name
+                           size:disk.size
+                     autoCreate:NO
+                        indexed:disk.indexed
+                         hidden:disk.hidden
+                        folders:disk.folders
+                      onSuccess:nil];
+  }
+}
+
++ (NSArray<TmpDiskFile *> *)knownVolumesWithNames:(NSSet<NSString *> *)names {
+
+  NSMutableArray *results = [[NSMutableArray alloc] init];
+
+  if ([[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"]) {
+
+    NSArray *autoCreateArray =
+        [[NSUserDefaults standardUserDefaults] objectForKey:@"autoCreate"];
+
+    for (NSDictionary *d in autoCreateArray) {
+
+      NSString *name = d[@"name"];
+
+      if (names.count && ![names containsObject:name]) {
+        continue;
+      }
+
+      NSNumber *size = d[@"size"];
+
+      if (name && size) {
+        TmpDiskFile *disk = [[TmpDiskFile alloc] init];
+        disk.name = name;
+        disk.size = size.unsignedLongLongValue;
+        disk.indexed = [d[@"indexed"] boolValue];
+        disk.hidden = [d[@"hidden"] boolValue];
+        disk.folders = [d objectForKey:@"folders"] ?: @[];
+        [results addObject:disk];
+      }
+    }
+  }
+
+  return results;
+}
+
++ (void)ejectVolumesWithNames:(NSSet<NSString *> *)names
+                     recreate:(BOOL)recreate {
+  dispatch_group_t group = dispatch_group_create();
+
+  for (TmpDiskFile *disk in [self knownVolumesWithNames:names]) {
+    dispatch_group_enter(group);
+    NSString *volumePath = [self pathForName:disk.name];
+
+    BOOL isRemovable, isWritable, isUnmountable;
+    NSString *description, *type;
+
+    NSWorkspace *ws = [[NSWorkspace alloc] init];
+
+    // Make sure the Volume is unmountable first
+    [ws getFileSystemInfoForPath:volumePath
+                     isRemovable:&isRemovable
+                      isWritable:&isWritable
+                   isUnmountable:&isUnmountable
+                     description:&description
+                            type:&type];
+    if (isUnmountable) {
+      [ws unmountAndEjectDeviceAtPath:volumePath];
+
+      if (recreate) {
+        [self autoCreateVolumesWithNames:[NSSet setWithObject:disk.name]];
+      }
+    }
+    dispatch_group_leave(group);
+  }
+}
+
++ (void)openVolumeWithName:(NSString *)name {
+
+  NSString *volumePath = [self pathForName:name];
+
+  NSWorkspace *ws = [[NSWorkspace alloc] init];
+
+  [ws openFile:volumePath];
+}
 
 + (bool)createTmpDiskWithName:(NSString*)name size:(u_int64_t)size autoCreate:(bool)autoCreate indexed:(bool)indexed hidden:(bool)hidden folders:(NSArray*)folders onSuccess:(void (^)())success {
   
@@ -33,7 +138,7 @@
     return NO;
   }
   
-  if ([[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat:@"/Volumes/%@", name] isDirectory:nil]) {
+  if ([[NSFileManager defaultManager] fileExistsAtPath:[self pathForName:name] isDirectory:nil]) {
     NSAlert *a = [NSAlert alertWithMessageText:@"Error Creating TmpDisk" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"A Volume named %@ already exists.", name];
     [a runModal];
     
@@ -112,7 +217,7 @@
     
     NSArray *arguments;
     arguments = @[@"-c",
-                  [NSString stringWithFormat:@"mdutil -i on /Volumes/%@", name]];
+                  [NSString stringWithFormat:@"mdutil -i on %@", [self pathForName:name]]];
     
     indexTask.arguments = arguments;
   }
