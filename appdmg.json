@@ -1,0 +1,10 @@
+{
+  "title": "TmpDisk",
+  "icon": "TmpDisk/icon.icns",
+  "background": "dmgbg.png",
+  "icon-size": 80,
+  "contents": [
+    { "x": 480, "y": 244, "type": "link", "path": "/Applications" },
+    { "x": 160, "y": 244, "type": "file", "path": "TmpDisk.app" }
+  ]
+}
