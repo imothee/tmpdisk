@@ -13,8 +13,6 @@
 		41283F8C147C88B7005EDE88 /* AutoCreateManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41283F8A147C88B7005EDE88 /* AutoCreateManager.xib */; };
 		412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 412EC7E6146DF1C600D569F1 /* eject_a.png */; };
 		413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413A37541470B12500C07D59 /* CoreServices.framework */; };
-		418320CA14722C1D000D8488 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418320C914722C1D000D8488 /* Sparkle.framework */; };
-		418320CC14722C41000D8488 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 418320C914722C1D000D8488 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		418320CE14722EB5000D8488 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 418320CD14722EB5000D8488 /* dsa_pub.pem */; };
 		418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A2894144299DE00D4BCB0 /* Cocoa.framework */; };
 		418A289F144299DE00D4BCB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A289D144299DE00D4BCB0 /* InfoPlist.strings */; };
@@ -33,6 +31,7 @@
 		418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */; };
 		418DD4C2147DF2E400488297 /* AutoCreateManagerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */; };
 		418DF6A0147B57CD0069EEAC /* TmpDiskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DF69F147B57CD0069EEAC /* TmpDiskManager.m */; };
+		74818F1D903E49A9BDD7AFD3 /* libPods-TmpDisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E637709C3803E7D3A414FBFF /* libPods-TmpDisk.a */; };
 		A96E4E7A1C5FDCEA0086FE71 /* recreate_a.png in Resources */ = {isa = PBXBuildFile; fileRef = A96E4E781C5FDCEA0086FE71 /* recreate_a.png */; };
 		A96E4E7B1C5FDCEA0086FE71 /* recreate.png in Resources */ = {isa = PBXBuildFile; fileRef = A96E4E791C5FDCEA0086FE71 /* recreate.png */; };
 /* End PBXBuildFile section */
@@ -47,20 +46,8 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		418320CB14722C34000D8488 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				418320CC14722C41000D8488 /* Sparkle.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		00F4F36CB9136F2BB1F0A497 /* Pods-TmpDisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TmpDisk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk.debug.xcconfig"; sourceTree = "<group>"; };
 		4103FF9114440A2900618177 /* eject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject.png; sourceTree = "<group>"; };
 		410B9B2D1456E7EC003FE088 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
 		410B9B321456F18B003FE088 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
@@ -102,8 +89,10 @@
 		418DF69E147B57CD0069EEAC /* TmpDiskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskManager.h; path = Classes/TmpDiskManager.h; sourceTree = "<group>"; };
 		418DF69F147B57CD0069EEAC /* TmpDiskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskManager.m; path = Classes/TmpDiskManager.m; sourceTree = "<group>"; };
 		41A5021C146268F600BC762D /* TmpDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TmpDisk.entitlements; sourceTree = "<group>"; };
+		9CD599E58C7540A97A750EFD /* Pods-TmpDisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TmpDisk.release.xcconfig"; path = "Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk.release.xcconfig"; sourceTree = "<group>"; };
 		A96E4E781C5FDCEA0086FE71 /* recreate_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recreate_a.png; sourceTree = "<group>"; };
 		A96E4E791C5FDCEA0086FE71 /* recreate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recreate.png; sourceTree = "<group>"; };
+		E637709C3803E7D3A414FBFF /* libPods-TmpDisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TmpDisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +102,7 @@
 			files = (
 				413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */,
 				418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */,
-				418320CA14722C1D000D8488 /* Sparkle.framework in Frameworks */,
+				74818F1D903E49A9BDD7AFD3 /* libPods-TmpDisk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +137,7 @@
 				418A28B7144299DF00D4BCB0 /* TmpDiskTests */,
 				418A2893144299DE00D4BCB0 /* Frameworks */,
 				418A2891144299DE00D4BCB0 /* Products */,
+				A52B03B0263BE43AE91D339C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +158,7 @@
 				418A2894144299DE00D4BCB0 /* Cocoa.framework */,
 				418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */,
 				418A2896144299DE00D4BCB0 /* Other Frameworks */,
+				E637709C3803E7D3A414FBFF /* libPods-TmpDisk.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -258,6 +249,15 @@
 			name = TmpDisks;
 			sourceTree = "<group>";
 		};
+		A52B03B0263BE43AE91D339C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				00F4F36CB9136F2BB1F0A497 /* Pods-TmpDisk.debug.xcconfig */,
+				9CD599E58C7540A97A750EFD /* Pods-TmpDisk.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,10 +265,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 418A28C2144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDisk" */;
 			buildPhases = (
+				76ECBA4186A60751F84A1605 /* Check Pods Manifest.lock */,
 				418A288C144299DE00D4BCB0 /* Sources */,
 				418A288D144299DE00D4BCB0 /* Frameworks */,
 				418A288E144299DE00D4BCB0 /* Resources */,
-				418320CB14722C34000D8488 /* CopyFiles */,
+				208BF7E989BC1EAA72BF6E0A /* Embed Pods Frameworks */,
+				9C2999F78C83568FAA539BE0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -307,6 +309,11 @@
 				LastTestingUpgradeCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Ink Scribbles Pty Ltd";
+				TargetAttributes = {
+					418A288F144299DE00D4BCB0 = {
+						DevelopmentTeam = B79ZU76C43;
+					};
+				};
 			};
 			buildConfigurationList = 418A288A144299DE00D4BCB0 /* Build configuration list for PBXProject "TmpDisk" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -357,6 +364,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		208BF7E989BC1EAA72BF6E0A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		418A28AF144299DF00D4BCB0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -369,6 +391,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		76ECBA4186A60751F84A1605 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9C2999F78C83568FAA539BE0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -528,9 +580,10 @@
 		};
 		418A28C3144299DF00D4BCB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00F4F36CB9136F2BB1F0A497 /* Pods-TmpDisk.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -540,7 +593,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
 				INFOPLIST_FILE = "TmpDisk/TmpDisk-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.inkscribbles.${PRODUCT_NAME:rfc1034identifier}";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = co.roomsix.tmpdisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -548,9 +602,10 @@
 		};
 		418A28C4144299DF00D4BCB0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9CD599E58C7540A97A750EFD /* Pods-TmpDisk.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -560,7 +615,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
 				INFOPLIST_FILE = "TmpDisk/TmpDisk-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.inkscribbles.${PRODUCT_NAME:rfc1034identifier}";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_BUNDLE_IDENTIFIER = co.roomsix.tmpdisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
