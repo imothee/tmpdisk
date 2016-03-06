@@ -2,3 +2,5 @@ build
 design
 Pods/
 TmpDisk.app
+TmpDisk*.dmg
+.DS_Store

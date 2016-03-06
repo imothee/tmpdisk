@@ -48,6 +48,12 @@
 
 /* Begin PBXFileReference section */
 		00F4F36CB9136F2BB1F0A497 /* Pods-TmpDisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TmpDisk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk.debug.xcconfig"; sourceTree = "<group>"; };
+		22109D901C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		22109D911C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/NewTmpDisk.xib"; sourceTree = "<group>"; };
+		22109D921C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/AutoCreateManager.xib"; sourceTree = "<group>"; };
+		22109D931C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		22109D941C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
+		22109D951C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4103FF9114440A2900618177 /* eject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject.png; sourceTree = "<group>"; };
 		410B9B2D1456E7EC003FE088 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
 		410B9B321456F18B003FE088 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
@@ -321,6 +327,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 418A2885144299DE00D4BCB0;
 			productRefGroup = 418A2891144299DE00D4BCB0 /* Products */;
@@ -463,6 +470,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				41283F8B147C88B7005EDE88 /* en */,
+				22109D921C8C08F0005B945E /* zh-Hans */,
 			);
 			name = AutoCreateManager.xib;
 			sourceTree = "<group>";
@@ -471,6 +479,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				418A289E144299DE00D4BCB0 /* en */,
+				22109D931C8C08F0005B945E /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -479,6 +488,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				418A28A4144299DE00D4BCB0 /* en */,
+				22109D941C8C08F0005B945E /* zh-Hans */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -487,6 +497,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				418A28AA144299DF00D4BCB0 /* en */,
+				22109D901C8C08F0005B945E /* zh-Hans */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -495,6 +506,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				418A28BB144299DF00D4BCB0 /* en */,
+				22109D951C8C08F0005B945E /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -503,6 +515,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				418A28D61442A2B400D4BCB0 /* en */,
+				22109D911C8C08F0005B945E /* zh-Hans */,
 			);
 			name = NewTmpDisk.xib;
 			sourceTree = "<group>";
