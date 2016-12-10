@@ -12,7 +12,7 @@ Installing
 
 TmpDisk is built for OSX Lion but does not use any Lion only libraries. It should compile for older systems as well, but this has not been tested.
 
-Either install the dmg at http://inkscribbles.com/app/tmpdisk or clone the repository and build the application yourself. All required files are included.
+Either install the dmg at https://github.com/imothee/tmpdisk/releases/download/v1.2.1/TmpDisk-1.2.1.dmg or clone the repository and build the application yourself. All required files are included.
 
 Usage
 -----
