@@ -33,6 +33,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var diskSizeSuffixLabel: NSTextField!
     @IBOutlet weak var folders: NSTextField!
     
+    @IBOutlet weak var diskSizeSelector: NSPopUpButton!
+    
     @IBOutlet weak var autoCreate: NSButton!
     @IBOutlet weak var index: NSButton!
     @IBOutlet weak var hidden: NSButton!
@@ -68,14 +70,31 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         self.diskSize.stringValue = "\(sender.integerValue)"
     }
     
+    @IBAction func sizeSelected(_ sender: NSPopUpButton) {
+        switch sender.indexOfSelectedItem {
+        case 1:
+            let dSize = (0.25 * Double(ProcessInfo.init().physicalMemory)) / 1024 / 1024
+            self.volume.size = Int(dSize)
+            self.diskSize.stringValue = String(Int(dSize))
+            sender.selectItem(at: 0)
+            break
+        case 2:
+            let dSize = (0.5 * Double(ProcessInfo.init().physicalMemory)) / 1024 / 1024
+            self.volume.size = Int(dSize)
+            self.diskSize.stringValue = String(Int(dSize))
+            sender.selectItem(at: 0)
+            break
+        default:
+            return
+        }
+    }
+    
     @IBAction func onUseTmpFsChange(_ sender: NSButton) {
         if sender.state == .on {
             self.volume.tmpFs = true
-            
             self.diskSizeLabel.stringValue = "Max Size"
         } else {
             self.volume.tmpFs = false
-            
             self.diskSizeLabel.stringValue = "Disk Size"
         }
     }
@@ -93,10 +112,19 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     }
     
     @IBAction func createTapped(_ sender: NSButton) {
-        // Todo: Check for name
-        // Todo: Check for integer size if no tmpFs
+        let spinner = NSProgressIndicator(frame: NSRect(x: 58.5, y: 7.5, width: 13, height: 13))
+        spinner.style = .spinning
+        spinner.startAnimation(nil)
+        
+        sender.addSubview(spinner)
+        sender.isEnabled = false
         
         TmpDiskManager.shared.createTmpDisk(volume: self.volume) { error in
+            DispatchQueue.main.async {
+                spinner.removeFromSuperview()
+                sender.isEnabled = true
+            }
+            
             if let error = error {
                 DispatchQueue.main.async {
                     switch error {
