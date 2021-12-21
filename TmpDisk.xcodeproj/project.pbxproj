@@ -70,11 +70,11 @@
 		220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2200826E2765508C00A8524B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2264C5E1276553E600C45CB8 /* StatusBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
-		2264C5E3276565D000C45CB8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		2264C5E72765667500C45CB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2264C5E92765667700C45CB8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskManager.swift; sourceTree = "<group>"; };
 		2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTmpDiskViewController.swift; sourceTree = "<group>"; };
+		228DD717277181D600D6CAC3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		22A6934F276FCDCD0040FDEF /* TmpDiskMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskMenuItem.swift; sourceTree = "<group>"; };
 		22A693562770014B0040FDEF /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		22A6935C277004E80040FDEF /* TmpDiskLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDiskLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -429,7 +429,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2200824A2765505100A8524B /* Base */,
-				2264C5E3276565D000C45CB8 /* zh-Hans */,
+				228DD717277181D600D6CAC3 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
