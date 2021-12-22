@@ -83,6 +83,10 @@ class StatusBarController {
         checkUpdateItem.target = self
         statusMenu.addItem(checkUpdateItem)
         
+        let preferencesItem = NSMenuItem(title: NSLocalizedString("Preferences", comment: ""), action: #selector(preferences(sender:)), keyEquivalent: "")
+        preferencesItem.target = self
+        statusMenu.addItem(preferencesItem)
+        
         // Separator
         statusMenu.addItem(NSMenuItem.separator())
         
@@ -109,6 +113,18 @@ class StatusBarController {
     
     // MARK: - Internal
     
+    func confirmEject(volume: TmpDiskVolume) -> Bool {
+        if (volume.showWarning()) {
+            let alert = NSAlert()
+            alert.messageText = NSLocalizedString("Volume contains files, are you sure you want to eject?", comment: "")
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "OK")
+            alert.addButton(withTitle: "Cancel")
+            return alert.runModal() == .alertFirstButtonReturn
+        }
+        return true
+    }
+    
     func buildCurrentTmpDiskMenu() {
         self.currentTmpDisksMenu.removeAllItems()
         for volume in TmpDiskManager.shared.volumes {
@@ -116,10 +132,14 @@ class StatusBarController {
                 NSWorkspace.shared.open(volume.URL())
                 self.statusMenu.cancelTracking()
             }, recreateHandler: {
-                TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
+                if self.confirmEject(volume: volume) {
+                    TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
+                }
                 self.statusMenu.cancelTracking()
             }, ejectHandler: {
-                TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: false)
+                if self.confirmEject(volume: volume) {
+                    TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: false)
+                }
                 self.statusMenu.cancelTracking()
             })
             volumeItem.target = self
@@ -161,6 +181,13 @@ class StatusBarController {
     
     @objc func checkUpdate(sender: AnyObject) {
         
+    }
+    
+    @objc func preferences(sender: AnyObject) {
+        NSApplication.shared.activate(ignoringOtherApps: true)
+        let preferencesWindow = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "PreferencesWindow") as? NSWindowController
+        preferencesWindow?.showWindow(nil)
+        preferencesWindow?.window?.makeKey()
     }
     
     @objc func help(sender: AnyObject) {

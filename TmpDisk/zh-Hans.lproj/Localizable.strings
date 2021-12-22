@@ -21,3 +21,5 @@
 "A volume with this name already exists" = "已存在同名的卷";
 "Size must be a number of megabytes > 0" = "大小必须是大于 0 的兆字节数";
 "Failed to create TmpDisk" = "创建 TmpDisk 失败";
+"Preferences" = "Preferences";
+"You can't change the root volume while tmpFS disks are mounted." = "You can't change the root volume while tmpFS disks are mounted.";

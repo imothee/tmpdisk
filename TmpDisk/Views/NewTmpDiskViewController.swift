@@ -44,6 +44,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     // MARK: - View controller lifecycle
     
     override public func viewDidAppear() {
+        super.viewDidAppear()
         self.diskName.delegate = self
         self.diskSize.delegate = self
         self.folders.delegate = self
@@ -93,9 +94,13 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         if sender.state == .on {
             self.volume.tmpFs = true
             self.diskSizeLabel.stringValue = "Max Size"
+            self.hidden.isHidden = true
+            self.hidden.state = .off
+            self.volume.hidden = false
         } else {
             self.volume.tmpFs = false
             self.diskSizeLabel.stringValue = "Disk Size"
+            self.hidden.isHidden = false
         }
     }
     
@@ -105,6 +110,10 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     
     @IBAction func onIndexChange(_ sender: NSButton) {
         self.volume.indexed = sender.state == .on
+    }
+    
+    @IBAction func onWarnChange(_ sender: NSButton) {
+        self.volume.warnOnEject = sender.state == .on
     }
     
     @IBAction func onHiddenChange(_ sender: NSButton) {

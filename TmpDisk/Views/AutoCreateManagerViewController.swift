@@ -64,6 +64,15 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
         case "hidden":
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
             cell?.checkbox.state = volume.hidden ? .on : .off
+            if volume.tmpFs {
+                cell?.checkbox.isEnabled = false
+            } else {
+                cell?.checkbox.isEnabled = true
+            }
+            return cell
+        case "warn":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
+            cell?.checkbox.state = volume.warnOnEject ? .on : .off
             return cell
         default:
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? NSTableCellView
@@ -112,12 +121,17 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             switch column {
             case 3:
                 self.volumes[row].tmpFs = button.state == .on
+                // Reload the table so the enabled state updates
+                self.tableView.reloadData()
                 break
             case 4:
                 self.volumes[row].indexed = button.state == .on
                 break
             case 5:
                 self.volumes[row].hidden = button.state == .on
+                break
+            case 6:
+                self.volumes[row].warnOnEject = button.state == .on
                 break
             default:
                 return

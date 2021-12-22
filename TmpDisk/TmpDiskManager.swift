@@ -31,11 +31,12 @@ struct TmpDiskVolume: Hashable, Codable {
     var indexed: Bool = false
     var hidden: Bool = false
     var tmpFs: Bool = false
+    var warnOnEject: Bool = false
     var folders: [String] = []
     
     func path() -> String {
         if tmpFs {
-            return "\(TmpDiskHome)/volumes/\(name)"
+            return "\(TmpDiskManager.rootFolder)/\(name)"
         }
         return "/Volumes/\(name)"
     }
@@ -51,8 +52,20 @@ struct TmpDiskVolume: Hashable, Codable {
             "indexed": indexed,
             "hidden": hidden,
             "tmpFs": tmpFs,
+            "warnOnEject": warnOnEject,
             "folders": folders
         ]
+    }
+    
+    func showWarning() -> Bool {
+        if warnOnEject {
+            if let files = try? FileManager.default.contentsOfDirectory(atPath: self.path()) {
+                if !files.filter({ ![".DS_Store", ".tmpdisk", ".fseventsd"].contains($0) }).isEmpty {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
 
@@ -71,6 +84,7 @@ class TmpDiskManager {
         return instance
     }()
  
+    static var rootFolder = UserDefaults.standard.object(forKey: "rootFolder") as? String ?? TmpDiskHome
     var volumes: Set<TmpDiskVolume> = []
     
     init() {
@@ -89,10 +103,10 @@ class TmpDiskManager {
         }
         
         // Check for existing tmpfs
-        if let vols = try? FileManager.default.contentsOfDirectory(atPath: "\(TmpDiskHome)/volumes") {
+        if let vols = try? FileManager.default.contentsOfDirectory(atPath: TmpDiskManager.rootFolder) {
             for vol in vols {
                 // For now we don't check if it's mounted, just check for the tmpdisk file
-                let tmpdiskFilePath = "\(TmpDiskHome)/volumes/\(vol)/.tmpdisk"
+                let tmpdiskFilePath = "\(TmpDiskManager.rootFolder)/\(vol)/.tmpdisk"
                 if FileManager.default.fileExists(atPath: tmpdiskFilePath) {
                     if let jsonData = FileManager.default.contents(atPath: tmpdiskFilePath) {
                         if let volume = try? JSONDecoder().decode(TmpDiskVolume.self, from: jsonData) {
@@ -104,18 +118,10 @@ class TmpDiskManager {
         }
         
         // AutoCreate any saved TmpDisks
-        if let autoCreate = UserDefaults.standard.object(forKey: "autoCreate") as? [Dictionary<String, Any>] {
-            for vol in autoCreate {
-                if let name = vol["name"] as? String, let size = vol["size"] as? Int, let indexed = vol["indexed"] as? Bool, let hidden = vol["hidden"] as? Bool, let tmpFs = vol["tmpFs"] as? Bool {
-                
-                    let folders = vol["folders"] as? [String] ?? []
-                    
-                    let volume = TmpDiskVolume(name: name, size: size, indexed: indexed, hidden: hidden, tmpFs: tmpFs, folders: folders)
-                    self.createTmpDisk(volume: volume) { error in
-                        if let error = error {
-                            // TODO: Add autocreate error
-                        }
-                    }
+        for volume in self.getAutoCreateVolumes() {
+            self.createTmpDisk(volume: volume) { error in
+                if let error = error {
+                    // TODO: Add autocreate error
                 }
             }
         }
@@ -129,9 +135,10 @@ class TmpDiskManager {
             for vol in autoCreate {
                 if let name = vol["name"] as? String, let size = vol["size"] as? Int, let indexed = vol["indexed"] as? Bool, let hidden = vol["hidden"] as? Bool, let tmpFs = vol["tmpFs"] as? Bool {
                 
+                    let warnOnEject = vol["warnOnEject"] as? Bool ?? false
                     let folders = vol["folders"] as? [String] ?? []
                     
-                    let volume = TmpDiskVolume(name: name, size: size, indexed: indexed, hidden: hidden, tmpFs: tmpFs, folders: folders)
+                    let volume = TmpDiskVolume(name: name, size: size, indexed: indexed, hidden: hidden, tmpFs: tmpFs, warnOnEject: warnOnEject, folders: folders)
                     autoCreateVolumes.insert(volume)
                 }
             }
