@@ -73,14 +73,9 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     
     @IBAction func sizeSelected(_ sender: NSPopUpButton) {
         switch sender.indexOfSelectedItem {
-        case 1:
-            let dSize = (0.25 * Double(ProcessInfo.init().physicalMemory)) / 1024 / 1024
-            self.volume.size = Int(dSize)
-            self.diskSize.stringValue = String(Int(dSize))
-            sender.selectItem(at: 0)
-            break
-        case 2:
-            let dSize = (0.5 * Double(ProcessInfo.init().physicalMemory)) / 1024 / 1024
+        case 1, 2, 3, 4:
+            let percent = [0.1, 0.25, 0.5, 0.75][sender.indexOfSelectedItem - 1]
+            let dSize = (percent * Double(ProcessInfo.init().physicalMemory)) / 1024 / 1024
             self.volume.size = Int(dSize)
             self.diskSize.stringValue = String(Int(dSize))
             sender.selectItem(at: 0)

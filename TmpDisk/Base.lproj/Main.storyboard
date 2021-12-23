@@ -849,8 +849,10 @@
                                     <menu key="menu" id="Ch5-M6-clS">
                                         <items>
                                             <menuItem title="Custom" state="on" id="gcJ-GN-9gz"/>
-                                            <menuItem title="25% of Ram" id="DAh-6M-Jca"/>
+                                            <menuItem title="10% of Ram" id="DAh-6M-Jca"/>
+                                            <menuItem title="25% of Ram" id="ud8-KO-JVf"/>
                                             <menuItem title="50% of Ram" id="nXv-G3-d8b"/>
+                                            <menuItem title="75% of Ram" id="oUd-0o-jwy"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
@@ -992,7 +994,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="JML-g3-qvT">
-                                                            <rect key="frame" x="162.5" y="0.0" width="88" height="24"/>
+                                                            <rect key="frame" x="162" y="0.0" width="88" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfW-y0-Gzf">
@@ -1027,7 +1029,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="m4U-hC-HcX">
-                                                            <rect key="frame" x="267.5" y="0.0" width="163" height="24"/>
+                                                            <rect key="frame" x="267" y="0.0" width="163" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ZJ-fg-CTz">
