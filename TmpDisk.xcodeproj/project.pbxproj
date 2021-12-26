@@ -3,703 +3,866 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4103FF9214440A2900618177 /* eject.png in Resources */ = {isa = PBXBuildFile; fileRef = 4103FF9114440A2900618177 /* eject.png */; };
-		410B9B2E1456E7EC003FE088 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B2D1456E7EC003FE088 /* status.png */; };
-		410B9B331456F18C003FE088 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 410B9B321456F18B003FE088 /* icon.icns */; };
-		41283F8C147C88B7005EDE88 /* AutoCreateManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41283F8A147C88B7005EDE88 /* AutoCreateManager.xib */; };
-		412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 412EC7E6146DF1C600D569F1 /* eject_a.png */; };
-		413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 413A37541470B12500C07D59 /* CoreServices.framework */; };
-		418320CE14722EB5000D8488 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 418320CD14722EB5000D8488 /* dsa_pub.pem */; };
-		418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A2894144299DE00D4BCB0 /* Cocoa.framework */; };
-		418A289F144299DE00D4BCB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A289D144299DE00D4BCB0 /* InfoPlist.strings */; };
-		418A28A1144299DE00D4BCB0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28A0144299DE00D4BCB0 /* main.m */; };
-		418A28A5144299DE00D4BCB0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 418A28A3144299DE00D4BCB0 /* Credits.rtf */; };
-		418A28A8144299DE00D4BCB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28A7144299DE00D4BCB0 /* AppDelegate.m */; };
-		418A28AB144299DF00D4BCB0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418A28A9144299DE00D4BCB0 /* MainMenu.xib */; };
-		418A28B3144299DF00D4BCB0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */; };
-		418A28B4144299DF00D4BCB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418A2894144299DE00D4BCB0 /* Cocoa.framework */; };
-		418A28BC144299DF00D4BCB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 418A28BA144299DF00D4BCB0 /* InfoPlist.strings */; };
-		418A28BF144299DF00D4BCB0 /* TmpDiskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28BE144299DF00D4BCB0 /* TmpDiskTests.m */; };
-		418A28D31442A08D00D4BCB0 /* TmpDiskStatusBarListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28D21442A08D00D4BCB0 /* TmpDiskStatusBarListener.m */; };
-		418A28D71442A2B400D4BCB0 /* NewTmpDisk.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418A28D51442A2B400D4BCB0 /* NewTmpDisk.xib */; };
-		418A28DA1442A2F800D4BCB0 /* NewTmpDiskWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28D91442A2F800D4BCB0 /* NewTmpDiskWindow.m */; };
-		418A28E51442CE8D00D4BCB0 /* TmpDiskMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */; };
-		418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */; };
-		418DD4C2147DF2E400488297 /* AutoCreateManagerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */; };
-		418DF6A0147B57CD0069EEAC /* TmpDiskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DF69F147B57CD0069EEAC /* TmpDiskManager.m */; };
-		74818F1D903E49A9BDD7AFD3 /* libPods-TmpDisk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E637709C3803E7D3A414FBFF /* libPods-TmpDisk.a */; };
-		A96E4E7A1C5FDCEA0086FE71 /* recreate_a.png in Resources */ = {isa = PBXBuildFile; fileRef = A96E4E781C5FDCEA0086FE71 /* recreate_a.png */; };
-		A96E4E7B1C5FDCEA0086FE71 /* recreate.png in Resources */ = {isa = PBXBuildFile; fileRef = A96E4E791C5FDCEA0086FE71 /* recreate.png */; };
+		220082442765504E00A8524B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220082432765504E00A8524B /* AppDelegate.swift */; };
+		220082482765505100A8524B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220082472765505100A8524B /* Assets.xcassets */; };
+		2200824B2765505100A8524B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220082492765505100A8524B /* Main.storyboard */; };
+		220082562765505100A8524B /* TmpDiskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220082552765505100A8524B /* TmpDiskTests.swift */; };
+		220082602765505100A8524B /* TmpDiskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200825F2765505100A8524B /* TmpDiskUITests.swift */; };
+		220082622765505100A8524B /* TmpDiskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */; };
+		2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5E1276553E600C45CB8 /* StatusBarController.swift */; };
+		2264C5E62765667500C45CB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2264C5E82765667500C45CB8 /* Localizable.strings */; };
+		2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */; };
+		2264C5EE2765C34000C45CB8 /* NewTmpDiskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */; };
+		228DD7192772F23D00D6CAC3 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DD7182772F23D00D6CAC3 /* PreferencesViewController.swift */; };
+		228DD724277426B000D6CAC3 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 228DD723277426B000D6CAC3 /* Sparkle */; };
+		22A69350276FCDCD0040FDEF /* TmpDiskMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6934F276FCDCD0040FDEF /* TmpDiskMenuItem.swift */; };
+		22A693572770014B0040FDEF /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A693562770014B0040FDEF /* ServiceManagement.framework */; platformFilter = maccatalyst; };
+		22A6935F277004E80040FDEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6935E277004E80040FDEF /* AppDelegate.swift */; };
+		22A69363277004E90040FDEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A69362277004E90040FDEF /* Assets.xcassets */; };
+		22A69366277004E90040FDEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22A69364277004E90040FDEF /* Main.storyboard */; };
+		22A69389277005B80040FDEF /* TmpDiskLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22A6935C277004E80040FDEF /* TmpDiskLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22A6938B27700B4B0040FDEF /* AutoCreateManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */; };
+		22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		418A28B5144299DF00D4BCB0 /* PBXContainerItemProxy */ = {
+		220082522765505100A8524B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 418A2887144299DE00D4BCB0 /* Project object */;
+			containerPortal = 220082382765504E00A8524B /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 418A288F144299DE00D4BCB0;
+			remoteGlobalIDString = 2200823F2765504E00A8524B;
+			remoteInfo = TmpDisk;
+		};
+		2200825C2765505100A8524B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 220082382765504E00A8524B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2200823F2765504E00A8524B;
 			remoteInfo = TmpDisk;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXFileReference section */
-		00F4F36CB9136F2BB1F0A497 /* Pods-TmpDisk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TmpDisk.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk.debug.xcconfig"; sourceTree = "<group>"; };
-		22109D901C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
-		22109D911C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/NewTmpDisk.xib"; sourceTree = "<group>"; };
-		22109D921C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/AutoCreateManager.xib"; sourceTree = "<group>"; };
-		22109D931C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		22109D941C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
-		22109D951C8C08F0005B945E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		4103FF9114440A2900618177 /* eject.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject.png; sourceTree = "<group>"; };
-		410B9B2D1456E7EC003FE088 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
-		410B9B321456F18B003FE088 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
-		41283F8B147C88B7005EDE88 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AutoCreateManager.xib; sourceTree = "<group>"; };
-		412EC7E6146DF1C600D569F1 /* eject_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eject_a.png; sourceTree = "<group>"; };
-		413A37541470B12500C07D59 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		418320C914722C1D000D8488 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		418320CD14722EB5000D8488 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		418A2890144299DE00D4BCB0 /* TmpDisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		418A2894144299DE00D4BCB0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		418A2897144299DE00D4BCB0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		418A2898144299DE00D4BCB0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		418A2899144299DE00D4BCB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		418A289C144299DE00D4BCB0 /* TmpDisk-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TmpDisk-Info.plist"; sourceTree = "<group>"; };
-		418A289E144299DE00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		418A28A0144299DE00D4BCB0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		418A28A2144299DE00D4BCB0 /* TmpDisk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TmpDisk-Prefix.pch"; sourceTree = "<group>"; };
-		418A28A4144299DE00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		418A28A6144299DE00D4BCB0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		418A28A7144299DE00D4BCB0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		418A28AA144299DF00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		418A28B1144299DF00D4BCB0 /* TmpDiskTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TmpDiskTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		418A28B9144299DF00D4BCB0 /* TmpDiskTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TmpDiskTests-Info.plist"; sourceTree = "<group>"; };
-		418A28BB144299DF00D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		418A28BD144299DF00D4BCB0 /* TmpDiskTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TmpDiskTests.h; sourceTree = "<group>"; };
-		418A28BE144299DF00D4BCB0 /* TmpDiskTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TmpDiskTests.m; sourceTree = "<group>"; };
-		418A28D11442A08D00D4BCB0 /* TmpDiskStatusBarListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskStatusBarListener.h; path = Classes/TmpDiskStatusBarListener.h; sourceTree = "<group>"; };
-		418A28D21442A08D00D4BCB0 /* TmpDiskStatusBarListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskStatusBarListener.m; path = Classes/TmpDiskStatusBarListener.m; sourceTree = "<group>"; };
-		418A28D61442A2B400D4BCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NewTmpDisk.xib; sourceTree = "<group>"; };
-		418A28D81442A2F800D4BCB0 /* NewTmpDiskWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewTmpDiskWindow.h; path = Classes/NewTmpDiskWindow.h; sourceTree = "<group>"; };
-		418A28D91442A2F800D4BCB0 /* NewTmpDiskWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewTmpDiskWindow.m; path = Classes/NewTmpDiskWindow.m; sourceTree = "<group>"; };
-		418A28E31442CE8D00D4BCB0 /* TmpDiskMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskMenuItem.h; path = Classes/TmpDiskMenuItem.h; sourceTree = "<group>"; };
-		418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskMenuItem.m; path = Classes/TmpDiskMenuItem.m; sourceTree = "<group>"; };
-		418A28E61442D05100D4BCB0 /* TmpDiskMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskMenuItemView.h; path = Classes/TmpDiskMenuItemView.h; sourceTree = "<group>"; };
-		418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskMenuItemView.m; path = Classes/TmpDiskMenuItemView.m; sourceTree = "<group>"; };
-		418DD4C0147DF2E400488297 /* AutoCreateManagerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCreateManagerWindow.h; path = Classes/AutoCreateManagerWindow.h; sourceTree = "<group>"; };
-		418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoCreateManagerWindow.m; path = Classes/AutoCreateManagerWindow.m; sourceTree = "<group>"; };
-		418DF69E147B57CD0069EEAC /* TmpDiskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TmpDiskManager.h; path = Classes/TmpDiskManager.h; sourceTree = "<group>"; };
-		418DF69F147B57CD0069EEAC /* TmpDiskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TmpDiskManager.m; path = Classes/TmpDiskManager.m; sourceTree = "<group>"; };
-		41A5021C146268F600BC762D /* TmpDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TmpDisk.entitlements; sourceTree = "<group>"; };
-		9CD599E58C7540A97A750EFD /* Pods-TmpDisk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TmpDisk.release.xcconfig"; path = "Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk.release.xcconfig"; sourceTree = "<group>"; };
-		A96E4E781C5FDCEA0086FE71 /* recreate_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recreate_a.png; sourceTree = "<group>"; };
-		A96E4E791C5FDCEA0086FE71 /* recreate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recreate.png; sourceTree = "<group>"; };
-		E637709C3803E7D3A414FBFF /* libPods-TmpDisk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TmpDisk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		418A288D144299DE00D4BCB0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
+/* Begin PBXCopyFilesBuildPhase section */
+		22A69388277005A00040FDEF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
 			files = (
-				413A37551470B12500C07D59 /* CoreServices.framework in Frameworks */,
-				418A2895144299DE00D4BCB0 /* Cocoa.framework in Frameworks */,
-				74818F1D903E49A9BDD7AFD3 /* libPods-TmpDisk.a in Frameworks */,
+				22A69389277005B80040FDEF /* TmpDiskLauncher.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		418A28AD144299DF00D4BCB0 /* Frameworks */ = {
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		220082402765504E00A8524B /* TmpDisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		220082432765504E00A8524B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		220082472765505100A8524B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2200824A2765505100A8524B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2200824C2765505100A8524B /* TmpDisk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TmpDisk.entitlements; sourceTree = "<group>"; };
+		220082512765505100A8524B /* TmpDiskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TmpDiskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		220082552765505100A8524B /* TmpDiskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskTests.swift; sourceTree = "<group>"; };
+		2200825B2765505100A8524B /* TmpDiskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TmpDiskUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2200825F2765505100A8524B /* TmpDiskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskUITests.swift; sourceTree = "<group>"; };
+		220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2200826E2765508C00A8524B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2264C5E1276553E600C45CB8 /* StatusBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		2264C5E72765667500C45CB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2264C5E92765667700C45CB8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskManager.swift; sourceTree = "<group>"; };
+		2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTmpDiskViewController.swift; sourceTree = "<group>"; };
+		228DD717277181D600D6CAC3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		228DD7182772F23D00D6CAC3 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		22A6934F276FCDCD0040FDEF /* TmpDiskMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskMenuItem.swift; sourceTree = "<group>"; };
+		22A693562770014B0040FDEF /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		22A6935C277004E80040FDEF /* TmpDiskLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDiskLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22A6935E277004E80040FDEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		22A69362277004E90040FDEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22A69365277004E90040FDEF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		22A69367277004E90040FDEF /* TmpDiskLauncher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TmpDiskLauncher.entitlements; sourceTree = "<group>"; };
+		22A69387277005840040FDEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCreateManagerViewController.swift; sourceTree = "<group>"; };
+		22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxTableCellView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2200823D2765504E00A8524B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				418A28B3144299DF00D4BCB0 /* SenTestingKit.framework in Frameworks */,
-				418A28B4144299DF00D4BCB0 /* Cocoa.framework in Frameworks */,
+				22A693572770014B0040FDEF /* ServiceManagement.framework in Frameworks */,
+				228DD724277426B000D6CAC3 /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2200824E2765505100A8524B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220082582765505100A8524B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A69359277004E80040FDEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4103FF9014440A2900618177 /* Images */ = {
+		220082372765504E00A8524B = {
 			isa = PBXGroup;
 			children = (
-				A96E4E781C5FDCEA0086FE71 /* recreate_a.png */,
-				A96E4E791C5FDCEA0086FE71 /* recreate.png */,
-				4103FF9114440A2900618177 /* eject.png */,
-				412EC7E6146DF1C600D569F1 /* eject_a.png */,
-				410B9B2D1456E7EC003FE088 /* status.png */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		418A2885144299DE00D4BCB0 = {
-			isa = PBXGroup;
-			children = (
-				418A289A144299DE00D4BCB0 /* TmpDisk */,
-				418A28B7144299DF00D4BCB0 /* TmpDiskTests */,
-				418A2893144299DE00D4BCB0 /* Frameworks */,
-				418A2891144299DE00D4BCB0 /* Products */,
-				A52B03B0263BE43AE91D339C /* Pods */,
+				220082422765504E00A8524B /* TmpDisk */,
+				220082542765505100A8524B /* TmpDiskTests */,
+				2200825E2765505100A8524B /* TmpDiskUITests */,
+				22A6935D277004E80040FDEF /* TmpDiskLauncher */,
+				220082412765504E00A8524B /* Products */,
+				22A693552770014B0040FDEF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		418A2891144299DE00D4BCB0 /* Products */ = {
+		220082412765504E00A8524B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				418A2890144299DE00D4BCB0 /* TmpDisk.app */,
-				418A28B1144299DF00D4BCB0 /* TmpDiskTests.octest */,
+				220082402765504E00A8524B /* TmpDisk.app */,
+				220082512765505100A8524B /* TmpDiskTests.xctest */,
+				2200825B2765505100A8524B /* TmpDiskUITests.xctest */,
+				22A6935C277004E80040FDEF /* TmpDiskLauncher.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		418A2893144299DE00D4BCB0 /* Frameworks */ = {
+		220082422765504E00A8524B /* TmpDisk */ = {
 			isa = PBXGroup;
 			children = (
-				418320C914722C1D000D8488 /* Sparkle.framework */,
-				413A37541470B12500C07D59 /* CoreServices.framework */,
-				418A2894144299DE00D4BCB0 /* Cocoa.framework */,
-				418A28B2144299DF00D4BCB0 /* SenTestingKit.framework */,
-				418A2896144299DE00D4BCB0 /* Other Frameworks */,
-				E637709C3803E7D3A414FBFF /* libPods-TmpDisk.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		418A2896144299DE00D4BCB0 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				418A2897144299DE00D4BCB0 /* AppKit.framework */,
-				418A2898144299DE00D4BCB0 /* CoreData.framework */,
-				418A2899144299DE00D4BCB0 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		418A289A144299DE00D4BCB0 /* TmpDisk */ = {
-			isa = PBXGroup;
-			children = (
-				41A5021C146268F600BC762D /* TmpDisk.entitlements */,
-				410B9B321456F18B003FE088 /* icon.icns */,
-				4103FF9014440A2900618177 /* Images */,
-				418DF69C147B57A80069EEAC /* TmpDisks */,
-				418A28D41442A09300D4BCB0 /* StatusBar */,
-				418A28A6144299DE00D4BCB0 /* AppDelegate.h */,
-				418A28A7144299DE00D4BCB0 /* AppDelegate.m */,
-				418A28A9144299DE00D4BCB0 /* MainMenu.xib */,
-				418A28D51442A2B400D4BCB0 /* NewTmpDisk.xib */,
-				41283F8A147C88B7005EDE88 /* AutoCreateManager.xib */,
-				418A289B144299DE00D4BCB0 /* Supporting Files */,
+				2264C5EA27657A7E00C45CB8 /* Views */,
+				220082432765504E00A8524B /* AppDelegate.swift */,
+				2264C5E1276553E600C45CB8 /* StatusBarController.swift */,
+				2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */,
+				220082472765505100A8524B /* Assets.xcassets */,
+				2200826E2765508C00A8524B /* Info.plist */,
+				220082492765505100A8524B /* Main.storyboard */,
+				2200824C2765505100A8524B /* TmpDisk.entitlements */,
+				2264C5E82765667500C45CB8 /* Localizable.strings */,
 			);
 			path = TmpDisk;
 			sourceTree = "<group>";
 		};
-		418A289B144299DE00D4BCB0 /* Supporting Files */ = {
+		220082542765505100A8524B /* TmpDiskTests */ = {
 			isa = PBXGroup;
 			children = (
-				418320CD14722EB5000D8488 /* dsa_pub.pem */,
-				418A289C144299DE00D4BCB0 /* TmpDisk-Info.plist */,
-				418A289D144299DE00D4BCB0 /* InfoPlist.strings */,
-				418A28A0144299DE00D4BCB0 /* main.m */,
-				418A28A2144299DE00D4BCB0 /* TmpDisk-Prefix.pch */,
-				418A28A3144299DE00D4BCB0 /* Credits.rtf */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		418A28B7144299DF00D4BCB0 /* TmpDiskTests */ = {
-			isa = PBXGroup;
-			children = (
-				418A28BD144299DF00D4BCB0 /* TmpDiskTests.h */,
-				418A28BE144299DF00D4BCB0 /* TmpDiskTests.m */,
-				418A28B8144299DF00D4BCB0 /* Supporting Files */,
+				220082552765505100A8524B /* TmpDiskTests.swift */,
 			);
 			path = TmpDiskTests;
 			sourceTree = "<group>";
 		};
-		418A28B8144299DF00D4BCB0 /* Supporting Files */ = {
+		2200825E2765505100A8524B /* TmpDiskUITests */ = {
 			isa = PBXGroup;
 			children = (
-				418A28B9144299DF00D4BCB0 /* TmpDiskTests-Info.plist */,
-				418A28BA144299DF00D4BCB0 /* InfoPlist.strings */,
+				2200825F2765505100A8524B /* TmpDiskUITests.swift */,
+				220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */,
 			);
-			name = "Supporting Files";
+			path = TmpDiskUITests;
 			sourceTree = "<group>";
 		};
-		418A28D41442A09300D4BCB0 /* StatusBar */ = {
+		2264C5EA27657A7E00C45CB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				418A28D11442A08D00D4BCB0 /* TmpDiskStatusBarListener.h */,
-				418A28D21442A08D00D4BCB0 /* TmpDiskStatusBarListener.m */,
-				418A28D81442A2F800D4BCB0 /* NewTmpDiskWindow.h */,
-				418A28D91442A2F800D4BCB0 /* NewTmpDiskWindow.m */,
-				418A28E31442CE8D00D4BCB0 /* TmpDiskMenuItem.h */,
-				418A28E41442CE8D00D4BCB0 /* TmpDiskMenuItem.m */,
-				418A28E61442D05100D4BCB0 /* TmpDiskMenuItemView.h */,
-				418A28E71442D05100D4BCB0 /* TmpDiskMenuItemView.m */,
-				418DD4C0147DF2E400488297 /* AutoCreateManagerWindow.h */,
-				418DD4C1147DF2E400488297 /* AutoCreateManagerWindow.m */,
+				22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */,
+				22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */,
+				2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */,
+				228DD7182772F23D00D6CAC3 /* PreferencesViewController.swift */,
+				22A6934F276FCDCD0040FDEF /* TmpDiskMenuItem.swift */,
 			);
-			name = StatusBar;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		418DF69C147B57A80069EEAC /* TmpDisks */ = {
+		22A693552770014B0040FDEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				418DF69E147B57CD0069EEAC /* TmpDiskManager.h */,
-				418DF69F147B57CD0069EEAC /* TmpDiskManager.m */,
+				22A693562770014B0040FDEF /* ServiceManagement.framework */,
 			);
-			name = TmpDisks;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A52B03B0263BE43AE91D339C /* Pods */ = {
+		22A6935D277004E80040FDEF /* TmpDiskLauncher */ = {
 			isa = PBXGroup;
 			children = (
-				00F4F36CB9136F2BB1F0A497 /* Pods-TmpDisk.debug.xcconfig */,
-				9CD599E58C7540A97A750EFD /* Pods-TmpDisk.release.xcconfig */,
+				22A69387277005840040FDEF /* Info.plist */,
+				22A6935E277004E80040FDEF /* AppDelegate.swift */,
+				22A69362277004E90040FDEF /* Assets.xcassets */,
+				22A69364277004E90040FDEF /* Main.storyboard */,
+				22A69367277004E90040FDEF /* TmpDiskLauncher.entitlements */,
 			);
-			name = Pods;
+			path = TmpDiskLauncher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		418A288F144299DE00D4BCB0 /* TmpDisk */ = {
+		2200823F2765504E00A8524B /* TmpDisk */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 418A28C2144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDisk" */;
+			buildConfigurationList = 220082652765505100A8524B /* Build configuration list for PBXNativeTarget "TmpDisk" */;
 			buildPhases = (
-				76ECBA4186A60751F84A1605 /* Check Pods Manifest.lock */,
-				418A288C144299DE00D4BCB0 /* Sources */,
-				418A288D144299DE00D4BCB0 /* Frameworks */,
-				418A288E144299DE00D4BCB0 /* Resources */,
-				208BF7E989BC1EAA72BF6E0A /* Embed Pods Frameworks */,
-				9C2999F78C83568FAA539BE0 /* Copy Pods Resources */,
+				2200823C2765504E00A8524B /* Sources */,
+				2200823D2765504E00A8524B /* Frameworks */,
+				2200823E2765504E00A8524B /* Resources */,
+				22A69388277005A00040FDEF /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = TmpDisk;
+			packageProductDependencies = (
+				228DD723277426B000D6CAC3 /* Sparkle */,
+			);
 			productName = TmpDisk;
-			productReference = 418A2890144299DE00D4BCB0 /* TmpDisk.app */;
+			productReference = 220082402765504E00A8524B /* TmpDisk.app */;
 			productType = "com.apple.product-type.application";
 		};
-		418A28B0144299DF00D4BCB0 /* TmpDiskTests */ = {
+		220082502765505100A8524B /* TmpDiskTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 418A28C5144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDiskTests" */;
+			buildConfigurationList = 220082682765505100A8524B /* Build configuration list for PBXNativeTarget "TmpDiskTests" */;
 			buildPhases = (
-				418A28AC144299DF00D4BCB0 /* Sources */,
-				418A28AD144299DF00D4BCB0 /* Frameworks */,
-				418A28AE144299DF00D4BCB0 /* Resources */,
-				418A28AF144299DF00D4BCB0 /* ShellScript */,
+				2200824D2765505100A8524B /* Sources */,
+				2200824E2765505100A8524B /* Frameworks */,
+				2200824F2765505100A8524B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				418A28B6144299DF00D4BCB0 /* PBXTargetDependency */,
+				220082532765505100A8524B /* PBXTargetDependency */,
 			);
 			name = TmpDiskTests;
 			productName = TmpDiskTests;
-			productReference = 418A28B1144299DF00D4BCB0 /* TmpDiskTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = 220082512765505100A8524B /* TmpDiskTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2200825A2765505100A8524B /* TmpDiskUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2200826B2765505100A8524B /* Build configuration list for PBXNativeTarget "TmpDiskUITests" */;
+			buildPhases = (
+				220082572765505100A8524B /* Sources */,
+				220082582765505100A8524B /* Frameworks */,
+				220082592765505100A8524B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2200825D2765505100A8524B /* PBXTargetDependency */,
+			);
+			name = TmpDiskUITests;
+			productName = TmpDiskUITests;
+			productReference = 2200825B2765505100A8524B /* TmpDiskUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		22A6935B277004E80040FDEF /* TmpDiskLauncher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22A6937E277004EA0040FDEF /* Build configuration list for PBXNativeTarget "TmpDiskLauncher" */;
+			buildPhases = (
+				22A69358277004E80040FDEF /* Sources */,
+				22A69359277004E80040FDEF /* Frameworks */,
+				22A6935A277004E80040FDEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TmpDiskLauncher;
+			productName = TmpDiskLauncher;
+			productReference = 22A6935C277004E80040FDEF /* TmpDiskLauncher.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		418A2887144299DE00D4BCB0 /* Project object */ = {
+		220082382765504E00A8524B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0720;
-				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "Ink Scribbles Pty Ltd";
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
-					418A288F144299DE00D4BCB0 = {
-						DevelopmentTeam = B79ZU76C43;
+					2200823F2765504E00A8524B = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					220082502765505100A8524B = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 2200823F2765504E00A8524B;
+					};
+					2200825A2765505100A8524B = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 2200823F2765504E00A8524B;
+					};
+					22A6935B277004E80040FDEF = {
+						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
 			};
-			buildConfigurationList = 418A288A144299DE00D4BCB0 /* Build configuration list for PBXProject "TmpDisk" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			buildConfigurationList = 2200823B2765504E00A8524B /* Build configuration list for PBXProject "TmpDisk" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 				"zh-Hans",
 			);
-			mainGroup = 418A2885144299DE00D4BCB0;
-			productRefGroup = 418A2891144299DE00D4BCB0 /* Products */;
+			mainGroup = 220082372765504E00A8524B;
+			packageReferences = (
+				228DD722277426B000D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			productRefGroup = 220082412765504E00A8524B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				418A288F144299DE00D4BCB0 /* TmpDisk */,
-				418A28B0144299DF00D4BCB0 /* TmpDiskTests */,
+				2200823F2765504E00A8524B /* TmpDisk */,
+				220082502765505100A8524B /* TmpDiskTests */,
+				2200825A2765505100A8524B /* TmpDiskUITests */,
+				22A6935B277004E80040FDEF /* TmpDiskLauncher */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		418A288E144299DE00D4BCB0 /* Resources */ = {
+		2200823E2765504E00A8524B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				418A289F144299DE00D4BCB0 /* InfoPlist.strings in Resources */,
-				418A28A5144299DE00D4BCB0 /* Credits.rtf in Resources */,
-				418A28AB144299DF00D4BCB0 /* MainMenu.xib in Resources */,
-				418A28D71442A2B400D4BCB0 /* NewTmpDisk.xib in Resources */,
-				4103FF9214440A2900618177 /* eject.png in Resources */,
-				410B9B2E1456E7EC003FE088 /* status.png in Resources */,
-				410B9B331456F18C003FE088 /* icon.icns in Resources */,
-				412EC7E7146DF1C600D569F1 /* eject_a.png in Resources */,
-				418320CE14722EB5000D8488 /* dsa_pub.pem in Resources */,
-				A96E4E7A1C5FDCEA0086FE71 /* recreate_a.png in Resources */,
-				A96E4E7B1C5FDCEA0086FE71 /* recreate.png in Resources */,
-				41283F8C147C88B7005EDE88 /* AutoCreateManager.xib in Resources */,
+				220082482765505100A8524B /* Assets.xcassets in Resources */,
+				2264C5E62765667500C45CB8 /* Localizable.strings in Resources */,
+				2200824B2765505100A8524B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		418A28AE144299DF00D4BCB0 /* Resources */ = {
+		2200824F2765505100A8524B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				418A28BC144299DF00D4BCB0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220082592765505100A8524B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A6935A277004E80040FDEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A69363277004E90040FDEF /* Assets.xcassets in Resources */,
+				22A69366277004E90040FDEF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		208BF7E989BC1EAA72BF6E0A /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		418A28AF144299DF00D4BCB0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		76ECBA4186A60751F84A1605 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		9C2999F78C83568FAA539BE0 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TmpDisk/Pods-TmpDisk-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		418A288C144299DE00D4BCB0 /* Sources */ = {
+		2200823C2765504E00A8524B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				418A28A1144299DE00D4BCB0 /* main.m in Sources */,
-				418A28A8144299DE00D4BCB0 /* AppDelegate.m in Sources */,
-				418A28D31442A08D00D4BCB0 /* TmpDiskStatusBarListener.m in Sources */,
-				418A28DA1442A2F800D4BCB0 /* NewTmpDiskWindow.m in Sources */,
-				418A28E51442CE8D00D4BCB0 /* TmpDiskMenuItem.m in Sources */,
-				418A28E81442D05100D4BCB0 /* TmpDiskMenuItemView.m in Sources */,
-				418DF6A0147B57CD0069EEAC /* TmpDiskManager.m in Sources */,
-				418DD4C2147DF2E400488297 /* AutoCreateManagerWindow.m in Sources */,
+				22A69350276FCDCD0040FDEF /* TmpDiskMenuItem.swift in Sources */,
+				228DD7192772F23D00D6CAC3 /* PreferencesViewController.swift in Sources */,
+				22A6938B27700B4B0040FDEF /* AutoCreateManagerViewController.swift in Sources */,
+				2264C5EE2765C34000C45CB8 /* NewTmpDiskViewController.swift in Sources */,
+				2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */,
+				2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */,
+				22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */,
+				220082442765504E00A8524B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		418A28AC144299DF00D4BCB0 /* Sources */ = {
+		2200824D2765505100A8524B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				418A28BF144299DF00D4BCB0 /* TmpDiskTests.m in Sources */,
+				220082562765505100A8524B /* TmpDiskTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		220082572765505100A8524B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				220082602765505100A8524B /* TmpDiskUITests.swift in Sources */,
+				220082622765505100A8524B /* TmpDiskUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22A69358277004E80040FDEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A6935F277004E80040FDEF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		418A28B6144299DF00D4BCB0 /* PBXTargetDependency */ = {
+		220082532765505100A8524B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 418A288F144299DE00D4BCB0 /* TmpDisk */;
-			targetProxy = 418A28B5144299DF00D4BCB0 /* PBXContainerItemProxy */;
+			target = 2200823F2765504E00A8524B /* TmpDisk */;
+			targetProxy = 220082522765505100A8524B /* PBXContainerItemProxy */;
+		};
+		2200825D2765505100A8524B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2200823F2765504E00A8524B /* TmpDisk */;
+			targetProxy = 2200825C2765505100A8524B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		41283F8A147C88B7005EDE88 /* AutoCreateManager.xib */ = {
+		220082492765505100A8524B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				41283F8B147C88B7005EDE88 /* en */,
-				22109D921C8C08F0005B945E /* zh-Hans */,
+				2200824A2765505100A8524B /* Base */,
+				228DD717277181D600D6CAC3 /* zh-Hans */,
 			);
-			name = AutoCreateManager.xib;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		418A289D144299DE00D4BCB0 /* InfoPlist.strings */ = {
+		2264C5E82765667500C45CB8 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				418A289E144299DE00D4BCB0 /* en */,
-				22109D931C8C08F0005B945E /* zh-Hans */,
+				2264C5E72765667500C45CB8 /* en */,
+				2264C5E92765667700C45CB8 /* zh-Hans */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		418A28A3144299DE00D4BCB0 /* Credits.rtf */ = {
+		22A69364277004E90040FDEF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				418A28A4144299DE00D4BCB0 /* en */,
-				22109D941C8C08F0005B945E /* zh-Hans */,
+				22A69365277004E90040FDEF /* Base */,
 			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		418A28A9144299DE00D4BCB0 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				418A28AA144299DF00D4BCB0 /* en */,
-				22109D901C8C08F0005B945E /* zh-Hans */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		418A28BA144299DF00D4BCB0 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				418A28BB144299DF00D4BCB0 /* en */,
-				22109D951C8C08F0005B945E /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		418A28D51442A2B400D4BCB0 /* NewTmpDisk.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				418A28D61442A2B400D4BCB0 /* en */,
-				22109D911C8C08F0005B945E /* zh-Hans */,
-			);
-			name = NewTmpDisk.xib;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		418A28C0144299DF00D4BCB0 /* Debug */ = {
+		220082632765505100A8524B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		418A28C1144299DF00D4BCB0 /* Release */ = {
+		220082642765505100A8524B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
-		418A28C3144299DF00D4BCB0 /* Debug */ = {
+		220082662765505100A8524B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 00F4F36CB9136F2BB1F0A497 /* Pods-TmpDisk.debug.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TmpDisk/TmpDisk.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = B79ZU76C43;
-				FRAMEWORK_SEARCH_PATHS = (
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TmpDisk/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2011 - 2022 @imothee. All rights reserved.";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"@executable_path/../Frameworks",
 				);
-				GCC_ENABLE_OBJC_GC = unsupported;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
-				INFOPLIST_FILE = "TmpDisk/TmpDisk-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_BUNDLE_IDENTIFIER = co.roomsix.tmpdisk;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		418A28C4144299DF00D4BCB0 /* Release */ = {
+		220082672765505100A8524B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CD599E58C7540A97A750EFD /* Pods-TmpDisk.release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TmpDisk/TmpDisk.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = B79ZU76C43;
-				FRAMEWORK_SEARCH_PATHS = (
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TmpDisk/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2011 - 2022 @imothee. All rights reserved.";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"@executable_path/../Frameworks",
 				);
-				GCC_ENABLE_OBJC_GC = unsupported;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
-				INFOPLIST_FILE = "TmpDisk/TmpDisk-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_BUNDLE_IDENTIFIER = co.roomsix.tmpdisk;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		418A28C6144299DF00D4BCB0 /* Debug */ = {
+		220082692765505100A8524B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TmpDisk.app/Contents/MacOS/TmpDisk";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
-				INFOPLIST_FILE = "TmpDiskTests/TmpDiskTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.inkscribbles.${PRODUCT_NAME:rfc1034identifier}";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TmpDisk.app/Contents/MacOS/TmpDisk";
 			};
 			name = Debug;
 		};
-		418A28C7144299DF00D4BCB0 /* Release */ = {
+		2200826A2765505100A8524B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TmpDisk.app/Contents/MacOS/TmpDisk";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TmpDisk/TmpDisk-Prefix.pch";
-				INFOPLIST_FILE = "TmpDiskTests/TmpDiskTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.inkscribbles.${PRODUCT_NAME:rfc1034identifier}";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TmpDisk.app/Contents/MacOS/TmpDisk";
+			};
+			name = Release;
+		};
+		2200826C2765505100A8524B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TmpDisk;
+			};
+			name = Debug;
+		};
+		2200826D2765505100A8524B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TmpDisk;
+			};
+			name = Release;
+		};
+		22A6937F277004EA0040FDEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TmpDiskLauncher/TmpDiskLauncher.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TmpDiskLauncher/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		22A69380277004EA0040FDEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TmpDiskLauncher/TmpDiskLauncher.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TmpDiskLauncher/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		418A288A144299DE00D4BCB0 /* Build configuration list for PBXProject "TmpDisk" */ = {
+		2200823B2765504E00A8524B /* Build configuration list for PBXProject "TmpDisk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				418A28C0144299DF00D4BCB0 /* Debug */,
-				418A28C1144299DF00D4BCB0 /* Release */,
+				220082632765505100A8524B /* Debug */,
+				220082642765505100A8524B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		418A28C2144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDisk" */ = {
+		220082652765505100A8524B /* Build configuration list for PBXNativeTarget "TmpDisk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				418A28C3144299DF00D4BCB0 /* Debug */,
-				418A28C4144299DF00D4BCB0 /* Release */,
+				220082662765505100A8524B /* Debug */,
+				220082672765505100A8524B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		418A28C5144299DF00D4BCB0 /* Build configuration list for PBXNativeTarget "TmpDiskTests" */ = {
+		220082682765505100A8524B /* Build configuration list for PBXNativeTarget "TmpDiskTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				418A28C6144299DF00D4BCB0 /* Debug */,
-				418A28C7144299DF00D4BCB0 /* Release */,
+				220082692765505100A8524B /* Debug */,
+				2200826A2765505100A8524B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2200826B2765505100A8524B /* Build configuration list for PBXNativeTarget "TmpDiskUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2200826C2765505100A8524B /* Debug */,
+				2200826D2765505100A8524B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22A6937E277004EA0040FDEF /* Build configuration list for PBXNativeTarget "TmpDiskLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22A6937F277004EA0040FDEF /* Debug */,
+				22A69380277004EA0040FDEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		228DD722277426B000D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = exactVersion;
+				version = "2.0.0-rc.1";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		228DD723277426B000D6CAC3 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 228DD722277426B000D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 418A2887144299DE00D4BCB0 /* Project object */;
+	rootObject = 220082382765504E00A8524B /* Project object */;
 }
