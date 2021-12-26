@@ -18,7 +18,7 @@
 		2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */; };
 		2264C5EE2765C34000C45CB8 /* NewTmpDiskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */; };
 		228DD7192772F23D00D6CAC3 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DD7182772F23D00D6CAC3 /* PreferencesViewController.swift */; };
-		228DD71C2774196200D6CAC3 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 228DD71B2774196200D6CAC3 /* Sparkle */; };
+		228DD724277426B000D6CAC3 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 228DD723277426B000D6CAC3 /* Sparkle */; };
 		22A69350276FCDCD0040FDEF /* TmpDiskMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6934F276FCDCD0040FDEF /* TmpDiskMenuItem.swift */; };
 		22A693572770014B0040FDEF /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A693562770014B0040FDEF /* ServiceManagement.framework */; platformFilter = maccatalyst; };
 		22A6935F277004E80040FDEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6935E277004E80040FDEF /* AppDelegate.swift */; };
@@ -96,7 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A693572770014B0040FDEF /* ServiceManagement.framework in Frameworks */,
-				228DD71C2774196200D6CAC3 /* Sparkle in Frameworks */,
+				228DD724277426B000D6CAC3 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +230,7 @@
 			);
 			name = TmpDisk;
 			packageProductDependencies = (
-				228DD71B2774196200D6CAC3 /* Sparkle */,
+				228DD723277426B000D6CAC3 /* Sparkle */,
 			);
 			productName = TmpDisk;
 			productReference = 220082402765504E00A8524B /* TmpDisk.app */;
@@ -326,7 +326,7 @@
 			);
 			mainGroup = 220082372765504E00A8524B;
 			packageReferences = (
-				228DD71A2774196200D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				228DD722277426B000D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 220082412765504E00A8524B /* Products */;
 			projectDirPath = "";
@@ -514,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -570,7 +570,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -594,14 +594,15 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDisk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2011 - 2022 @imothee. All rights reserved.";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -624,14 +625,15 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDisk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2011 - 2022 @imothee. All rights reserved.";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -844,20 +846,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		228DD71A2774196200D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+		228DD722277426B000D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				kind = exactVersion;
+				version = "2.0.0-rc.1";
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		228DD71B2774196200D6CAC3 /* Sparkle */ = {
+		228DD723277426B000D6CAC3 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 228DD71A2774196200D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			package = 228DD722277426B000D6CAC3 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */

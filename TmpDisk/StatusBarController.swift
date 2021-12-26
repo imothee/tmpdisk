@@ -21,6 +21,7 @@
 
 import AppKit
 import ServiceManagement
+import Sparkle
 
 class StatusBarController {
     private var statusItem: NSStatusItem
@@ -28,11 +29,15 @@ class StatusBarController {
     private var currentTmpDisksMenu: NSMenu
     
     private let launcherAppId = "com.imothee.TmpDiskLauncher"
+    private let updaterController: SPUStandardUpdaterController
     
     init() {
         statusItem = NSStatusBar.system.statusItem(withLength: 28.0)
         statusMenu = NSMenu()
         currentTmpDisksMenu = NSMenu()
+        
+        // Sparkle
+        updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
         
         // Check to see the app is in the login items
         let jobDicts = SMCopyAllJobDictionaries( kSMDomainUserLaunchd ).takeRetainedValue() as NSArray as! [[String:AnyObject]]
@@ -79,8 +84,9 @@ class StatusBarController {
         startLoginItem.state = startOnLogin ? .on : .off
         statusMenu.addItem(startLoginItem)
         
-        let checkUpdateItem = NSMenuItem(title: NSLocalizedString("Check for Updates", comment: ""), action: #selector(checkUpdate(sender:)), keyEquivalent: "")
-        checkUpdateItem.target = self
+        let checkUpdateItem = NSMenuItem(title: NSLocalizedString("Check for Updates", comment: ""), action:nil, keyEquivalent: "")
+        checkUpdateItem.target = updaterController
+        checkUpdateItem.action = #selector(SPUStandardUpdaterController.checkForUpdates(_:))
         statusMenu.addItem(checkUpdateItem)
         
         let preferencesItem = NSMenuItem(title: NSLocalizedString("Preferences", comment: ""), action: #selector(preferences(sender:)), keyEquivalent: "")
@@ -177,10 +183,6 @@ class StatusBarController {
                 menuItem.state = .on
             }
         }
-    }
-    
-    @objc func checkUpdate(sender: AnyObject) {
-        
     }
     
     @objc func preferences(sender: AnyObject) {

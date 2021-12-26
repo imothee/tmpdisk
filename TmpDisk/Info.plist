@@ -4,5 +4,13 @@
 <dict>
 	<key>LSUIElement</key>
 	<true/>
+	<key>SUEnableSystemProfiling</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://apps.imothee.com/updates/tmpdisk.xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
+	<key>SUPublicEDKey</key>
+	<string>4OWxWIfRJun0dvLQzqI9S4pCWPhkIhr4dw0S8tl/rGI=</string>
 </dict>
 </plist>
