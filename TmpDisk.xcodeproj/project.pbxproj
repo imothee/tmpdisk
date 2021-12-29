@@ -13,6 +13,7 @@
 		220082562765505100A8524B /* TmpDiskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220082552765505100A8524B /* TmpDiskTests.swift */; };
 		220082602765505100A8524B /* TmpDiskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200825F2765505100A8524B /* TmpDiskUITests.swift */; };
 		220082622765505100A8524B /* TmpDiskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */; };
+		22235EC027784F8200FBD8AC /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 22235EBF27784F8200FBD8AC /* dsa_pub.pem */; };
 		2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5E1276553E600C45CB8 /* StatusBarController.swift */; };
 		2264C5E62765667500C45CB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2264C5E82765667500C45CB8 /* Localizable.strings */; };
 		2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */; };
@@ -71,6 +72,7 @@
 		2200825F2765505100A8524B /* TmpDiskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskUITests.swift; sourceTree = "<group>"; };
 		220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2200826E2765508C00A8524B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		22235EBF27784F8200FBD8AC /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		2264C5E1276553E600C45CB8 /* StatusBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		2264C5E72765667500C45CB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2264C5E92765667700C45CB8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				2264C5E1276553E600C45CB8 /* StatusBarController.swift */,
 				2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */,
 				220082472765505100A8524B /* Assets.xcassets */,
+				22235EBF27784F8200FBD8AC /* dsa_pub.pem */,
 				2200826E2765508C00A8524B /* Info.plist */,
 				220082492765505100A8524B /* Main.storyboard */,
 				2200824C2765505100A8524B /* TmpDisk.entitlements */,
@@ -346,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				220082482765505100A8524B /* Assets.xcassets in Resources */,
+				22235EC027784F8200FBD8AC /* dsa_pub.pem in Resources */,
 				2264C5E62765667500C45CB8 /* Localizable.strings in Resources */,
 				2200824B2765505100A8524B /* Main.storyboard in Resources */,
 			);
@@ -588,7 +592,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -602,7 +606,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -619,7 +623,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1001;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -633,7 +637,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -745,11 +749,12 @@
 				CODE_SIGN_ENTITLEMENTS = TmpDiskLauncher/TmpDiskLauncher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDiskLauncher/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -757,8 +762,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				MARKETING_VERSION = 2.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -774,11 +779,12 @@
 				CODE_SIGN_ENTITLEMENTS = TmpDiskLauncher/TmpDiskLauncher.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDiskLauncher/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -786,8 +792,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
-				MARKETING_VERSION = 2.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MARKETING_VERSION = 2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

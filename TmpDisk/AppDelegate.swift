@@ -36,6 +36,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         statusBar = StatusBarController.init()
         
+        // Check if TmpDisk was loaded with command line args
+        let (name, size) = getArgs()
+        if let name = name, let size = size {
+            let volume = TmpDiskVolume(name: name, size: size)
+            TmpDiskManager.shared.createTmpDisk(volume: volume, onCreate: {_ in})
+        }
+        
         NotificationCenter.default.addObserver(forName: .tmpDiskMounted, object: nil, queue: .main) { notification in
             self.statusBar?.buildCurrentTmpDiskMenu()
         }
@@ -64,6 +71,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
+    }
+    
+    // We expect args in the format -argname=argval
+    private func getArgs() -> (String?, Int?) {
+        let args = ProcessInfo.processInfo.arguments
+        var name: String?
+        var size: Int?
+        
+        for arg in args {
+            let values = arg.components(separatedBy: "=")
+            if values.count == 2 {
+                switch values[0] {
+                case "-name":
+                    name = values[1]
+                    break
+                case "-size":
+                    size = (values[1] as NSString).integerValue
+                    break
+                default:
+                    break
+                }
+            }
+        }
+        return (name, size)
     }
 }
 

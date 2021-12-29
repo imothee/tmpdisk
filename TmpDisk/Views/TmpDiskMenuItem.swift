@@ -49,8 +49,8 @@ class TmpDiskMenuItem: NSMenuItem {
         let recreate = NSButton(frame: NSRect(x: 110, y: 5, width: 15, height: 15))
         recreate.action = #selector(onRecreate(sender:))
         recreate.target = self
-        recreate.image = NSImage(named: "recreate")
-        recreate.alternateImage = NSImage(named: "recreate_a")
+        recreate.image = NSImage(named: "recreate_a")
+        recreate.alternateImage = NSImage(named: "recreate")
         recreate.imagePosition = .imageOnly
         recreate.isBordered = false
         view.addSubview(recreate)

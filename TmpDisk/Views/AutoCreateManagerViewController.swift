@@ -141,6 +141,19 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
         }
     }
     
+    @IBAction func recreate(_ sender: AnyObject) {
+        if let button = sender as? NSButton {
+            let row = tableView.row(for: button)
+            
+            let volume = self.volumes[row]
+            if TmpDiskManager.shared.exists(volume: volume) {
+                TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
+            } else {
+                TmpDiskManager.shared.createTmpDisk(volume: volume, onCreate: {_ in })
+            }
+        }
+    }
+    
     @IBAction func removeRow(_ sender: AnyObject) {
         if let button = sender as? NSButton {
             let row = tableView.row(for: button)
