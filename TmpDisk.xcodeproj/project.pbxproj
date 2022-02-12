@@ -28,6 +28,7 @@
 		22A69389277005B80040FDEF /* TmpDiskLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22A6935C277004E80040FDEF /* TmpDiskLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22A6938B27700B4B0040FDEF /* AutoCreateManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */; };
 		22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */; };
+		22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D93DBD27B85E0F0024FB53 /* WindowManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		22A69387277005840040FDEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCreateManagerViewController.swift; sourceTree = "<group>"; };
 		22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxTableCellView.swift; sourceTree = "<group>"; };
+		22D93DBD27B85E0F0024FB53 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				220082432765504E00A8524B /* AppDelegate.swift */,
 				2264C5E1276553E600C45CB8 /* StatusBarController.swift */,
 				2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */,
+				22D93DBD27B85E0F0024FB53 /* WindowManager.swift */,
 				220082472765505100A8524B /* Assets.xcassets */,
 				22235EBF27784F8200FBD8AC /* dsa_pub.pem */,
 				2200826E2765508C00A8524B /* Info.plist */,
@@ -390,6 +393,7 @@
 				22A6938B27700B4B0040FDEF /* AutoCreateManagerViewController.swift in Sources */,
 				2264C5EE2765C34000C45CB8 /* NewTmpDiskViewController.swift in Sources */,
 				2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */,
+				22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */,
 				2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */,
 				22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */,
 				220082442765504E00A8524B /* AppDelegate.swift in Sources */,
@@ -592,7 +596,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1001;
+				CURRENT_PROJECT_VERSION = 1002;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -606,7 +610,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -623,7 +627,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1001;
+				CURRENT_PROJECT_VERSION = 1002;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -637,7 +641,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

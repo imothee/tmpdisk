@@ -31,6 +31,8 @@ class StatusBarController {
     private let launcherAppId = "com.imothee.TmpDiskLauncher"
     private let updaterController: SPUStandardUpdaterController
     
+    private let windowManager = WindowManager()
+    
     init() {
         statusItem = NSStatusBar.system.statusItem(withLength: 28.0)
         statusMenu = NSMenu()
@@ -117,6 +119,10 @@ class StatusBarController {
         statusItem.menu = statusMenu
     }
     
+    func windowWillClose(window: NSWindowController) {
+        
+    }
+    
     // MARK: - Internal
     
     func confirmEject(volume: TmpDiskVolume) -> Bool {
@@ -156,10 +162,7 @@ class StatusBarController {
     // MARK: - Actions
     
     @objc func newTmpDisk(sender: AnyObject) {
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        let newTmpDiskWindow = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "NewTmpDiskWindow") as? NSWindowController
-        newTmpDiskWindow?.showWindow(nil)
-        newTmpDiskWindow?.window?.makeKey()
+        windowManager.showNewTmpDiskWindow()
     }
     
     @objc func recreateAll(sender: AnyObject) {
@@ -167,10 +170,7 @@ class StatusBarController {
     }
     
     @objc func autoCreateManager(sender: AnyObject) {
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        let autoCreateManagerWindow = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "AutoCreateManagerWindow") as? NSWindowController
-        autoCreateManagerWindow?.showWindow(nil)
-        autoCreateManagerWindow?.window?.makeKey()
+        windowManager.showAutoCreateManagerWindow()
     }
     
     @objc func toggleStartOnLogin(sender: AnyObject) {
@@ -186,10 +186,7 @@ class StatusBarController {
     }
     
     @objc func preferences(sender: AnyObject) {
-        NSApplication.shared.activate(ignoringOtherApps: true)
-        let preferencesWindow = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "PreferencesWindow") as? NSWindowController
-        preferencesWindow?.showWindow(nil)
-        preferencesWindow?.window?.makeKey()
+        windowManager.showPreferencesWindow()
     }
     
     @objc func help(sender: AnyObject) {
