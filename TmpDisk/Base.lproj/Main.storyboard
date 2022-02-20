@@ -1331,9 +1331,9 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJA-9b-PqG">
-                                <rect key="frame" x="80" y="98" width="340" height="32"/>
+                                <rect key="frame" x="83" y="98" width="335" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" alignment="center" title="Change where your TmpFS mount poiunts sit. Must be changed when you have no TmpFS volumes mounted." id="EYH-BL-kNS">
+                                <textFieldCell key="cell" alignment="center" title="Change where your TmpFS mount points sit. Must be changed when you have no TmpFS volumes mounted." id="EYH-BL-kNS">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
