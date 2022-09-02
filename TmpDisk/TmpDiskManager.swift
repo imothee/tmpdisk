@@ -272,14 +272,10 @@ class TmpDiskManager {
         let task = Process()
         task.launchPath = "/usr/bin/osascript"
         let command = "mount_tmpfs -s\(volume.size)M \(volume.path())"
-        
         let script = """
-        tell application "Terminal"
             do shell script "\(command)" with administrator privileges
-            quit
-        end tell
         """
-        
+
         task.arguments = ["-e", script]
         return task
     }
