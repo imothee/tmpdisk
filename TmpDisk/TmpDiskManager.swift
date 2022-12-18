@@ -33,6 +33,7 @@ struct TmpDiskVolume: Hashable, Codable {
     var tmpFs: Bool = false
     var warnOnEject: Bool = false
     var folders: [String] = []
+    var icon: String?
     
     func path() -> String {
         if tmpFs {
@@ -53,7 +54,8 @@ struct TmpDiskVolume: Hashable, Codable {
             "hidden": hidden,
             "tmpFs": tmpFs,
             "warnOnEject": warnOnEject,
-            "folders": folders
+            "folders": folders,
+            "icon": icon ?? "",
         ]
     }
     
@@ -137,8 +139,9 @@ class TmpDiskManager {
                 
                     let warnOnEject = vol["warnOnEject"] as? Bool ?? false
                     let folders = vol["folders"] as? [String] ?? []
+                    let icon = vol["icon"] as? String
                     
-                    let volume = TmpDiskVolume(name: name, size: size, indexed: indexed, hidden: hidden, tmpFs: tmpFs, warnOnEject: warnOnEject, folders: folders)
+                    let volume = TmpDiskVolume(name: name, size: size, indexed: indexed, hidden: hidden, tmpFs: tmpFs, warnOnEject: warnOnEject, folders: folders, icon: icon)
                     autoCreateVolumes.insert(volume)
                 }
             }
@@ -195,7 +198,11 @@ class TmpDiskManager {
                 self.indexVolume(volume: volume)
             }
             
+            // Create the folders if there are any set
             self.createFolders(volume: volume)
+            
+            // Create the icon if there is one set
+            self.createIcon(volume: volume)
             
             if volume.autoCreate {
                 self.addAutoCreateVolume(volume: volume)
@@ -325,4 +332,12 @@ class TmpDiskManager {
         return FileManager.default.fileExists(atPath: volume.path())
     }
     
+    func createIcon(volume: TmpDiskVolume) {
+        if let icon = volume.icon {
+            if let data = Data(base64Encoded: icon) {
+                let image = NSImage(data: data)
+                NSWorkspace.shared.setIcon(image, forFile: volume.path())
+            }
+        }
+    }
 }

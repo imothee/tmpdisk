@@ -23,3 +23,5 @@
 "Failed to create TmpDisk" = "Failed to create TmpDisk";
 "Preferences" = "Preferences";
 "You can't change the root volume while tmpFS disks are mounted." = "You can't change the root volume while tmpFS disks are mounted.";
+"Icon must be square" = "Icon must be square";
+"Could not convert image to icon" = "Could not convert image to icon";

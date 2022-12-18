@@ -33,6 +33,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var diskSizeSuffixLabel: NSTextField!
     @IBOutlet weak var folders: NSTextField!
     
+    @IBOutlet weak var icon: NSImageView!
+    
     @IBOutlet weak var diskSizeSelector: NSPopUpButton!
     
     @IBOutlet weak var autoCreate: NSButton!
@@ -82,6 +84,24 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
             break
         default:
             return
+        }
+    }
+    
+    @IBAction func onIconChange(_ sender: NSImageView) {
+        if let image = sender.image{
+            guard image.size.width == image.size.height else {
+                self.showError(message: NSLocalizedString("Icon must be square", comment: ""))
+                sender.image = nil
+                return
+            }
+            
+            guard let iconBase64 = try? IconUtil.shared.convertImageToICNS(image: image) else {
+                self.showError(message: NSLocalizedString("Could not convert image to icon", comment: ""))
+                sender.image = nil
+                return
+            }
+            
+            self.volume.icon = iconBase64
         }
     }
     
