@@ -16,7 +16,7 @@
 "About TmpDisk" = "About TmpDisk";
 "Quit" = "Quit";
 "Help content" = "Ram Disks are temporary disks that use your RAM (Memory) for storage. They are incredibly fast and can be very useful when used for performance or temporary files.";
-"About content" = "TmpDisk was created by @imothee to help easily create and manage Ram Disks. Distributed under GPL V2. Uses Sparkle Framework.";
+"About content" = "TmpDisk was created by @imothee to help easily create and manage Ram Disks. Distributed under GPL V2. Uses Sparkle Framework. Report bugs or get the source code at https://github.com/imothee/tmpdisk";
 "Your TmpDisk must have a name" = "Your TmpDisk must have a name";
 "A volume with this name already exists" = "A volume with this name already exists";
 "Size must be a number of megabytes > 0" = "Size must be a number of megabytes > 0";
