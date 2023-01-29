@@ -1035,11 +1035,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="JML-g3-qvT">
-                                                            <rect key="frame" x="190" y="0.0" width="88" height="24"/>
+                                                            <rect key="frame" x="190" y="0.0" width="113" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfW-y0-Gzf">
-                                                                    <rect key="frame" x="0.0" y="4" width="88" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="113" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="t3z-IH-wJR">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1070,11 +1070,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="m4U-hC-HcX">
-                                                            <rect key="frame" x="289" y="0.0" width="163" height="24"/>
+                                                            <rect key="frame" x="289" y="0.0" width="188" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ZJ-fg-CTz">
-                                                                    <rect key="frame" x="0.0" y="4" width="163" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="188" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="qXn-wF-aJV">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1401,6 +1401,148 @@
                 <customObject id="q1h-1k-eYF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1837" y="366"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="4AK-oC-7Tg">
+            <objects>
+                <windowController storyboardIdentifier="AboutWindow" id="DOd-Ow-l09" sceneMemberID="viewController">
+                    <window key="window" title="About" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="qkc-td-g2b">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <rect key="contentRect" x="255" y="323" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1079"/>
+                        <view key="contentView" id="sQd-mL-CYM">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="DOd-Ow-l09" id="LWW-74-stI"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="i3d-fE-wMQ" kind="relationship" relationship="window.shadowedContentViewController" id="fgz-dd-xYh"/>
+                    </connections>
+                </windowController>
+                <customObject id="Xra-p6-F3t" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="366"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="FFD-qf-0BH">
+            <objects>
+                <viewController id="i3d-fE-wMQ" customClass="AboutViewController" customModule="TmpDisk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="7Lw-dW-Zwa">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZT4-dM-V8c">
+                                <rect key="frame" x="65" y="218" width="350" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="346" id="6l1-dq-Aal"/>
+                                </constraints>
+                                <textFieldCell key="cell" title="TmpDisk was created by @imothee to help easily create and manage Ram Disks. Distributed under GPL V2." id="92J-GX-lZp">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hou-W5-euc">
+                                <rect key="frame" x="65" y="190" width="350" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="lFL-QL-lfB"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Found a bug or Issue?" id="CRo-x0-OMs">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WJM-uz-hBE">
+                                <rect key="frame" x="65" y="134" width="350" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4AM-Qa-qKh"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Get the source code" id="YQl-gW-wMR">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2tZ-f6-KF6">
+                                <rect key="frame" x="65" y="78" width="350" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="53O-11-3yH"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="3rd Party Libraries" id="Yhh-3o-HGQ">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LcK-AA-eXO">
+                                <rect key="frame" x="65" y="162" width="350" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="E5y-Ly-YfQ"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="https://github.com/imothee/tmpdisk/issues" id="7B3-Xk-LWU">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v1o-bv-VzS">
+                                <rect key="frame" x="65" y="106" width="350" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="98t-nz-lj6"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="https://github.com/imothee/tmpdisk" id="8Lb-V2-Iun">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y2s-BO-8Qm">
+                                <rect key="frame" x="65" y="50" width="350" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Uiz-4m-Vhi"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Sparkle Framework" id="jFH-29-tnu">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="LcK-AA-eXO" firstAttribute="leading" secondItem="WJM-uz-hBE" secondAttribute="leading" id="0dA-be-GMt"/>
+                            <constraint firstItem="WJM-uz-hBE" firstAttribute="top" secondItem="LcK-AA-eXO" secondAttribute="bottom" constant="8" symbolic="YES" id="3fP-ah-FBd"/>
+                            <constraint firstItem="WJM-uz-hBE" firstAttribute="trailing" secondItem="v1o-bv-VzS" secondAttribute="trailing" id="5fc-xc-RiJ"/>
+                            <constraint firstItem="ZT4-dM-V8c" firstAttribute="trailing" secondItem="hou-W5-euc" secondAttribute="trailing" id="9r8-Vx-vAo"/>
+                            <constraint firstItem="LcK-AA-eXO" firstAttribute="top" secondItem="hou-W5-euc" secondAttribute="bottom" constant="8" symbolic="YES" id="DR4-f9-FyJ"/>
+                            <constraint firstItem="ZT4-dM-V8c" firstAttribute="top" secondItem="7Lw-dW-Zwa" secondAttribute="top" constant="20" symbolic="YES" id="G0W-Mt-OfQ"/>
+                            <constraint firstItem="2tZ-f6-KF6" firstAttribute="top" secondItem="v1o-bv-VzS" secondAttribute="bottom" constant="8" symbolic="YES" id="IR9-b2-Uku"/>
+                            <constraint firstItem="WJM-uz-hBE" firstAttribute="leading" secondItem="v1o-bv-VzS" secondAttribute="leading" id="Jd9-gm-ce9"/>
+                            <constraint firstItem="v1o-bv-VzS" firstAttribute="leading" secondItem="2tZ-f6-KF6" secondAttribute="leading" id="Kxx-dV-MFp"/>
+                            <constraint firstItem="LcK-AA-eXO" firstAttribute="trailing" secondItem="WJM-uz-hBE" secondAttribute="trailing" id="S5o-Sc-fgQ"/>
+                            <constraint firstItem="v1o-bv-VzS" firstAttribute="top" secondItem="WJM-uz-hBE" secondAttribute="bottom" constant="8" symbolic="YES" id="XiL-f1-K5e"/>
+                            <constraint firstItem="hou-W5-euc" firstAttribute="trailing" secondItem="LcK-AA-eXO" secondAttribute="trailing" id="XjO-io-ktM"/>
+                            <constraint firstItem="2tZ-f6-KF6" firstAttribute="leading" secondItem="y2s-BO-8Qm" secondAttribute="leading" id="een-ks-QW2"/>
+                            <constraint firstItem="y2s-BO-8Qm" firstAttribute="top" secondItem="2tZ-f6-KF6" secondAttribute="bottom" constant="8" symbolic="YES" id="g3o-zw-FZv"/>
+                            <constraint firstItem="ZT4-dM-V8c" firstAttribute="centerX" secondItem="7Lw-dW-Zwa" secondAttribute="centerX" id="hcH-wr-OXB"/>
+                            <constraint firstItem="2tZ-f6-KF6" firstAttribute="trailing" secondItem="y2s-BO-8Qm" secondAttribute="trailing" id="ky0-u6-YmC"/>
+                            <constraint firstItem="hou-W5-euc" firstAttribute="top" secondItem="ZT4-dM-V8c" secondAttribute="bottom" constant="8" symbolic="YES" id="sjf-uZ-gcS"/>
+                            <constraint firstItem="ZT4-dM-V8c" firstAttribute="leading" secondItem="hou-W5-euc" secondAttribute="leading" id="suR-4F-wqE"/>
+                            <constraint firstItem="hou-W5-euc" firstAttribute="leading" secondItem="LcK-AA-eXO" secondAttribute="leading" id="uBX-0N-UXV"/>
+                            <constraint firstItem="v1o-bv-VzS" firstAttribute="trailing" secondItem="2tZ-f6-KF6" secondAttribute="trailing" id="vdt-GA-LJk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="issuesUrl" destination="LcK-AA-eXO" id="E8n-Nu-UzB"/>
+                        <outlet property="sourceUrl" destination="v1o-bv-VzS" id="coU-je-CNt"/>
+                    </connections>
+                </viewController>
+                <customObject id="nLa-0z-LPK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="833"/>
         </scene>
         <!--Preferences View Controller-->
         <scene sceneID="AWl-xm-23z">

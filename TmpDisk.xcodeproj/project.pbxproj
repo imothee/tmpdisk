@@ -21,6 +21,7 @@
 		2264C5EE2765C34000C45CB8 /* NewTmpDiskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */; };
 		228DD7192772F23D00D6CAC3 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DD7182772F23D00D6CAC3 /* PreferencesViewController.swift */; };
 		228DD724277426B000D6CAC3 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 228DD723277426B000D6CAC3 /* Sparkle */; };
+		229EFA552985EAEE001EADB2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EFA542985EAEE001EADB2 /* AboutViewController.swift */; };
 		22A69350276FCDCD0040FDEF /* TmpDiskMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6934F276FCDCD0040FDEF /* TmpDiskMenuItem.swift */; };
 		22A693572770014B0040FDEF /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A693562770014B0040FDEF /* ServiceManagement.framework */; platformFilter = maccatalyst; };
 		22A6935F277004E80040FDEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6935E277004E80040FDEF /* AppDelegate.swift */; };
@@ -81,8 +82,9 @@
 		2264C5E92765667700C45CB8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskManager.swift; sourceTree = "<group>"; };
 		2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTmpDiskViewController.swift; sourceTree = "<group>"; };
-		228DD717277181D600D6CAC3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		228DD7182772F23D00D6CAC3 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		229EFA542985EAEE001EADB2 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		229EFA572985FEB9001EADB2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		22A6934F276FCDCD0040FDEF /* TmpDiskMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskMenuItem.swift; sourceTree = "<group>"; };
 		22A693562770014B0040FDEF /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		22A6935C277004E80040FDEF /* TmpDiskLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TmpDiskLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 		2264C5EA27657A7E00C45CB8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				229EFA542985EAEE001EADB2 /* AboutViewController.swift */,
 				22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */,
 				22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */,
 				2264C5ED2765C34000C45CB8 /* NewTmpDiskViewController.swift */,
@@ -393,6 +396,7 @@
 			files = (
 				22A69350276FCDCD0040FDEF /* TmpDiskMenuItem.swift in Sources */,
 				228DD7192772F23D00D6CAC3 /* PreferencesViewController.swift in Sources */,
+				229EFA552985EAEE001EADB2 /* AboutViewController.swift in Sources */,
 				22A6938B27700B4B0040FDEF /* AutoCreateManagerViewController.swift in Sources */,
 				2264C5EE2765C34000C45CB8 /* NewTmpDiskViewController.swift in Sources */,
 				2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */,
@@ -449,7 +453,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2200824A2765505100A8524B /* Base */,
-				228DD717277181D600D6CAC3 /* zh-Hans */,
+				229EFA572985FEB9001EADB2 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

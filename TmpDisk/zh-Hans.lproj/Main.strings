@@ -60,7 +60,7 @@
 "5ee-ag-nb5.placeholderString" = "请输入磁盘名称";
 
 /* Class = "NSMenuItem"; title = "About TmpDisk"; ObjectID = "5kV-Vb-QxS"; */
-"5kV-Vb-QxS.title" = "关于 TmpDisk";
+"5kV-Vb-QxS.title" = "About TmpDisk";
 
 /* Class = "NSTableColumn"; headerCell.title = "TmpFS"; ObjectID = "60P-FP-R7L"; */
 "60P-FP-R7L.headerCell.title" = "TmpFS";
@@ -68,14 +68,29 @@
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "6dh-zS-Vam"; */
 "6dh-zS-Vam.title" = "Redo";
 
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "6q7-5O-jmd"; */
+"6q7-5O-jmd.title" = "Text Cell";
+
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "78Y-hA-62v"; */
 "78Y-hA-62v.title" = "Correct Spelling Automatically";
+
+/* Class = "NSTextFieldCell"; title = "https://github.com/imothee/tmpdisk/issues"; ObjectID = "7B3-Xk-LWU"; */
+"7B3-Xk-LWU.title" = "https://github.com/imothee/tmpdisk/issues";
+
+/* Class = "NSButtonCell"; title = "Warn on eject if TmpDisk has files"; ObjectID = "87p-Ma-bcT"; */
+"87p-Ma-bcT.title" = "Warn on eject if TmpDisk has files";
+
+/* Class = "NSTextFieldCell"; title = "https://github.com/imothee/tmpdisk"; ObjectID = "8Lb-V2-Iun"; */
+"8Lb-V2-Iun.title" = "https://github.com/imothee/tmpdisk";
 
 /* Class = "NSMenu"; title = "Writing Direction"; ObjectID = "8mr-sm-Yjd"; */
 "8mr-sm-Yjd.title" = "Writing Direction";
 
 /* Class = "NSButtonCell"; title = "Create TmpDisk"; ObjectID = "8vB-Je-FgU"; */
 "8vB-Je-FgU.title" = "创建 TmpDisk";
+
+/* Class = "NSTextFieldCell"; title = "TmpDisk was created by @imothee to help easily create and manage Ram Disks. Distributed under GPL V2."; ObjectID = "92J-GX-lZp"; */
+"92J-GX-lZp.title" = "TmpDisk 由@imothee 创建，用于帮助轻松创建和管理 Ram 磁盘。在 GPL V2 下分发。";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "9ic-FL-obx"; */
 "9ic-FL-obx.title" = "Substitutions";
@@ -101,17 +116,29 @@
 /* Class = "NSMenuItem"; title = "Save As…"; ObjectID = "Bw7-FT-i3A"; */
 "Bw7-FT-i3A.title" = "Save As…";
 
+/* Class = "NSTextFieldCell"; title = "Found a bug or Issue?"; ObjectID = "CRo-x0-OMs"; */
+"CRo-x0-OMs.title" = "Found a bug or Issue?";
+
+/* Class = "NSMenuItem"; title = "10% of Ram"; ObjectID = "DAh-6M-Jca"; */
+"DAh-6M-Jca.title" = "10% of Ram";
+
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "DVo-aG-piG"; */
 "DVo-aG-piG.title" = "Close";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "Dv1-io-Yv7"; */
 "Dv1-io-Yv7.title" = "Spelling and Grammar";
 
+/* Class = "NSTableColumn"; headerCell.title = "Journaled"; ObjectID = "EOg-1b-WmF"; */
+"EOg-1b-WmF.headerCell.title" = "Journaled";
+
+/* Class = "NSTextFieldCell"; title = "Change where your TmpFS mount points sit. Must be changed when you have no TmpFS volumes mounted."; ObjectID = "EYH-BL-kNS"; */
+"EYH-BL-kNS.title" = "Change where your TmpFS mount points sit. Must be changed when you have no TmpFS volumes mounted.";
+
 /* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
 "F2S-fz-NVQ.title" = "Help";
 
 /* Class = "NSMenuItem"; title = "TmpDisk Help"; ObjectID = "FKE-Sm-Kum"; */
-"FKE-Sm-Kum.title" = "TmpDisk 帮助";
+"FKE-Sm-Kum.title" = "TmpDisk Help";
 
 /* Class = "NSMenuItem"; title = "Text"; ObjectID = "Fal-I4-PZk"; */
 "Fal-I4-PZk.title" = "Text";
@@ -157,6 +184,9 @@
 
 /* Class = "NSMenuItem"; title = "Use None"; ObjectID = "J7y-lM-qPV"; */
 "J7y-lM-qPV.title" = "Use None";
+
+/* Class = "NSTextFieldCell"; title = "Icon"; ObjectID = "JAg-eR-WFV"; */
+"JAg-eR-WFV.title" = "Icon";
 
 /* Class = "NSMenuItem"; title = "Revert to Saved"; ObjectID = "KaW-ft-85H"; */
 "KaW-ft-85H.title" = "Revert to Saved";
@@ -206,6 +236,9 @@
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "Oyz-dy-DGm"; */
 "Oyz-dy-DGm.title" = "Stop Speaking";
 
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "PIG-yb-FRO"; */
+"PIG-yb-FRO.title" = "Preferences";
+
 /* Class = "NSMenuItem"; title = "Bigger"; ObjectID = "Ptp-SP-VEL"; */
 "Ptp-SP-VEL.title" = "Bigger";
 
@@ -235,6 +268,9 @@
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "UEZ-Bs-lqG"; */
 "UEZ-Bs-lqG.title" = "Capitalize";
+
+/* Class = "NSTableColumn"; headerCell.title = "Case Sensitive"; ObjectID = "UPy-wU-HZo"; */
+"UPy-wU-HZo.headerCell.title" = "Case Sensitive";
 
 /* Class = "NSMenuItem"; title = "Center"; ObjectID = "VIY-Ag-zcb"; */
 "VIY-Ag-zcb.title" = "Center";
@@ -275,6 +311,15 @@
 /* Class = "NSMenuItem"; title = "\tDefault"; ObjectID = "YGs-j5-SAR"; */
 "YGs-j5-SAR.title" = "\tDefault";
 
+/* Class = "NSTextFieldCell"; title = "Get the source code"; ObjectID = "YQl-gW-wMR"; */
+"YQl-gW-wMR.title" = "Get the source code";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YRf-Nm-YtA"; */
+"YRf-Nm-YtA.title" = "Text Cell";
+
+/* Class = "NSTextFieldCell"; title = "3rd Party Libraries"; ObjectID = "Yhh-3o-HGQ"; */
+"Yhh-3o-HGQ.title" = "3rd Party Libraries";
+
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "Ynk-f8-cLZ"; */
 "Ynk-f8-cLZ.title" = "Start Speaking";
 
@@ -283,6 +328,9 @@
 
 /* Class = "NSMenuItem"; title = "Paragraph"; ObjectID = "ZvO-Gk-QUH"; */
 "ZvO-Gk-QUH.title" = "Paragraph";
+
+/* Class = "NSButtonCell"; title = "Update Preferences"; ObjectID = "aFz-gK-uoy"; */
+"aFz-gK-uoy.title" = "Update Preferences";
 
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "aTl-1u-JFS"; */
 "aTl-1u-JFS.title" = "Print…";
@@ -335,11 +383,23 @@
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "dRJ-4n-Yzg"; */
 "dRJ-4n-Yzg.title" = "Undo";
 
+/* Class = "NSTextFieldCell"; placeholderString = "~/.tmpdisk/volumes"; ObjectID = "fMk-fB-fMf"; */
+"fMk-fB-fMf.placeholderString" = "~/.tmpdisk/volumes";
+
 /* Class = "NSTableColumn"; headerCell.title = "Hidden"; ObjectID = "fP5-p8-hYR"; */
 "fP5-p8-hYR.headerCell.title" = "隐藏卷";
 
+/* Class = "NSButtonCell"; title = "Case Sensitive"; ObjectID = "gCa-HK-wJZ"; */
+"gCa-HK-wJZ.title" = "Case Sensitive";
+
+/* Class = "NSButtonCell"; title = "Journaled"; ObjectID = "gFb-jm-Dxc"; */
+"gFb-jm-Dxc.title" = "Journaled";
+
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
 "gVA-U4-sdL.title" = "Paste";
+
+/* Class = "NSMenuItem"; title = "Custom"; ObjectID = "gcJ-GN-9gz"; */
+"gcJ-GN-9gz.title" = "Custom";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "hQb-2v-fYv"; */
 "hQb-2v-fYv.title" = "Smart Quotes";
@@ -368,6 +428,9 @@
 /* Class = "NSMenuItem"; title = "Kern"; ObjectID = "jBQ-r6-VK2"; */
 "jBQ-r6-VK2.title" = "Kern";
 
+/* Class = "NSTextFieldCell"; title = "Sparkle Framework"; ObjectID = "jFH-29-tnu"; */
+"jFH-29-tnu.title" = "Sparkle Framework";
+
 /* Class = "NSMenuItem"; title = "\tRight to Left"; ObjectID = "jFq-tB-4Kx"; */
 "jFq-tB-4Kx.title" = "\tRight to Left";
 
@@ -386,6 +449,12 @@
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG"; */
 "mK6-2p-4JG.title" = "Check Grammar With Spelling";
 
+/* Class = "NSTableColumn"; headerCell.title = "Warn"; ObjectID = "moE-oU-Xjj"; */
+"moE-oU-Xjj.headerCell.title" = "Warn";
+
+/* Class = "NSMenuItem"; title = "50% of Ram"; ObjectID = "nXv-G3-d8b"; */
+"nXv-G3-d8b.title" = "50% of Ram";
+
 /* Class = "NSTextFieldCell"; placeholderString = "0"; ObjectID = "nYC-7d-c8X"; */
 "nYC-7d-c8X.placeholderString" = "0";
 
@@ -394,6 +463,9 @@
 
 /* Class = "NSMenuItem"; title = "Ligatures"; ObjectID = "o6e-r0-MWq"; */
 "o6e-r0-MWq.title" = "Ligatures";
+
+/* Class = "NSMenuItem"; title = "75% of Ram"; ObjectID = "oUd-0o-jwy"; */
+"oUd-0o-jwy.title" = "75% of Ram";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "Open Recent";
@@ -413,17 +485,26 @@
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "pa3-QI-u2k"; */
 "pa3-QI-u2k.title" = "Delete";
 
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "pm4-Q2-gSs"; */
+"pm4-Q2-gSs.title" = "Text Cell";
+
 /* Class = "NSMenuItem"; title = "Save…"; ObjectID = "pxx-59-PXV"; */
 "pxx-59-PXV.title" = "Save…";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "q09-fT-Sye"; */
 "q09-fT-Sye.title" = "Find Next";
 
+/* Class = "NSTextFieldCell"; title = "TmpFS Root Folder"; ObjectID = "q71-xV-gGa"; */
+"q71-xV-gGa.title" = "TmpFS Root Folder";
+
 /* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "qIS-W8-SiK"; */
 "qIS-W8-SiK.title" = "Page Setup…";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "qXn-wF-aJV"; */
 "qXn-wF-aJV.title" = "Table View Cell";
+
+/* Class = "NSWindow"; title = "About"; ObjectID = "qkc-td-g2b"; */
+"qkc-td-g2b.title" = "About";
 
 /* Class = "NSTextFieldCell"; title = "Folders"; ObjectID = "qw8-z7-vQx"; */
 "qw8-z7-vQx.title" = "文件夹";
@@ -457,6 +538,9 @@
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "uRl-iY-unG"; */
 "uRl-iY-unG.title" = "Cut";
+
+/* Class = "NSMenuItem"; title = "25% of Ram"; ObjectID = "ud8-KO-JVf"; */
+"ud8-KO-JVf.title" = "25% of Ram";
 
 /* Class = "NSMenuItem"; title = "Paste Style"; ObjectID = "vKC-jM-MkH"; */
 "vKC-jM-MkH.title" = "Paste Style";

@@ -98,10 +98,7 @@ class StatusBarController {
         // Separator
         statusMenu.addItem(NSMenuItem.separator())
         
-        // Help and about section
-        let helpItem = NSMenuItem(title: NSLocalizedString("Help Center", comment: ""), action: #selector(help(sender:)), keyEquivalent: "")
-        helpItem.target = self
-        statusMenu.addItem(helpItem)
+        // About
         
         let aboutItem = NSMenuItem(title: NSLocalizedString("About TmpDisk", comment: ""), action: #selector(about(sender:)), keyEquivalent: "")
         aboutItem.target = self
@@ -189,20 +186,8 @@ class StatusBarController {
         windowManager.showPreferencesWindow()
     }
     
-    @objc func help(sender: AnyObject) {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("Help content", comment: "Help content string")
-        alert.alertStyle = .warning
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
-    }
-    
     @objc func about(sender: AnyObject) {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("About content", comment: "About content string")
-        alert.alertStyle = .warning
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
+        windowManager.showAboutWindow()
     }
     
     @objc func quit(sender: AnyObject) {
