@@ -12,6 +12,7 @@ class WindowManager: NSObject, NSWindowDelegate {
     private var newTmpDiskWindow: NSWindowController?
     private var autoCreateManagerWindow: NSWindowController?
     private var preferencesWindow: NSWindowController?
+    private var aboutWindow: NSWindowController?
    
     func windowWillClose(_ notification: Notification) {
         if let window = notification.object as? NSWindow {
@@ -65,5 +66,17 @@ class WindowManager: NSObject, NSWindowDelegate {
         
         preferencesWindow?.showWindow(nil)
         preferencesWindow?.window?.makeKey()
+    }
+    
+    func showAboutWindow() {
+        NSApplication.shared.activate(ignoringOtherApps: true)
+        
+        if aboutWindow == nil {
+            aboutWindow = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "AboutWindow") as? NSWindowController
+            aboutWindow?.window?.delegate = self
+        }
+        
+        aboutWindow?.showWindow(nil)
+        aboutWindow?.window?.makeKey()
     }
 }

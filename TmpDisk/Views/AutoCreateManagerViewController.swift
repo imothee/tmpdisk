@@ -70,6 +70,24 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
                 cell?.checkbox.isEnabled = true
             }
             return cell
+        case "casesensitive":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
+            cell?.checkbox.state = volume.caseSensitive ? .on : .off
+            if volume.tmpFs {
+                cell?.checkbox.isEnabled = false
+            } else {
+                cell?.checkbox.isEnabled = true
+            }
+            return cell
+        case "journaled":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
+            cell?.checkbox.state = volume.journaled ? .on : .off
+            if volume.tmpFs {
+                cell?.checkbox.isEnabled = false
+            } else {
+                cell?.checkbox.isEnabled = true
+            }
+            return cell
         case "warn":
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
             cell?.checkbox.state = volume.warnOnEject ? .on : .off
@@ -131,6 +149,12 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
                 self.volumes[row].hidden = button.state == .on
                 break
             case 6:
+                self.volumes[row].caseSensitive = button.state == .on
+                break
+            case 7:
+                self.volumes[row].journaled = button.state == .on
+                break
+            case 8:
                 self.volumes[row].warnOnEject = button.state == .on
                 break
             default:

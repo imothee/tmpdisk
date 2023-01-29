@@ -31,6 +31,8 @@ struct TmpDiskVolume: Hashable, Codable {
     var indexed: Bool = false
     var hidden: Bool = false
     var tmpFs: Bool = false
+    var caseSensitive: Bool = false
+    var journaled: Bool = false
     var warnOnEject: Bool = false
     var folders: [String] = []
     var icon: String?
@@ -53,6 +55,8 @@ struct TmpDiskVolume: Hashable, Codable {
             "indexed": indexed,
             "hidden": hidden,
             "tmpFs": tmpFs,
+            "caseSensitive": caseSensitive,
+            "journaled": journaled,
             "warnOnEject": warnOnEject,
             "folders": folders,
             "icon": icon ?? "",
@@ -136,12 +140,25 @@ class TmpDiskManager {
         if let autoCreate = UserDefaults.standard.object(forKey: "autoCreate") as? [Dictionary<String, Any>] {
             for vol in autoCreate {
                 if let name = vol["name"] as? String, let size = vol["size"] as? Int, let indexed = vol["indexed"] as? Bool, let hidden = vol["hidden"] as? Bool, let tmpFs = vol["tmpFs"] as? Bool {
-                
+                    
+                    let caseSensitive = vol["caseSensitive"] as? Bool ?? false
+                    let journaled = vol["journaled"] as? Bool ?? false
                     let warnOnEject = vol["warnOnEject"] as? Bool ?? false
                     let folders = vol["folders"] as? [String] ?? []
                     let icon = vol["icon"] as? String
                     
-                    let volume = TmpDiskVolume(name: name, size: size, indexed: indexed, hidden: hidden, tmpFs: tmpFs, warnOnEject: warnOnEject, folders: folders, icon: icon)
+                    let volume = TmpDiskVolume(
+                        name: name,
+                        size: size,
+                        indexed: indexed,
+                        hidden: hidden,
+                        tmpFs: tmpFs,
+                        caseSensitive: caseSensitive,
+                        journaled: journaled,
+                        warnOnEject: warnOnEject,
+                        folders: folders,
+                        icon: icon
+                    )
                     autoCreateVolumes.insert(volume)
                 }
             }
@@ -208,7 +225,9 @@ class TmpDiskManager {
                 self.addAutoCreateVolume(volume: volume)
             }
             
-            self.volumes.insert(volume)
+            DispatchQueue.main.async {
+                self.volumes.insert(volume)
+            }
             NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
             onCreate(nil)
         }
@@ -243,7 +262,9 @@ class TmpDiskManager {
                 print(error)
             }
             
-            self.volumes.remove(volume)
+            DispatchQueue.main.async {
+                self.volumes.remove(volume)
+            }
             
             if recreate {
                 self.createTmpDisk(volume: volume, onCreate: {_ in })
@@ -293,11 +314,24 @@ class TmpDiskManager {
         
         let dSize = UInt64(volume.size) * 2048
         
+        let filesystem: String = {
+            switch (volume.caseSensitive, volume.journaled) {
+            case (false, false):
+                return "HFS+" // Mac OS Extended
+            case (true, false):
+                return "HFSX" // Mac OS Extended (Case-sensitive)
+            case (false, true):
+                return "JHFS+" // Mac OS Extended (Journaled)
+            case (true, true):
+                return "JHFSX" // Mac OS Extended (Case-sensitive, Journaled)
+            }
+        }()
+        
         let command: String
         if volume.hidden {
-            command = "d=$(hdiutil attach -nomount ram://\(dSize)) && diskutil eraseDisk HFS+ %noformat% $d && newfs_hfs -v \"\(volume.name)\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\""
+            command = "d=$(hdiutil attach -nomount ram://\(dSize)) && diskutil eraseDisk \(filesystem) %noformat% $d && newfs_hfs -v \"\(volume.name)\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\""
         } else {
-            command = "diskutil eraseVolume HFS+ \"\(volume.name)\" `hdiutil attach -nomount ram://\(dSize)`"
+            command = "diskutil eraseVolume \(filesystem) \"\(volume.name)\" `hdiutil attach -nomount ram://\(dSize)`"
         }
         
         print(command)

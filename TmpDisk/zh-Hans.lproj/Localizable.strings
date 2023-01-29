@@ -12,11 +12,8 @@
 "AutoCreate Manager" = "自动创建管理器";
 "Always Start on Login" = "开机时自动打开";
 "Check for Updates" = "检查更新";
-"Help Center" = "帮助中心";
 "About TmpDisk" = "关于 TmpDisk";
 "Quit" = "退出";
-"Help content" = "Ram Disks 是临时磁盘，使用您的 RAM（内存）进行存储。它们非常快，在用于性能或临时文件时非常有用。";
-"About content" = "TmpDisk 由@imothee 创建，用于帮助轻松创建和管理 Ram 磁盘。在 GPL V2 下分发。使用 Sparkle 框架。";
 "Your TmpDisk must have a name" = "你的 TmpDisk 必须有一个名字";
 "A volume with this name already exists" = "已存在同名的卷";
 "Size must be a number of megabytes > 0" = "大小必须是大于 0 的兆字节数";

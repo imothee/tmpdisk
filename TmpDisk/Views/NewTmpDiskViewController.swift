@@ -40,6 +40,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var autoCreate: NSButton!
     @IBOutlet weak var index: NSButton!
     @IBOutlet weak var hidden: NSButton!
+    @IBOutlet weak var caseSensitive: NSButton!
+    @IBOutlet weak var journaled: NSButton!
     
     var volume = TmpDiskVolume()
     
@@ -109,13 +111,24 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         if sender.state == .on {
             self.volume.tmpFs = true
             self.diskSizeLabel.stringValue = "Max Size"
+            // Hidden button
             self.hidden.isHidden = true
             self.hidden.state = .off
             self.volume.hidden = false
+            // Case sensitive button
+            self.caseSensitive.isHidden = true
+            self.caseSensitive.state = .off
+            self.volume.caseSensitive = false
+            // Journaled button
+            self.journaled.isHidden = true
+            self.journaled.state = .off
+            self.volume.journaled = false
         } else {
             self.volume.tmpFs = false
             self.diskSizeLabel.stringValue = "Disk Size"
             self.hidden.isHidden = false
+            self.caseSensitive.isHidden = false
+            self.journaled.isHidden = false
         }
     }
     
@@ -133,6 +146,14 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     
     @IBAction func onHiddenChange(_ sender: NSButton) {
         self.volume.hidden = sender.state == .on
+    }
+    
+    @IBAction func onCaseSensitiveChange(_ sender: NSButton) {
+        self.volume.caseSensitive = sender.state == .on
+    }
+    
+    @IBAction func onJournaledChange(_ sender: NSButton) {
+        self.volume.journaled = sender.state == .on
     }
     
     @IBAction func createTapped(_ sender: NSButton) {

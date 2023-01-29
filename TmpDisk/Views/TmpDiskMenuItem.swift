@@ -36,9 +36,9 @@ class TmpDiskMenuItem: NSMenuItem {
         
         super.init(title: string, action: selector, keyEquivalent: charCode)
         
-        let view = NSView.init(frame: NSRect(x: 0, y: 0, width: 150, height: 25))
+        let view = NSView.init(frame: NSRect(x: 0, y: 0, width: 200, height: 25))
 
-        let label = NSButton(frame: NSRect(x: 20, y: 2.5, width: 90, height: 20))
+        let label = NSButton(frame: NSRect(x: 20, y: 2.5, width: 140, height: 20))
         label.action = #selector(onClick(sender:))
         label.target = self
         label.title = title
@@ -46,7 +46,7 @@ class TmpDiskMenuItem: NSMenuItem {
         label.alignment = .left
         view.addSubview(label)
 
-        let recreate = NSButton(frame: NSRect(x: 110, y: 5, width: 15, height: 15))
+        let recreate = NSButton(frame: NSRect(x: 160, y: 5, width: 15, height: 15))
         recreate.action = #selector(onRecreate(sender:))
         recreate.target = self
         recreate.image = NSImage(named: "recreate_a")
@@ -55,7 +55,7 @@ class TmpDiskMenuItem: NSMenuItem {
         recreate.isBordered = false
         view.addSubview(recreate)
 
-        let eject = NSButton(frame: NSRect(x: 130, y: 5, width: 15, height: 15))
+        let eject = NSButton(frame: NSRect(x: 180, y: 5, width: 15, height: 15))
         eject.action = #selector(onEject(sender:))
         eject.target = self
         eject.image = NSImage(named: "eject")
