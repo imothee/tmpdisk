@@ -10,9 +10,9 @@ TmpDisk is an Open Source simple RamDisk management tool. RamDisks are disks tha
 Installing
 ----------
 
-TmpDisk is built for OSX Lion but does not use any Lion only libraries. It should compile for older systems as well, but this has not been tested.
+After 2.0.4 TmpDisk supports a minimum MacOS version of 10.14.6.
 
-Either install the dmg at https://github.com/imothee/tmpdisk/releases/download/v2.0.3/TmpDisk.dmg or clone the repository and build the application yourself. All required files are included.
+Down the latest release https://github.com/imothee/tmpdisk/releases/latest or clone the repository and build the application yourself. All required files are included.
 
 Usage
 -----
