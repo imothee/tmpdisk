@@ -30,11 +30,11 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var diskSizeLabel: NSTextField!
     @IBOutlet weak var diskSizeStepper: NSStepper!
     @IBOutlet weak var diskSize: NSTextField!
-    @IBOutlet weak var diskSizeSuffixLabel: NSTextField!
     @IBOutlet weak var folders: NSTextField!
     
     @IBOutlet weak var icon: NSImageView!
     
+    @IBOutlet weak var diskUnitSelector: NSPopUpButton!
     @IBOutlet weak var diskSizeSelector: NSPopUpButton!
     
     @IBOutlet weak var autoCreate: NSButton!
@@ -44,6 +44,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var journaled: NSButton!
     
     var volume = TmpDiskVolume()
+    var unitIndex = 0
     
     // MARK: - View controller lifecycle
     
@@ -61,18 +62,43 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
             self.volume.name = textField.stringValue
         }
         if let textField = obj.object as? NSTextField, self.diskSize.identifier == textField.identifier {
-            self.volume.size = textField.integerValue
+            self.setVolumeSize()
         }
         if let textField = obj.object as? NSTextField, self.folders.identifier == textField.identifier {
             self.volume.folders = textField.stringValue.split(separator: ",").map { String($0) }
         }
     }
     
-    // MARK: - IBACtions
+    // MARK: - IBActions
     
     @IBAction func sizeStepped(_ sender: NSStepper) {
-        self.volume.size = sender.integerValue
-        self.diskSize.stringValue = "\(sender.integerValue)"
+        if unitIndex == 0 {
+            self.diskSize.stringValue = String(sender.integerValue)
+        } else {
+            let dSize = sender.integerValue / 1000
+            self.diskSize.stringValue = String(format: "%.2f", dSize)
+        }
+    }
+    
+    @IBAction func unitSelected(_ sender: NSPopUpButton) {
+        switch sender.indexOfSelectedItem {
+        case 0:
+            if unitIndex == 1 {
+                let dSize = self.diskSize.doubleValue * 1000
+                self.diskSize.stringValue = String(Int(dSize))
+                unitIndex = 0
+            }
+            break
+        case 1:
+            if unitIndex == 0 {
+                let dSize = self.diskSize.doubleValue / 1000.0
+                self.diskSize.stringValue = String(format: "%.2f", dSize)
+                unitIndex = 1
+            }
+            break
+        default:
+            return
+        }
     }
     
     @IBAction func sizeSelected(_ sender: NSPopUpButton) {
@@ -80,8 +106,12 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         case 1, 2, 3, 4:
             let percent = [0.1, 0.25, 0.5, 0.75][sender.indexOfSelectedItem - 1]
             let dSize = (percent * Double(ProcessInfo.init().physicalMemory)) / 1024 / 1024
-            self.volume.size = Int(dSize)
-            self.diskSize.stringValue = String(Int(dSize))
+            if unitIndex == 0 {
+                self.diskSize.stringValue = String(Int(dSize))
+            } else {
+                let newDSize = dSize / 1000.0
+                self.diskSize.stringValue = String(format: "%.2f", newDSize)
+            }
             sender.selectItem(at: 0)
             break
         default:
@@ -164,6 +194,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         sender.addSubview(spinner)
         sender.isEnabled = false
         
+        self.setVolumeSize()
+        
         TmpDiskManager.shared.createTmpDisk(volume: self.volume) { error in
             DispatchQueue.main.async {
                 spinner.removeFromSuperview()
@@ -180,7 +212,11 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                         self.showError(message: NSLocalizedString("A volume with this name already exists", comment: ""))
                         break;
                     case .invalidSize:
-                        self.showError(message: NSLocalizedString("Size must be a number of megabytes > 0", comment: ""))
+                        if self.unitIndex == 0 {
+                            self.showError(message: NSLocalizedString("Size must be a number of megabytes > 0", comment: ""))
+                        } else {
+                            self.showError(message: NSLocalizedString("Size must be a number of gigabytes >= 0.01", comment: ""))
+                        }
                         break;
                     case .failed:
                         self.showError(message: NSLocalizedString("Failed to create TmpDisk", comment: ""))
@@ -196,6 +232,14 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     }
     
     // MARK: - Internal functions
+    
+    func setVolumeSize() {
+        if unitIndex == 0 {
+            self.volume.size = self.diskSize.integerValue
+        } else {
+            self.volume.size = Int(self.diskSize.doubleValue * 1000)
+        }
+    }
     
     func showError(message: String) {
         let alert = NSAlert()
