@@ -17,6 +17,13 @@
 "Your TmpDisk must have a name" = "你的 TmpDisk 必须有一个名字";
 "A volume with this name already exists" = "已存在同名的卷";
 "Size must be a number of megabytes > 0" = "大小必须是大于 0 的兆字节数";
+"Size must be a number of gigabytes >= 0.01" = "大小必须是大于或等于0.01的吉字节数";
 "Failed to create TmpDisk" = "创建 TmpDisk 失败";
-"Preferences" = "Preferences";
-"You can't change the root volume while tmpFS disks are mounted." = "You can't change the root volume while tmpFS disks are mounted.";
+"Preferences" = "设置";
+"You can't change the root volume while tmpFS disks are mounted." = "你无法在装载tmpFS盘的同时更改根卷宗.";
+"Icon must be square" = "图标必须是正方形";
+"Could not convert image to icon" = "无法将图片转换为图标";
+"Failed to eject \"%@\"" = "推出 \"%@\" 失败";
+"The volume \"%@\" wasn't ejected because one or more programs may be using it" = "无法推出卷宗 \"%@\" , 因为有一个或多个程序正在使用";
+"To eject the disk immediately, hit the Force Eject button" = "选择\"强制推出\"按钮以强制推出";
+"Force Eject" = "强制推出";

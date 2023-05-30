@@ -258,20 +258,88 @@ class TmpDiskManager {
                 if volume.tmpFs {
                     try FileManager.default.removeItem(atPath: volume.path())
                 }
-            } catch {
-                print(error)
+                DispatchQueue.main.async {
+                    self.volumes.remove(volume)
+                }
+                
+                if recreate {
+                    self.createTmpDisk(volume: volume, onCreate: {_ in })
+                }
+            } catch let error as NSError {
+                if error.code == fBsyErr {
+                    DispatchQueue.main.async {
+                        self.ejectErrorDiskInUse(name: volume.name, recreate: recreate)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.ejectError(name: volume.name)
+                    }
+                }
+            }
+            
+            group.leave()
+        }
+        
+    }
+    
+    func forceEject(name: String, recreate: Bool) {
+        guard let volume = self.volumes.first(where: { name == $0.name }) else {
+            return
+        }
+        
+        let task = Process()
+        task.launchPath = "/sbin/umount"
+        
+        let command = volume.path()
+        task.arguments = ["-f", command]
+        
+        task.terminationHandler = { process in
+            if process.terminationStatus != 0 {
+                DispatchQueue.main.async {
+                    self.ejectError(name: name)
+                }
+                return
             }
             
             DispatchQueue.main.async {
                 self.volumes.remove(volume)
+                
+                if recreate {
+                    // We've force ejected so recreate the TmpDisk
+                    self.createTmpDisk(volume: volume, onCreate: {_ in })
+                }
             }
-            
-            if recreate {
-                self.createTmpDisk(volume: volume, onCreate: {_ in })
-            }
-            group.leave()
         }
         
+        if #available(macOS 10.13, *) {
+            do {
+                try task.run()
+            } catch {
+                print(error)
+            }
+        } else {
+            task.launch()
+        }
+    }
+    
+    func ejectErrorDiskInUse(name: String, recreate: Bool) {
+        let alert = NSAlert()
+        alert.messageText = String(format: NSLocalizedString("The volume \"%@\" wasn't ejected because one or more programs may be using it", comment: ""), name)
+        alert.informativeText = NSLocalizedString("To eject the disk immediately, hit the Force Eject button", comment: "")
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: NSLocalizedString("Force Eject", comment: ""))
+        alert.addButton(withTitle: "Cancel")
+        if alert.runModal() == .alertFirstButtonReturn {
+            self.forceEject(name: name, recreate: recreate)
+        }
+    }
+    
+    func ejectError(name: String) {
+        let alert = NSAlert()
+        alert.messageText = String(format: NSLocalizedString("Failed to eject \"%@\"", comment: ""), name)
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
     
     /*

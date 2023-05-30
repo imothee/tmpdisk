@@ -732,7 +732,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2a-a2-Prg">
-                                <rect key="frame" x="195" y="318" width="250" height="21"/>
+                                <rect key="frame" x="195" y="318" width="284" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="You must enter a Disk Name" drawsBackground="YES" id="5ee-ag-nb5">
                                     <font key="font" metaFont="system"/>
@@ -741,7 +741,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xyN-2s-pFi">
-                                <rect key="frame" x="216" y="289" width="95" height="21"/>
+                                <rect key="frame" x="216" y="289" width="110" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="16" placeholderString="0" drawsBackground="YES" id="nYC-7d-c8X">
                                     <font key="font" metaFont="system"/>
@@ -794,7 +794,7 @@
                             <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P5u-9X-RMA">
                                 <rect key="frame" x="192" y="286" width="19" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <stepperCell key="cell" continuous="YES" alignment="left" increment="16" minValue="16" maxValue="32000" doubleValue="16" valueWraps="YES" id="Rpa-l3-js0"/>
+                                <stepperCell key="cell" continuous="YES" alignment="left" increment="16" minValue="16" maxValue="128000" doubleValue="16" valueWraps="YES" id="Rpa-l3-js0"/>
                                 <connections>
                                     <action selector="sizeStepped:" target="4AE-e9-iwB" id="qiA-T1-NOt"/>
                                 </connections>
@@ -829,7 +829,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H7j-O1-ZBb">
-                                <rect key="frame" x="195" y="259" width="250" height="21"/>
+                                <rect key="frame" x="195" y="259" width="284" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Comma separated folder names" drawsBackground="YES" id="ini-oz-Wpw">
                                     <font key="font" metaFont="system"/>
@@ -838,7 +838,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MSl-ao-5Ke">
-                                <rect key="frame" x="355" y="285" width="94" height="25"/>
+                                <rect key="frame" x="389" y="285" width="94" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="Custom" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gcJ-GN-9gz" id="rZ6-s2-bcs">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -857,15 +857,6 @@
                                     <action selector="sizeSelected:" target="4AE-e9-iwB" id="qPb-lU-iJO"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aqV-UW-cbZ">
-                                <rect key="frame" x="317" y="291" width="24" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" alignment="left" title="MB" id="hdG-Me-bAt">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9uZ-cc-D1t">
                                 <rect key="frame" x="193" y="95" width="118" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -918,6 +909,23 @@
                                     <action selector="createTapped:" target="4AE-e9-iwB" id="4T6-VP-krq"/>
                                 </connections>
                             </button>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2p-wL-s18">
+                                <rect key="frame" x="331" y="285" width="57" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="MB" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="JxI-0N-oYo" id="ssH-8t-toD">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="G57-Hf-orQ">
+                                        <items>
+                                            <menuItem title="MB" state="on" id="JxI-0N-oYo"/>
+                                            <menuItem title="GB" id="QDX-KN-Ki5"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="unitSelected:" target="4AE-e9-iwB" id="KRZ-WI-2q8"/>
+                                </connections>
+                            </popUpButton>
                         </subviews>
                     </view>
                     <connections>
@@ -928,7 +936,7 @@
                         <outlet property="diskSizeLabel" destination="O1S-ta-weE" id="goH-tF-DiN"/>
                         <outlet property="diskSizeSelector" destination="MSl-ao-5Ke" id="I5b-Ym-R4q"/>
                         <outlet property="diskSizeStepper" destination="P5u-9X-RMA" id="HBq-pW-un9"/>
-                        <outlet property="diskSizeSuffixLabel" destination="aqV-UW-cbZ" id="sAX-I9-2Um"/>
+                        <outlet property="diskUnitSelector" destination="V2p-wL-s18" id="NGY-n8-1FI"/>
                         <outlet property="folders" destination="H7j-O1-ZBb" id="4Rz-tD-q48"/>
                         <outlet property="hidden" destination="9uZ-cc-D1t" id="pCK-PN-B6b"/>
                         <outlet property="icon" destination="1T3-Bk-PAe" id="2hJ-Pd-SiY"/>
@@ -1000,11 +1008,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="lFv-aq-hWE">
-                                                            <rect key="frame" x="8" y="0.0" width="165" height="24"/>
+                                                            <rect key="frame" x="8" y="0.0" width="166" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l4G-Ut-HMs">
-                                                                    <rect key="frame" x="0.0" y="4" width="165" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="166" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="XWF-fr-bC7">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1035,11 +1043,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="JML-g3-qvT">
-                                                            <rect key="frame" x="190" y="0.0" width="113" height="24"/>
+                                                            <rect key="frame" x="190" y="0.0" width="94" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfW-y0-Gzf">
-                                                                    <rect key="frame" x="0.0" y="4" width="113" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="94" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="t3z-IH-wJR">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1070,11 +1078,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="m4U-hC-HcX">
-                                                            <rect key="frame" x="289" y="0.0" width="188" height="24"/>
+                                                            <rect key="frame" x="289" y="0.0" width="168" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ZJ-fg-CTz">
-                                                                    <rect key="frame" x="0.0" y="4" width="188" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="168" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="qXn-wF-aJV">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1309,7 +1317,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="2W4-bt-YC3">
-                                                            <rect key="frame" x="894" y="0.0" width="79" height="24"/>
+                                                            <rect key="frame" x="894" y="0.0" width="80" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NeM-An-jyl">

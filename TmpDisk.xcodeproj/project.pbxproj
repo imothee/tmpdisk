@@ -75,6 +75,9 @@
 		2200825F2765505100A8524B /* TmpDiskUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskUITests.swift; sourceTree = "<group>"; };
 		220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2200826E2765508C00A8524B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		220E0556299DD3D200F822F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		220E0557299DD3D200F822F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		220E0558299DD3D200F822F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		22235EBF27784F8200FBD8AC /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		2226C0D7294EAFF80043D2B7 /* IconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconUtil.swift; sourceTree = "<group>"; };
 		2264C5E1276553E600C45CB8 /* StatusBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
@@ -335,6 +338,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				es,
 			);
 			mainGroup = 220082372765504E00A8524B;
 			packageReferences = (
@@ -454,6 +458,7 @@
 			children = (
 				2200824A2765505100A8524B /* Base */,
 				229EFA572985FEB9001EADB2 /* zh-Hans */,
+				220E0556299DD3D200F822F6 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 			children = (
 				2264C5E72765667500C45CB8 /* en */,
 				2264C5E92765667700C45CB8 /* zh-Hans */,
+				220E0558299DD3D200F822F6 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				22A69365277004E90040FDEF /* Base */,
+				220E0557299DD3D200F822F6 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -606,7 +613,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1009;
+				CURRENT_PROJECT_VERSION = 1011;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -621,7 +628,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -639,7 +646,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1009;
+				CURRENT_PROJECT_VERSION = 1011;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -654,7 +661,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -774,7 +781,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -789,7 +796,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -807,7 +814,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -822,7 +829,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -886,8 +893,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
-				kind = exactVersion;
-				version = 2.2.0;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
