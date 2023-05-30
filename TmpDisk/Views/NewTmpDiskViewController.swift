@@ -53,6 +53,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         self.diskName.delegate = self
         self.diskSize.delegate = self
         self.folders.delegate = self
+        self.setDefaultUnits()
     }
     
     // MARK: - NSTextFieldDelegate
@@ -87,6 +88,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                 let dSize = self.diskSize.doubleValue * 1000
                 self.diskSize.stringValue = String(Int(dSize))
                 unitIndex = 0
+                UserDefaults.standard.set(unitIndex, forKey: "defaultUnits")
             }
             break
         case 1:
@@ -94,6 +96,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                 let dSize = self.diskSize.doubleValue / 1000.0
                 self.diskSize.stringValue = String(format: "%.2f", dSize)
                 unitIndex = 1
+                UserDefaults.standard.set(unitIndex, forKey: "defaultUnits")
             }
             break
         default:
@@ -236,8 +239,18 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     func setVolumeSize() {
         if unitIndex == 0 {
             self.volume.size = self.diskSize.integerValue
-        } else {
+        } else if unitIndex == 1 {
             self.volume.size = Int(self.diskSize.doubleValue * 1000)
+        }
+    }
+    
+    func setDefaultUnits() {
+        if let defaultUnits = UserDefaults.standard.object(forKey: "defaultUnits") as? Int {
+            if defaultUnits == 1 {
+                // Default units is now GB
+                diskUnitSelector.selectItem(at: defaultUnits)
+                self.unitIndex = defaultUnits
+            }
         }
     }
     
