@@ -134,6 +134,15 @@ class StatusBarController {
         return true
     }
     
+    func confirmRecreateAll() -> Bool {
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("This will eject and recreate all TmpDisks. All existing data will be lost.", comment: "")
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        return alert.runModal() == .alertFirstButtonReturn
+    }
+    
     func buildCurrentTmpDiskMenu() {
         self.currentTmpDisksMenu.removeAllItems()
         for volume in TmpDiskManager.shared.volumes {
@@ -163,7 +172,9 @@ class StatusBarController {
     }
     
     @objc func recreateAll(sender: AnyObject) {
-        TmpDiskManager.shared.ejectAllTmpDisks(recreate: true)
+        if confirmRecreateAll() {
+            TmpDiskManager.shared.ejectAllTmpDisks(recreate: true)
+        }
     }
     
     @objc func autoCreateManager(sender: AnyObject) {

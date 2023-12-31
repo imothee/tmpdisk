@@ -169,11 +169,13 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
         if let button = sender as? NSButton {
             let row = tableView.row(for: button)
             
-            let volume = self.volumes[row]
-            if TmpDiskManager.shared.exists(volume: volume) {
-                TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
-            } else {
-                TmpDiskManager.shared.createTmpDisk(volume: volume, onCreate: {_ in })
+            if confirmRecreate() {
+                let volume = self.volumes[row]
+                if TmpDiskManager.shared.exists(volume: volume) {
+                    TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
+                } else {
+                    TmpDiskManager.shared.createTmpDisk(volume: volume, onCreate: {_ in })
+                }
             }
         }
     }
@@ -186,5 +188,14 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             TmpDiskManager.shared.saveAutoCreateVolumes(volumes: Set(self.volumes))
             self.tableView.reloadData()
         }
+    }
+    
+    func confirmRecreate() -> Bool {
+        let alert = NSAlert()
+        alert.messageText = NSLocalizedString("This will eject and recreate the TmpDisk. All existing data will be lost.", comment: "")
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: "Cancel")
+        return alert.runModal() == .alertFirstButtonReturn
     }
 }
