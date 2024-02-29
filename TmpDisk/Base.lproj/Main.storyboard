@@ -800,9 +800,9 @@
                                 </connections>
                             </stepper>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fEV-yb-Se2">
-                                <rect key="frame" x="193" y="184" width="226" height="18"/>
+                                <rect key="frame" x="193" y="184" width="341" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Use TmpFS (Needs Root Access)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xBA-Ze-bf2">
+                                <buttonCell key="cell" type="check" title="Use TmpFS (Needs Root Access or Helper Installed)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="xBA-Ze-bf2">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1043,11 +1043,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="JML-g3-qvT">
-                                                            <rect key="frame" x="190" y="0.0" width="401" height="24"/>
+                                                            <rect key="frame" x="190" y="0.0" width="900" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DfW-y0-Gzf">
-                                                                    <rect key="frame" x="0.0" y="4" width="401" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="900" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="t3z-IH-wJR">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1078,11 +1078,11 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="m4U-hC-HcX">
-                                                            <rect key="frame" x="289" y="0.0" width="475" height="24"/>
+                                                            <rect key="frame" x="289" y="0.0" width="974" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ZJ-fg-CTz">
-                                                                    <rect key="frame" x="0.0" y="4" width="475" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="4" width="974" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="qXn-wF-aJV">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1561,7 +1561,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XO-mK-bhq">
-                                <rect key="frame" x="32" y="141" width="120" height="16"/>
+                                <rect key="frame" x="32" y="131" width="120" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="TmpFS Root Folder" id="q71-xV-gGa">
                                     <font key="font" metaFont="system"/>
@@ -1569,8 +1569,17 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YiI-JV-ocs">
+                                <rect key="frame" x="32" y="223" width="97" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="TmpDiskHelper" id="gwG-L6-BAO">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4os-jd-sv5">
-                                <rect key="frame" x="191" y="138" width="243" height="21"/>
+                                <rect key="frame" x="191" y="128" width="243" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="~/.tmpdisk/volumes" drawsBackground="YES" id="fMk-fB-fMf">
                                     <font key="font" metaFont="system"/>
@@ -1590,7 +1599,7 @@
                                 </connections>
                             </button>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="pJA-9b-PqG">
-                                <rect key="frame" x="83" y="48" width="332" height="82"/>
+                                <rect key="frame" x="83" y="60" width="332" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                 <textFieldCell key="cell" alignment="center" title="Change where your TmpFS mount points sit. Must be changed when you have no TmpFS volumes mounted." id="EYH-BL-kNS">
                                     <font key="font" metaFont="system"/>
@@ -1598,10 +1607,47 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="GJg-c6-PtQ">
+                                <rect key="frame" x="91" y="167" width="299" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <textFieldCell key="cell" alignment="center" id="LLv-lK-dgg">
+                                    <font key="font" metaFont="system"/>
+                                    <string key="title">Installing the TmpDiskCreator Helper can install TmpFS TmpDisks without asking for your root password. Requires Admin password to install</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wBV-Uc-oE8">
+                                <rect key="frame" x="171" y="214" width="130" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Update Helper" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oIz-aS-Ulv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="updateHelper:" target="p4y-fC-51t" id="c6K-CR-6bi"/>
+                                </connections>
+                            </button>
+                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-Eq-qKM">
+                                <rect key="frame" x="346" y="220" width="73" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="pt1-DY-kC4">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Off" width="32" selected="YES"/>
+                                        <segment label="On" width="32" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="toggleHelper:" target="p4y-fC-51t" id="f2P-mU-U81"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="rootFolder" destination="4os-jd-sv5" id="8FX-qI-mrd"/>
+                        <outlet property="updateHelper" destination="wBV-Uc-oE8" id="m68-tp-OvY"/>
+                        <outlet property="useHelper" destination="9gP-Eq-qKM" id="VgN-g2-lQI"/>
                     </connections>
                 </viewController>
                 <customObject id="L85-zs-ndx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

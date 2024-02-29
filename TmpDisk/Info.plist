@@ -2,8 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSUIElement</key>
-	<true/>
+	<key>SMPrivilegedExecutables</key>
+	<dict>
+		<key>com.imothee.TmpDiskHelper</key>
+		<string>identifier "com.imothee.TmpDiskHelper" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Timothy Marks (R824A4SSXM)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+	</dict>
 	<key>SUEnableSystemProfiling</key>
 	<true/>
 	<key>SUFeedURL</key>
@@ -12,5 +15,7 @@
 	<string>dsa_pub.pem</string>
 	<key>SUPublicEDKey</key>
 	<string>cHYVa9jmyIHtzvsj9w8WQ/L19rbBklLx75GNou5ipjw=</string>
+	<key>TmpDiskHelperVersion</key>
+	<string>1</string>
 </dict>
 </plist>

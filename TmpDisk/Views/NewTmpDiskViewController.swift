@@ -199,6 +199,25 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         
         self.setVolumeSize()
         
+        if self.volume.tmpFs {
+            // Check if we've ever prompted them to install the helper
+            let helperPrompted = UserDefaults.standard.object(forKey: "helperPromptShowns") as? Bool
+            let helperVersion = Util.checkHelperVersion()
+            
+            if helperPrompted == nil && helperVersion == nil {
+                UserDefaults.standard.set(true, forKey: "helperPromptShown")
+                
+                let alert = NSAlert()
+                alert.messageText = NSLocalizedString("You can now install the TmpDiskHelper to create TmpFS volumes without entering a password each time. The helper can be managed in TmpDisk preferences and requires your Admin Password to install.", comment: "")
+                alert.alertStyle = .warning
+                alert.addButton(withTitle: "OK")
+                alert.addButton(withTitle: "Don't ask again")
+                if alert.runModal() == .alertFirstButtonReturn {
+                    Util.installHelper()
+                }
+            }
+        }
+        
         TmpDiskManager.shared.createTmpDisk(volume: self.volume) { error in
             DispatchQueue.main.async {
                 spinner.removeFromSuperview()
@@ -223,6 +242,9 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                         break;
                     case .failed:
                         self.showError(message: NSLocalizedString("Failed to create TmpDisk", comment: ""))
+                        break;
+                    case .helperNotInstalled:
+                        self.showError(message: NSLocalizedString("The helper is installed but not running. Please try updating or removing it in the preferences", comment: ""))
                         break;
                     }
                 }

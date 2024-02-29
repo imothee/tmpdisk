@@ -24,64 +24,6 @@ import AppKit
 
 let TmpDiskHome = "\(NSHomeDirectory())/.tmpdisk"
 
-struct TmpDiskVolume: Hashable, Codable {
-    var name: String = ""
-    var size: Int = 16
-    var autoCreate: Bool = false
-    var indexed: Bool = false
-    var hidden: Bool = false
-    var tmpFs: Bool = false
-    var caseSensitive: Bool = false
-    var journaled: Bool = false
-    var warnOnEject: Bool = false
-    var folders: [String] = []
-    var icon: String?
-    
-    func path() -> String {
-        if tmpFs {
-            return "\(TmpDiskManager.rootFolder)/\(name)"
-        }
-        return "/Volumes/\(name)"
-    }
-    
-    func URL() -> URL {
-        return NSURL.fileURL(withPath: self.path())
-    }
-    
-    func dictionary() -> Dictionary<String, Any> {
-        return [
-            "name": name,
-            "size": size,
-            "indexed": indexed,
-            "hidden": hidden,
-            "tmpFs": tmpFs,
-            "caseSensitive": caseSensitive,
-            "journaled": journaled,
-            "warnOnEject": warnOnEject,
-            "folders": folders,
-            "icon": icon ?? "",
-        ]
-    }
-    
-    func showWarning() -> Bool {
-        if warnOnEject {
-            if let files = try? FileManager.default.contentsOfDirectory(atPath: self.path()) {
-                if !files.filter({ ![".DS_Store", ".tmpdisk", ".fseventsd"].contains($0) }).isEmpty {
-                    return true
-                }
-            }
-        }
-        return false
-    }
-}
-
-enum TmpDiskError: Error {
-    case noName
-    case exists
-    case invalidSize
-    case failed
-}
-
 class TmpDiskManager {
     
     static let shared: TmpDiskManager = {
@@ -190,6 +132,35 @@ class TmpDiskManager {
             return onCreate(.exists)
         }
         
+        if Util.checkHelperVersion() != nil {
+            let client = XPCClient()
+//            if client.connection == nil {
+//                return onCreate(.helperNotInstalled)
+//            }
+            
+            var task: String?
+            if volume.tmpFs {
+                task = try? self.createTmpFsTask(volume: volume)
+            } else {
+                task = self.createRamDiskTask(volume: volume)
+            }
+            
+            guard let task = task else {
+                return onCreate(.failed)
+            }
+            
+            client.createVolume(task) { error in
+                if error != nil {
+                    return onCreate(error)
+                }
+                self.diskCreated(volume: volume)
+                onCreate(nil)
+            }
+            return
+        }
+        
+        // Old flow without the helper installed
+        
         let task: Process?
         if volume.tmpFs {
             task = try? self.createTmpFs(volume: volume)
@@ -205,30 +176,7 @@ class TmpDiskManager {
             if process.terminationStatus != 0 {
                 return onCreate(.failed)
             }
-            
-            if let jsonData = try? JSONEncoder().encode(volume) {
-                let jsonString = String(data: jsonData, encoding: .utf8)!
-                try? jsonString.write(toFile: "\(volume.path())/.tmpdisk", atomically: true, encoding: .utf8)
-            }
-                
-            if volume.indexed {
-                self.indexVolume(volume: volume)
-            }
-            
-            // Create the folders if there are any set
-            self.createFolders(volume: volume)
-            
-            // Create the icon if there is one set
-            self.createIcon(volume: volume)
-            
-            if volume.autoCreate {
-                self.addAutoCreateVolume(volume: volume)
-            }
-            
-            DispatchQueue.main.async {
-                self.volumes.insert(volume)
-            }
-            NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
+            self.diskCreated(volume: volume)
             onCreate(nil)
         }
         if #available(macOS 10.13, *) {
@@ -358,28 +306,42 @@ class TmpDiskManager {
     
     // MARK: - Helper functions
     
-    func createTmpFs(volume: TmpDiskVolume) throws -> Process {
+    func diskCreated(volume: TmpDiskVolume) {
+        if let jsonData = try? JSONEncoder().encode(volume) {
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            try? jsonString.write(toFile: "\(volume.path())/.tmpdisk", atomically: true, encoding: .utf8)
+        }
+            
+        if volume.indexed {
+            self.indexVolume(volume: volume)
+        }
+        
+        // Create the folders if there are any set
+        self.createFolders(volume: volume)
+        
+        // Create the icon if there is one set
+        self.createIcon(volume: volume)
+        
+        if volume.autoCreate {
+            self.addAutoCreateVolume(volume: volume)
+        }
+        
+        DispatchQueue.main.async {
+            self.volumes.insert(volume)
+        }
+        NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
+    }
+    
+    func createTmpFsTask(volume: TmpDiskVolume) throws -> String {
         // Setup the volume mount folder
         if !FileManager.default.fileExists(atPath: volume.path()) {
              try FileManager.default.createDirectory(atPath: volume.path(), withIntermediateDirectories: true, attributes: nil)
         }
         
-        // Run the process
-        let task = Process()
-        task.launchPath = "/usr/bin/osascript"
-        let command = "mount_tmpfs -s\(volume.size)M \(volume.path())"
-        let script = """
-            do shell script "\(command)" with administrator privileges
-        """
-
-        task.arguments = ["-e", script]
-        return task
+        return "mount_tmpfs -s\(volume.size)M \(volume.path())"
     }
     
-    func createRamDisk(volume: TmpDiskVolume) -> Process {
-        let task = Process()
-        task.launchPath = "/bin/sh"
-        
+    func createRamDiskTask(volume: TmpDiskVolume) -> String {
         let dSize = UInt64(volume.size) * 2048
         
         let filesystem: String = {
@@ -395,15 +357,31 @@ class TmpDiskManager {
             }
         }()
         
-        let command: String
         if volume.hidden {
-            command = "d=$(hdiutil attach -nomount ram://\(dSize)) && diskutil eraseDisk \(filesystem) %noformat% $d && newfs_hfs -v \"\(volume.name)\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\""
+            return "d=$(hdiutil attach -nomount ram://\(dSize)) && diskutil eraseDisk \(filesystem) %noformat% $d && newfs_hfs -v \"\(volume.name)\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\""
         } else {
-            command = "diskutil eraseVolume \(filesystem) \"\(volume.name)\" `hdiutil attach -nomount ram://\(dSize)`"
+            return "diskutil eraseVolume \(filesystem) \"\(volume.name)\" `hdiutil attach -nomount ram://\(dSize)`"
         }
+    }
+    
+    func createTmpFs(volume: TmpDiskVolume) throws -> Process {
+        // Run the process
+        let task = Process()
+        task.launchPath = "/usr/bin/osascript"
+        let command = try createTmpFsTask(volume: volume)
+        let script = """
+            do shell script "\(command)" with administrator privileges
+        """
+
+        task.arguments = ["-e", script]
+        return task
+    }
+    
+    func createRamDisk(volume: TmpDiskVolume) -> Process {
+        let task = Process()
+        task.launchPath = "/bin/sh"
         
-        print(command)
-        
+        let command = createRamDiskTask(volume: volume)
         task.arguments = ["-c", command]
         return task
     }

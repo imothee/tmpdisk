@@ -23,14 +23,50 @@ import Foundation
 import AppKit
 
 class PreferencesViewController: NSViewController, NSTextFieldDelegate {
+    @IBOutlet weak var updateHelper: NSButton!
+    @IBOutlet weak var useHelper: NSSegmentedControl!
     @IBOutlet weak var rootFolder: NSTextField!
 
+    var helperInstalled: Bool = false
+    
     override public func viewDidAppear() {
         super.viewDidAppear()
         if let root = UserDefaults.standard.object(forKey: "rootFolder") as? String {
             self.rootFolder.stringValue = root
         }
         self.rootFolder.placeholderString = TmpDiskHome
+        
+        if Util.checkHelperVersion() != nil {
+            helperInstalled = true
+            useHelper.setSelected(true, forSegment: 1)
+        } else {
+            updateHelper.isHidden = true
+        }
+    }
+    
+    @IBAction func toggleHelper(_ sender: NSSegmentedControl) {
+        if useHelper.isSelected(forSegment: 1) {
+            if !helperInstalled {
+                let installed = Util.installHelper(update: false)
+                if installed {
+                    updateHelper.isHidden = false
+                    helperInstalled = true
+                } else {
+                    useHelper.setSelected(true, forSegment: 0)
+                }
+            }
+        } else {
+            if helperInstalled {
+                let client = XPCClient()
+                client.uninstall()
+                updateHelper.isHidden = true
+                helperInstalled = false
+            }
+        }
+    }
+    
+    @IBAction func updateHelper(_ sender: NSButton) {
+        Util.installHelper(update: true)
     }
     
     @IBAction func savePreferences(_ sender: NSButton) {

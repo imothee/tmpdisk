@@ -63,6 +63,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if isRunning {
             DistributedNotificationCenter.default().post(name: .killLauncher, object: Bundle.main.bundleIdentifier!)
         }
+        
+        // Check the helper status
+        checkHelperStatus()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -95,6 +98,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         return (name, size)
+    }
+    
+    // Check if the helper is installed, if it is check if it needs to be updated
+    private func checkHelperStatus() {
+        if let build = Util.checkHelperVersion() {
+            if let newestHelperVersion = Util.latestEmbeddedHelperVersion() {
+                if newestHelperVersion > build {
+                    Util.installHelper(update: true)
+                }
+            }
+        }
     }
 }
 

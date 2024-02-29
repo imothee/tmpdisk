@@ -15,6 +15,19 @@
 		220082622765505100A8524B /* TmpDiskUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */; };
 		22235EC027784F8200FBD8AC /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 22235EBF27784F8200FBD8AC /* dsa_pub.pem */; };
 		2226C0D8294EAFF80043D2B7 /* IconUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2226C0D7294EAFF80043D2B7 /* IconUtil.swift */; };
+		2255872A2B8EDB7900136543 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587292B8EDB7900136543 /* main.swift */; };
+		225587352B8FA71E00136543 /* XPCServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587342B8FA71E00136543 /* XPCServer.swift */; };
+		225587382B8FA74100136543 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587372B8FA74100136543 /* Constants.swift */; };
+		2255873A2B8FA76500136543 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587392B8FA76500136543 /* Protocols.swift */; };
+		225587402B8FAA5C00136543 /* TmpDiskCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2255873F2B8FAA5C00136543 /* TmpDiskCreator.swift */; };
+		225587422B8FAA9A00136543 /* XPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587412B8FAA9A00136543 /* XPCClient.swift */; };
+		225587432B8FAAE100136543 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587372B8FA74100136543 /* Constants.swift */; };
+		225587442B8FAAE400136543 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587392B8FA76500136543 /* Protocols.swift */; };
+		225587462B8FB23300136543 /* TmpDiskVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587452B8FB23300136543 /* TmpDiskVolume.swift */; };
+		225587482B8FB36900136543 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587472B8FB36900136543 /* Util.swift */; };
+		2255874A2B8FB38000136543 /* SecurityFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225587492B8FB38000136543 /* SecurityFoundation.framework */; };
+		2255874D2B8FB65200136543 /* SMJobBlessUtil.py in Resources */ = {isa = PBXBuildFile; fileRef = 2255874C2B8FB65200136543 /* SMJobBlessUtil.py */; };
+		2255874E2B8FBA9200136543 /* com.imothee.TmpDiskHelper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225587272B8EDB7900136543 /* com.imothee.TmpDiskHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5E1276553E600C45CB8 /* StatusBarController.swift */; };
 		2264C5E62765667500C45CB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2264C5E82765667500C45CB8 /* Localizable.strings */; };
 		2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */; };
@@ -48,9 +61,35 @@
 			remoteGlobalIDString = 2200823F2765504E00A8524B;
 			remoteInfo = TmpDisk;
 		};
+		2255874F2B8FBAA600136543 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 220082382765504E00A8524B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 225587262B8EDB7900136543;
+			remoteInfo = com.imothee.TmpDiskHelper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		225587252B8EDB7900136543 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		225587302B8EDBEC00136543 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				2255874E2B8FBA9200136543 /* com.imothee.TmpDiskHelper in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22A69388277005A00040FDEF /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,6 +119,21 @@
 		220E0558299DD3D200F822F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		22235EBF27784F8200FBD8AC /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		2226C0D7294EAFF80043D2B7 /* IconUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconUtil.swift; sourceTree = "<group>"; };
+		225587272B8EDB7900136543 /* com.imothee.TmpDiskHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.imothee.TmpDiskHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		225587292B8EDB7900136543 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		225587322B8F962900136543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		225587332B8F963C00136543 /* launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = launchd.plist; sourceTree = "<group>"; };
+		225587342B8FA71E00136543 /* XPCServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCServer.swift; sourceTree = "<group>"; };
+		225587372B8FA74100136543 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		225587392B8FA76500136543 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		2255873B2B8FA7C800136543 /* NSXPCConnection+AuditToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSXPCConnection+AuditToken.h"; sourceTree = "<group>"; };
+		2255873E2B8FA9B500136543 /* com.imothee.TmpDiskHelper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "com.imothee.TmpDiskHelper-Bridging-Header.h"; sourceTree = "<group>"; };
+		2255873F2B8FAA5C00136543 /* TmpDiskCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskCreator.swift; sourceTree = "<group>"; };
+		225587412B8FAA9A00136543 /* XPCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPCClient.swift; sourceTree = "<group>"; };
+		225587452B8FB23300136543 /* TmpDiskVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskVolume.swift; sourceTree = "<group>"; };
+		225587472B8FB36900136543 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		225587492B8FB38000136543 /* SecurityFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityFoundation.framework; path = System/Library/Frameworks/SecurityFoundation.framework; sourceTree = SDKROOT; };
+		2255874C2B8FB65200136543 /* SMJobBlessUtil.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = SMJobBlessUtil.py; sourceTree = "<group>"; };
 		2264C5E1276553E600C45CB8 /* StatusBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		2264C5E72765667500C45CB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2264C5E92765667700C45CB8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -106,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2255874A2B8FB38000136543 /* SecurityFoundation.framework in Frameworks */,
 				22A693572770014B0040FDEF /* ServiceManagement.framework in Frameworks */,
 				228DD724277426B000D6CAC3 /* Sparkle in Frameworks */,
 			);
@@ -125,6 +180,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		225587242B8EDB7900136543 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22A69359277004E80040FDEF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -138,10 +200,12 @@
 		220082372765504E00A8524B = {
 			isa = PBXGroup;
 			children = (
+				225587362B8FA73600136543 /* Common */,
 				220082422765504E00A8524B /* TmpDisk */,
 				220082542765505100A8524B /* TmpDiskTests */,
 				2200825E2765505100A8524B /* TmpDiskUITests */,
 				22A6935D277004E80040FDEF /* TmpDiskLauncher */,
+				225587282B8EDB7900136543 /* com.imothee.TmpDiskHelper */,
 				220082412765504E00A8524B /* Products */,
 				22A693552770014B0040FDEF /* Frameworks */,
 			);
@@ -154,6 +218,7 @@
 				220082512765505100A8524B /* TmpDiskTests.xctest */,
 				2200825B2765505100A8524B /* TmpDiskUITests.xctest */,
 				22A6935C277004E80040FDEF /* TmpDiskLauncher.app */,
+				225587272B8EDB7900136543 /* com.imothee.TmpDiskHelper */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,6 +231,8 @@
 				2226C0D7294EAFF80043D2B7 /* IconUtil.swift */,
 				2264C5E1276553E600C45CB8 /* StatusBarController.swift */,
 				2264C5EB27657AAC00C45CB8 /* TmpDiskManager.swift */,
+				225587472B8FB36900136543 /* Util.swift */,
+				225587412B8FAA9A00136543 /* XPCClient.swift */,
 				22D93DBD27B85E0F0024FB53 /* WindowManager.swift */,
 				220082472765505100A8524B /* Assets.xcassets */,
 				22235EBF27784F8200FBD8AC /* dsa_pub.pem */,
@@ -180,6 +247,7 @@
 		220082542765505100A8524B /* TmpDiskTests */ = {
 			isa = PBXGroup;
 			children = (
+				2255874C2B8FB65200136543 /* SMJobBlessUtil.py */,
 				220082552765505100A8524B /* TmpDiskTests.swift */,
 			);
 			path = TmpDiskTests;
@@ -192,6 +260,30 @@
 				220082612765505100A8524B /* TmpDiskUITestsLaunchTests.swift */,
 			);
 			path = TmpDiskUITests;
+			sourceTree = "<group>";
+		};
+		225587282B8EDB7900136543 /* com.imothee.TmpDiskHelper */ = {
+			isa = PBXGroup;
+			children = (
+				225587292B8EDB7900136543 /* main.swift */,
+				225587322B8F962900136543 /* Info.plist */,
+				225587332B8F963C00136543 /* launchd.plist */,
+				225587342B8FA71E00136543 /* XPCServer.swift */,
+				2255873B2B8FA7C800136543 /* NSXPCConnection+AuditToken.h */,
+				2255873E2B8FA9B500136543 /* com.imothee.TmpDiskHelper-Bridging-Header.h */,
+				2255873F2B8FAA5C00136543 /* TmpDiskCreator.swift */,
+			);
+			path = com.imothee.TmpDiskHelper;
+			sourceTree = "<group>";
+		};
+		225587362B8FA73600136543 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				225587372B8FA74100136543 /* Constants.swift */,
+				225587392B8FA76500136543 /* Protocols.swift */,
+				225587452B8FB23300136543 /* TmpDiskVolume.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		2264C5EA27657A7E00C45CB8 /* Views */ = {
@@ -210,6 +302,7 @@
 		22A693552770014B0040FDEF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				225587492B8FB38000136543 /* SecurityFoundation.framework */,
 				22A693562770014B0040FDEF /* ServiceManagement.framework */,
 			);
 			name = Frameworks;
@@ -238,10 +331,12 @@
 				2200823D2765504E00A8524B /* Frameworks */,
 				2200823E2765504E00A8524B /* Resources */,
 				22A69388277005A00040FDEF /* CopyFiles */,
+				225587302B8EDBEC00136543 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				225587502B8FBAA600136543 /* PBXTargetDependency */,
 			);
 			name = TmpDisk;
 			packageProductDependencies = (
@@ -287,6 +382,23 @@
 			productReference = 2200825B2765505100A8524B /* TmpDiskUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		225587262B8EDB7900136543 /* com.imothee.TmpDiskHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2255872B2B8EDB7900136543 /* Build configuration list for PBXNativeTarget "com.imothee.TmpDiskHelper" */;
+			buildPhases = (
+				225587232B8EDB7900136543 /* Sources */,
+				225587242B8EDB7900136543 /* Frameworks */,
+				225587252B8EDB7900136543 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = com.imothee.TmpDiskHelper;
+			productName = TmpDiskHelper;
+			productReference = 225587272B8EDB7900136543 /* com.imothee.TmpDiskHelper */;
+			productType = "com.apple.product-type.tool";
+		};
 		22A6935B277004E80040FDEF /* TmpDiskLauncher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22A6937E277004EA0040FDEF /* Build configuration list for PBXNativeTarget "TmpDiskLauncher" */;
@@ -311,7 +423,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1520;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					2200823F2765504E00A8524B = {
@@ -324,6 +436,9 @@
 					2200825A2765505100A8524B = {
 						CreatedOnToolsVersion = 13.1;
 						TestTargetID = 2200823F2765504E00A8524B;
+					};
+					225587262B8EDB7900136543 = {
+						CreatedOnToolsVersion = 15.2;
 					};
 					22A6935B277004E80040FDEF = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -352,6 +467,7 @@
 				220082502765505100A8524B /* TmpDiskTests */,
 				2200825A2765505100A8524B /* TmpDiskUITests */,
 				22A6935B277004E80040FDEF /* TmpDiskLauncher */,
+				225587262B8EDB7900136543 /* com.imothee.TmpDiskHelper */,
 			);
 		};
 /* End PBXProject section */
@@ -372,6 +488,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2255874D2B8FB65200136543 /* SMJobBlessUtil.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +515,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				225587442B8FAAE400136543 /* Protocols.swift in Sources */,
+				225587432B8FAAE100136543 /* Constants.swift in Sources */,
+				225587462B8FB23300136543 /* TmpDiskVolume.swift in Sources */,
+				225587482B8FB36900136543 /* Util.swift in Sources */,
+				225587422B8FAA9A00136543 /* XPCClient.swift in Sources */,
 				22A69350276FCDCD0040FDEF /* TmpDiskMenuItem.swift in Sources */,
 				228DD7192772F23D00D6CAC3 /* PreferencesViewController.swift in Sources */,
 				229EFA552985EAEE001EADB2 /* AboutViewController.swift in Sources */,
@@ -429,6 +551,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		225587232B8EDB7900136543 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				225587402B8FAA5C00136543 /* TmpDiskCreator.swift in Sources */,
+				225587352B8FA71E00136543 /* XPCServer.swift in Sources */,
+				2255872A2B8EDB7900136543 /* main.swift in Sources */,
+				225587382B8FA74100136543 /* Constants.swift in Sources */,
+				2255873A2B8FA76500136543 /* Protocols.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22A69358277004E80040FDEF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,6 +583,11 @@
 			isa = PBXTargetDependency;
 			target = 2200823F2765504E00A8524B /* TmpDisk */;
 			targetProxy = 2200825C2765505100A8524B /* PBXContainerItemProxy */;
+		};
+		225587502B8FBAA600136543 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 225587262B8EDB7900136543 /* com.imothee.TmpDiskHelper */;
+			targetProxy = 2255874F2B8FBAA600136543 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -613,13 +752,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1012;
+				CURRENT_PROJECT_VERSION = 1013;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDisk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2011 - 2022 @imothee. All rights reserved.";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -628,7 +768,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -646,13 +786,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1012;
+				CURRENT_PROJECT_VERSION = 1013;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDisk/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2011 - 2022 @imothee. All rights reserved.";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -661,7 +802,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
@@ -772,6 +913,64 @@
 			};
 			name = Release;
 		};
+		2255872C2B8EDB7900136543 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				INFOPLIST_FILE = "$(SRCROOT)/com.imothee.TmpDiskHelper/Info.plist";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MARKETING_VERSION = 2.1.0;
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"$(SRCROOT)/${TARGET_NAME}/launchd.plist",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(TARGET_NAME)/com.imothee.TmpDiskHelper-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2255872D2B8EDB7900136543 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				INFOPLIST_FILE = "$(SRCROOT)/com.imothee.TmpDiskHelper/Info.plist";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MARKETING_VERSION = 2.1.0;
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"$(SRCROOT)/${TARGET_NAME}/launchd.plist",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskHelper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(TARGET_NAME)/com.imothee.TmpDiskHelper-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		22A6937F277004EA0040FDEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -781,7 +980,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -796,7 +995,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -814,7 +1013,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -829,7 +1028,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 2.0.6;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -873,6 +1072,15 @@
 			buildConfigurations = (
 				2200826C2765505100A8524B /* Debug */,
 				2200826D2765505100A8524B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2255872B2B8EDB7900136543 /* Build configuration list for PBXNativeTarget "com.imothee.TmpDiskHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2255872C2B8EDB7900136543 /* Debug */,
+				2255872D2B8EDB7900136543 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
