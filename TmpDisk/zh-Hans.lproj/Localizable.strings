@@ -7,10 +7,10 @@
 */
 
 "New TmpDisk" = "创建 TmpDisk";
-"Current TmpDisks" = "当前 TmpDisks";
+"Current TmpDisks" = "当前 TmpDisk";
 "Recreate All" = "全部重新创建";
 "AutoCreate Manager" = "自动创建管理器";
-"Always Start on Login" = "开机时自动打开";
+"Always Start on Login" = "登录时自动启动";
 "Check for Updates" = "检查更新";
 "About TmpDisk" = "关于 TmpDisk";
 "Quit" = "退出";
@@ -19,8 +19,8 @@
 "Size must be a number of megabytes > 0" = "大小必须是大于 0 的兆字节数";
 "Size must be a number of gigabytes >= 0.01" = "大小必须是大于或等于0.01的吉字节数";
 "Failed to create TmpDisk" = "创建 TmpDisk 失败";
-"Preferences" = "设置";
-"You can't change the root volume while tmpFS disks are mounted." = "你无法在装载tmpFS盘的同时更改根卷宗.";
+"Preferences" = "偏好设置";
+"You can't change the root volume while tmpFS disks are mounted." = "你不能在挂载 tmpFS 磁盘时更改根卷的位置。";
 "Icon must be square" = "图标必须是正方形";
 "Could not convert image to icon" = "无法将图片转换为图标";
 "Failed to eject \"%@\"" = "推出 \"%@\" 失败";
