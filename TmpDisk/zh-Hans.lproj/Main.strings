@@ -153,22 +153,22 @@
 "GEO-Iw-cKr.title" = "格式";
 
 /* Class = "NSMenuItem"; title = "Use Default"; ObjectID = "GUa-eO-cwY"; */
-"GUa-eO-cwY.title" = "Use Default";
+"GUa-eO-cwY.title" = "使用默认值";
 
 /* Class = "NSMenuItem"; title = "Font"; ObjectID = "Gi5-1S-RQB"; */
 "Gi5-1S-RQB.title" = "字体";
 
 /* Class = "NSMenuItem"; title = "Writing Direction"; ObjectID = "H1b-Si-o9J"; */
-"H1b-Si-o9J.title" = "Writing Direction";
+"H1b-Si-o9J.title" = "书写方向";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "H8h-7b-M4v"; */
 "H8h-7b-M4v.title" = "查看";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "HFQ-gK-NFA"; */
-"HFQ-gK-NFA.title" = "Text Replacement";
+"HFQ-gK-NFA.title" = "替换文本";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "HFo-cy-zxI"; */
-"HFo-cy-zxI.title" = "Show Spelling and Grammar";
+"HFo-cy-zxI.title" = "显示拼写和语法";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "HyV-fh-RgO"; */
 "HyV-fh-RgO.title" = "查看";
@@ -186,7 +186,7 @@
 "J7y-lM-qPV.title" = "Use None";
 
 /* Class = "NSTextFieldCell"; title = "Icon"; ObjectID = "JAg-eR-WFV"; */
-"JAg-eR-WFV.title" = "Icon";
+"JAg-eR-WFV.title" = "图标";
 
 /* Class = "NSMenuItem"; title = "Revert to Saved"; ObjectID = "KaW-ft-85H"; */
 "KaW-ft-85H.title" = "Revert to Saved";
@@ -312,13 +312,13 @@
 "YGs-j5-SAR.title" = "\tDefault";
 
 /* Class = "NSTextFieldCell"; title = "Get the source code"; ObjectID = "YQl-gW-wMR"; */
-"YQl-gW-wMR.title" = "Get the source code";
+"YQl-gW-wMR.title" = "获取源代码";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "YRf-Nm-YtA"; */
 "YRf-Nm-YtA.title" = "Text Cell";
 
 /* Class = "NSTextFieldCell"; title = "3rd Party Libraries"; ObjectID = "Yhh-3o-HGQ"; */
-"Yhh-3o-HGQ.title" = "3rd Party Libraries";
+"Yhh-3o-HGQ.title" = "第三方库";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "Ynk-f8-cLZ"; */
 "Ynk-f8-cLZ.title" = "Start Speaking";
@@ -342,7 +342,7 @@
 "aXa-aM-Jaq.title" = "字体";
 
 /* Class = "NSMenuItem"; title = "Use Default"; ObjectID = "agt-UL-0e3"; */
-"agt-UL-0e3.title" = "Use Default";
+"agt-UL-0e3.title" = "使用默认值";
 
 /* Class = "NSMenuItem"; title = "Show Colors"; ObjectID = "bgn-CT-cEk"; */
 "bgn-CT-cEk.title" = "Show Colors";
@@ -375,7 +375,7 @@
 "d9M-CD-aMd.title" = "Make Lower Case";
 
 /* Class = "NSMenu"; title = "Text"; ObjectID = "d9c-me-L2H"; */
-"d9c-me-L2H.title" = "Text";
+"d9c-me-L2H.title" = "文本";
 
 /* Class = "NSMenuItem"; title = "File"; ObjectID = "dMs-cI-mzQ"; */
 "dMs-cI-mzQ.title" = "文件";
@@ -393,7 +393,7 @@
 "gCa-HK-wJZ.title" = "Case Sensitive";
 
 /* Class = "NSButtonCell"; title = "Journaled"; ObjectID = "gFb-jm-Dxc"; */
-"gFb-jm-Dxc.title" = "Journaled";
+"gFb-jm-Dxc.title" = "日志式";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "gVA-U4-sdL"; */
 "gVA-U4-sdL.title" = "粘贴";
@@ -447,13 +447,13 @@
 "kIP-vf-haE.title" = "显示侧边栏";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "mK6-2p-4JG"; */
-"mK6-2p-4JG.title" = "Check Grammar With Spelling";
+"mK6-2p-4JG.title" = "检查语法和拼写";
 
 /* Class = "NSTableColumn"; headerCell.title = "Warn"; ObjectID = "moE-oU-Xjj"; */
 "moE-oU-Xjj.headerCell.title" = "警告";
 
 /* Class = "NSMenuItem"; title = "50% of Ram"; ObjectID = "nXv-G3-d8b"; */
-"nXv-G3-d8b.title" = "50% of Ram";
+"nXv-G3-d8b.title" = "50% 内存";
 
 /* Class = "NSTextFieldCell"; placeholderString = "0"; ObjectID = "nYC-7d-c8X"; */
 "nYC-7d-c8X.placeholderString" = "0";
@@ -465,7 +465,7 @@
 "o6e-r0-MWq.title" = "Ligatures";
 
 /* Class = "NSMenuItem"; title = "75% of Ram"; ObjectID = "oUd-0o-jwy"; */
-"oUd-0o-jwy.title" = "75% of Ram";
+"oUd-0o-jwy.title" = "75% 内存";
 
 /* Class = "NSMenu"; title = "Open Recent"; ObjectID = "oas-Oc-fiZ"; */
 "oas-Oc-fiZ.title" = "打开最近的文件";
@@ -540,7 +540,7 @@
 "uRl-iY-unG.title" = "剪切";
 
 /* Class = "NSMenuItem"; title = "25% of Ram"; ObjectID = "ud8-KO-JVf"; */
-"ud8-KO-JVf.title" = "25% of Ram";
+"ud8-KO-JVf.title" = "25% 内存";
 
 /* Class = "NSMenuItem"; title = "Paste Style"; ObjectID = "vKC-jM-MkH"; */
 "vKC-jM-MkH.title" = "Paste Style";
@@ -567,7 +567,7 @@
 "x3v-GG-iWU.title" = "复制";
 
 /* Class = "NSButtonCell"; title = "Use TmpFS (Needs Root Access)"; ObjectID = "xBA-Ze-bf2"; */
-"xBA-Ze-bf2.title" = "使用 TmpFS（需要根访问权限）";
+"xBA-Ze-bf2.title" = "使用 TmpFS（需要根目录访问权限）";
 
 /* Class = "NSMenuItem"; title = "Use All"; ObjectID = "xQD-1f-W4t"; */
 "xQD-1f-W4t.title" = "Use All";
