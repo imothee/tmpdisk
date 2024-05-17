@@ -3,6 +3,7 @@ design
 TmpDisk.app
 TmpDisk*.dmg
 .DS_Store
+keys
 
 # User settings
 xcuserdata/
