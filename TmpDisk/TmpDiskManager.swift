@@ -134,9 +134,6 @@ class TmpDiskManager {
         
         if Util.checkHelperVersion() != nil {
             let client = XPCClient()
-//            if client.connection == nil {
-//                return onCreate(.helperNotInstalled)
-//            }
             
             var task: String?
             if volume.tmpFs {

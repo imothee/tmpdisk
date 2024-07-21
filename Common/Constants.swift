@@ -16,5 +16,6 @@ enum TmpDiskError: Error {
     case exists
     case invalidSize
     case failed
-    case helperNotInstalled
+    case helperInvalidated
+    case helperFailed
 }

@@ -45,9 +45,12 @@ class XPCServer: NSObject {
         guard let dynamicCode = code else {
             return false
         }
-        // in this sample we duplicate the requirements from the Info.plist for simplicity
-        // in a commercial application you could want to put the requirements in one place, for example in Active Compilation Conditions (Swift), or in preprocessor definitions (C, Objective-C)
-        let entitlements = "identifier \"com.imothee.TmpDisk\" and anchor apple generic and certificate leaf[subject.CN] = \"Apple Development: Timothy Marks (R824A4SSXM)\" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */"
+        
+        let authedClients = Bundle.main.infoDictionary?["SMAuthorizedClients"] as? [String?]
+        guard let entitlements = authedClients?[0] else {
+            return false
+        }
+        
         var requirement: SecRequirement?
         
         status = SecRequirementCreateWithString(entitlements as CFString, flags, &requirement)
@@ -79,14 +82,10 @@ extension XPCServer: NSXPCListenerDelegate {
         newConnection.exportedInterface = NSXPCInterface(with: TmpDiskCreator.self)
         newConnection.exportedObject = creator
         
-        newConnection.remoteObjectInterface = NSXPCInterface(with: TmpDiskClient.self)
-        
         newConnection.interruptionHandler = connetionInterruptionHandler
         newConnection.invalidationHandler = connectionInvalidationHandler
         
         newConnection.resume()
-        
-        creator.client = newConnection.remoteObjectProxy as? TmpDiskClient
         
         return true
     }

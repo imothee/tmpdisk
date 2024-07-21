@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>Build</key>
-	<string>1</string>
+	<string>4</string>
+	<key>Label</key>
+	<string>com.imothee.TmpDiskHelper</string>
 	<key>MachServices</key>
 	<dict>
 		<key>com.imothee.TmpDiskHelper</key>
 		<true/>
 	</dict>
-	<key>Label</key>
-	<string>com.imothee.TmpDiskHelper</string>
 </dict>
 </plist>

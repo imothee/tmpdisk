@@ -5,7 +5,7 @@
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>com.imothee.TmpDiskHelper</key>
-		<string>identifier "com.imothee.TmpDiskHelper" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Timothy Marks (R824A4SSXM)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>anchor apple generic and identifier com.imothee.TmpDiskHelper and certificate leaf[subject.OU] = AGZ3AP53DM</string>
 	</dict>
 	<key>SUEnableSystemProfiling</key>
 	<true/>
@@ -16,6 +16,6 @@
 	<key>SUPublicEDKey</key>
 	<string>cHYVa9jmyIHtzvsj9w8WQ/L19rbBklLx75GNou5ipjw=</string>
 	<key>TmpDiskHelperVersion</key>
-	<string>1</string>
+	<string>4</string>
 </dict>
 </plist>

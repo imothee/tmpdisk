@@ -9,9 +9,7 @@ import Foundation
 
 class TmpDiskCreatorImpl: NSObject, TmpDiskCreator {
     
-    var client: TmpDiskClient?
-    
-    func createTmpDisk(_ command: String) {
+    func createTmpDisk(_ command: String, onCreate: @escaping (Bool) -> Void) {
         NSLog("[SMJBS]: \(#function)")
         
         let task = Process()
@@ -21,7 +19,7 @@ class TmpDiskCreatorImpl: NSObject, TmpDiskCreator {
         task.waitUntilExit()
         let created = (task.terminationStatus == 0)
         
-        client?.tmpDiskCreated(created)
+        onCreate(created)
     }
     
     func uninstall() {

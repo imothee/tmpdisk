@@ -8,10 +8,6 @@
 import Foundation
 
 @objc protocol TmpDiskCreator {
-    func createTmpDisk(_ command: String)
+    func createTmpDisk(_ command: String, onCreate: @escaping (Bool) -> Void)
     func uninstall()
-}
-
-@objc public protocol TmpDiskClient {
-    func tmpDiskCreated(_ success: Bool)
 }

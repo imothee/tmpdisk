@@ -8,7 +8,7 @@
 	<string>6.0</string>
 	<key>SMAuthorizedClients</key>
 	<array>
-		<string>identifier &quot;com.imothee.TmpDisk&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Apple Development: Timothy Marks (R824A4SSXM)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>anchor apple generic and identifier com.imothee.TmpDisk and certificate leaf[subject.OU] = AGZ3AP53DM</string>
 	</array>
 </dict>
 </plist>

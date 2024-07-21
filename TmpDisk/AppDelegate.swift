@@ -105,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let build = Util.checkHelperVersion() {
             if let newestHelperVersion = Util.latestEmbeddedHelperVersion() {
                 if newestHelperVersion > build {
-                    Util.installHelper(update: true)
+                    _ = Util.installHelper(update: true)
                 }
             }
         }

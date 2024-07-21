@@ -243,8 +243,11 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                     case .failed:
                         self.showError(message: NSLocalizedString("Failed to create TmpDisk", comment: ""))
                         break;
-                    case .helperNotInstalled:
-                        self.showError(message: NSLocalizedString("The helper is installed but not running. Please try updating or removing it in the preferences", comment: ""))
+                    case .helperInvalidated:
+                        self.showError(message: NSLocalizedString("The helper failed connection validation. Please try reinstalling the helper.", comment: ""))
+                        break;
+                    case .helperFailed:
+                        self.showError(message: NSLocalizedString("The helper crashed, please check TmpDisk logs in the Console app and log a bug.", comment: ""))
                         break;
                     }
                 }
