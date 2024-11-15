@@ -205,10 +205,9 @@ class TmpDiskManager {
                 }
                 DispatchQueue.main.async {
                     self.volumes.remove(volume)
-                }
-                
-                if recreate {
-                    self.createTmpDisk(volume: volume, onCreate: {_ in })
+                    if recreate {
+                        self.createTmpDisk(volume: volume, onCreate: {_ in })
+                    }
                 }
             } catch let error as NSError {
                 if error.code == fBsyErr {
