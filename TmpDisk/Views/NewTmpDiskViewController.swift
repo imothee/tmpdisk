@@ -241,6 +241,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                     case .helperFailed:
                         self.showError(message: NSLocalizedString("The helper crashed, please check TmpDisk logs in the Console app and log a bug.", comment: ""))
                         break;
+                    case .inUse:
+                        break;
                     }
                 }
                 return

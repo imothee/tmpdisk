@@ -18,4 +18,5 @@ enum TmpDiskError: Error {
     case failed
     case helperInvalidated
     case helperFailed
+    case inUse
 }

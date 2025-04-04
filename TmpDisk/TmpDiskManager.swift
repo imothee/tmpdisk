@@ -68,9 +68,7 @@ class TmpDiskManager {
         // AutoCreate any saved TmpDisks
         for volume in self.getAutoCreateVolumes() {
             self.createTmpDisk(volume: volume) { error in
-                if let _error = error {
-                    // TODO: Add autocreate error
-                }
+                // TODO: Add autocreate error
             }
         }
     }
@@ -113,19 +111,20 @@ class TmpDiskManager {
             return onCreate(.exists)
         }
         
+        var task: String?
+        if FileSystemManager.isTmpFS(volume.fileSystem) {
+            task = try? self.createTmpFsTask(volume: volume)
+        } else {
+            task = self.createRamDiskTask(volume: volume)
+        }
+        
+        guard let task = task else {
+            return onCreate(.failed)
+        }
+        
         if Util.checkHelperVersion() != nil {
+            // Run using the helper
             let client = XPCClient()
-            
-            var task: String?
-            if FileSystemManager.isTmpFS(volume.fileSystem) {
-                task = try? self.createTmpFsTask(volume: volume)
-            } else {
-                task = self.createRamDiskTask(volume: volume)
-            }
-            
-            guard let task = task else {
-                return onCreate(.failed)
-            }
             
             client.createVolume(task) { error in
                 if error != nil {
@@ -137,34 +136,13 @@ class TmpDiskManager {
             return
         }
         
-        // Old flow without the helper installed
-        
-        let task: Process?
-        if FileSystemManager.isTmpFS(volume.fileSystem) {
-            task = try? self.createTmpFs(volume: volume)
-        } else {
-            task = self.createRamDisk(volume: volume)
-        }
-        
-        guard let task = task else {
-            return onCreate(.failed)
-        }
-        
-        task.terminationHandler = { process in
-            if process.terminationStatus != 0 {
+        // Run using tasks
+        self.runTask(task, needsRoot: FileSystemManager.isTmpFS(volume.fileSystem)) { status in
+            if status != 0 {
                 return onCreate(.failed)
             }
             self.diskCreated(volume: volume)
             onCreate(nil)
-        }
-        if #available(macOS 10.13, *) {
-            do {
-                try task.run()
-            } catch {
-                print(error)
-            }
-        } else {
-            task.launch()
         }
     }
     
@@ -177,85 +155,83 @@ class TmpDiskManager {
         let group = DispatchGroup()
         for volume in self.volumes.filter({ names.contains($0.name) }) {
             group.enter()
-            
-            let ws = NSWorkspace()
-            do {
-                try ws.unmountAndEjectDevice(at: volume.URL())
-                if FileSystemManager.isTmpFS(volume.fileSystem) {
-                    try FileManager.default.removeItem(atPath: volume.path())
-                }
-                DispatchQueue.main.async {
-                    self.volumes.remove(volume)
-                    if recreate {
-                        self.createTmpDisk(volume: volume, onCreate: {_ in })
-                    }
-                }
-            } catch let error as NSError {
-                if error.code == fBsyErr {
-                    DispatchQueue.main.async {
-                        self.ejectErrorDiskInUse(name: volume.name, recreate: recreate)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.ejectError(name: volume.name)
-                    }
-                }
-            }
-            
+            ejectVolume(volume: volume, recreate: recreate)
             group.leave()
         }
         
     }
     
-    func forceEject(name: String, recreate: Bool) {
-        guard let volume = self.volumes.first(where: { name == $0.name }) else {
-            return
-        }
+    func ejectVolume(volume: TmpDiskVolume, recreate: Bool, force: Bool = false) {
+        let task = self.ejectTask(volume: volume, force: force)
+        let isTmpFS = FileSystemManager.isTmpFS(volume.fileSystem)
         
-        let task = Process()
-        task.launchPath = "/sbin/umount"
-        
-        let command = volume.path()
-        task.arguments = ["-f", command]
-        
-        task.terminationHandler = { process in
-            if process.terminationStatus != 0 {
-                DispatchQueue.main.async {
-                    self.ejectError(name: name)
-                }
-                return
-            }
-            
+        let onEjected: () -> Void = {
             DispatchQueue.main.async {
                 self.volumes.remove(volume)
                 
                 if recreate {
                     // We've force ejected so recreate the TmpDisk
                     self.createTmpDisk(volume: volume, onCreate: {_ in })
+                } else if isTmpFS {
+                    try? FileManager.default.removeItem(atPath: volume.path())
                 }
+                NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
             }
         }
         
-        if #available(macOS 10.13, *) {
-            do {
-                try task.run()
-            } catch {
-                print(error)
+        if Util.checkHelperVersion() != nil {
+            // Run using the helper
+            let client = XPCClient()
+            
+            client.ejectVolume(task) { error in
+                if let error = error {
+                    if error == .inUse {
+                        DispatchQueue.main.async {
+                            self.ejectErrorDiskInUse(volume: volume, recreate: recreate)
+                        }
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        self.ejectError(name: volume.name)
+                    }
+                    return
+                }
+                onEjected()
             }
-        } else {
-            task.launch()
+            return
+        }
+        
+        // We only need to do this for now if we're not using the helper
+        // TODO: Move back to optioanlly handling workspace unmount
+        self.runTask(task, needsRoot: isTmpFS) { status in
+            if status == 16 {
+                DispatchQueue.main.async {
+                    self.ejectErrorDiskInUse(volume: volume, recreate: recreate)
+                }
+                return
+            } else if status != 0 {
+                // General error (not found etc)
+                DispatchQueue.main.async {
+                    self.ejectError(name: volume.name)
+                }
+                return
+            }
+            
+            
         }
     }
     
-    func ejectErrorDiskInUse(name: String, recreate: Bool) {
+    // MARK: - Error handling
+    
+    func ejectErrorDiskInUse(volume: TmpDiskVolume, recreate: Bool) {
         let alert = NSAlert()
-        alert.messageText = String(format: NSLocalizedString("The volume \"%@\" wasn't ejected because one or more programs may be using it", comment: ""), name)
+        alert.messageText = String(format: NSLocalizedString("The volume \"%@\" wasn't ejected because one or more programs may be using it", comment: ""), volume.name)
         alert.informativeText = NSLocalizedString("To eject the disk immediately, hit the Force Eject button", comment: "")
         alert.alertStyle = .warning
         alert.addButton(withTitle: NSLocalizedString("Force Eject", comment: ""))
         alert.addButton(withTitle: "Cancel")
         if alert.runModal() == .alertFirstButtonReturn {
-            self.forceEject(name: name, recreate: recreate)
+            self.ejectVolume(volume: volume, recreate: recreate, force: true)
         }
     }
     
@@ -266,6 +242,8 @@ class TmpDiskManager {
         alert.addButton(withTitle: "OK")
         alert.runModal()
     }
+    
+    // MARK: - Helper functions
     
     /*
      diskEjected takes a path and checks to see if it's a TmpDisk
@@ -280,8 +258,6 @@ class TmpDiskManager {
         }
         return false
     }
-    
-    // MARK: - Helper functions
     
     func diskCreated(volume: TmpDiskVolume) {
         if let jsonData = try? JSONEncoder().encode(volume) {
@@ -307,6 +283,82 @@ class TmpDiskManager {
             self.volumes.insert(volume)
         }
         NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
+    }
+    
+    func createFolders(volume: TmpDiskVolume) {
+        for folder in volume.folders {
+            let path = "\(volume.path())/\(folder)"
+            if !FileManager.default.fileExists(atPath: path) {
+                try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+            }
+        }
+    }
+    
+    func indexVolume(volume: TmpDiskVolume) {
+        let task = self.indexTask(volume: volume)
+        self.runTask(task) { _ in }
+    }
+    
+    func exists(volume: TmpDiskVolume) -> Bool {
+        if FileSystemManager.isTmpFS(volume.fileSystem) {
+            // TODO: lookup mount instead of just the tmpdisk file
+            return FileManager.default.fileExists(atPath: "\(volume.path())/.tmpdisk")
+        }
+        return FileManager.default.fileExists(atPath: volume.path())
+    }
+    
+    func createIcon(volume: TmpDiskVolume) {
+        if let icon = volume.icon {
+            if let data = Data(base64Encoded: icon) {
+                let image = NSImage(data: data)
+                NSWorkspace.shared.setIcon(image, forFile: volume.path())
+            }
+        }
+    }
+    
+    // MARK: - Task Runner
+    
+    func runTask(_ command: String, needsRoot: Bool = false, onTermination: @escaping (Int32) -> Void) {
+        let task = needsRoot ? self.runAppleScript(command) : self.runShell(command)
+        task.terminationHandler = { process in
+            onTermination(process.terminationStatus)
+        }
+        if #available(macOS 10.13, *) {
+            do {
+                try task.run()
+            } catch {
+                print(error)
+            }
+        } else {
+            task.launch()
+        }
+    }
+    
+    func runShell(_ command: String) -> Process {
+        let task = Process()
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", command]
+        return task
+    }
+    
+    func runAppleScript(_ command: String) -> Process {
+        let task = Process()
+        task.launchPath = "/usr/bin/osascript"
+        let script = """
+            do shell script "\(command)" with administrator privileges
+        """
+        task.arguments = ["-e", script]
+        return task
+    }
+    
+    // MARK: - Tasks
+    
+    func ejectTask(volume: TmpDiskVolume, force: Bool) -> String {
+        return "/usr/bin/hdiutil detach \(force ? "-force" : "") \"\(volume.path())\""
+    }
+    
+    func indexTask(volume: TmpDiskVolume) -> String {
+        return "mdutil -i on \"\(volume.path())\""
     }
     
     func createTmpFsTask(volume: TmpDiskVolume) throws -> String {
@@ -358,62 +410,5 @@ class TmpDiskManager {
         \(format)
         \(attach)
         """
-    }
-    
-    func createTmpFs(volume: TmpDiskVolume) throws -> Process {
-        // Run the process
-        let task = Process()
-        task.launchPath = "/usr/bin/osascript"
-        let command = try createTmpFsTask(volume: volume)
-        let script = """
-            do shell script "\(command)" with administrator privileges
-        """
-
-        task.arguments = ["-e", script]
-        return task
-    }
-    
-    func createRamDisk(volume: TmpDiskVolume) -> Process {
-        let task = Process()
-        task.launchPath = "/bin/sh"
-        
-        let command = createRamDiskTask(volume: volume)
-        task.arguments = ["-c", command]
-        return task
-    }
-    
-    func createFolders(volume: TmpDiskVolume) {
-        for folder in volume.folders {
-            let path = "\(volume.path())/\(folder)"
-            if !FileManager.default.fileExists(atPath: path) {
-                try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-            }
-        }
-    }
-    
-    func indexVolume(volume: TmpDiskVolume) {
-        let task = Process()
-        task.launchPath = "/bin/sh"
-        
-        let command = "mdutil -i on \(volume.path())"
-        task.arguments = ["-c", command]
-        task.launch()
-    }
-    
-    func exists(volume: TmpDiskVolume) -> Bool {
-        if FileSystemManager.isTmpFS(volume.fileSystem) {
-            // TODO: lookup mount instead of just the tmpdisk file
-            return FileManager.default.fileExists(atPath: "\(volume.path())/.tmpdisk")
-        }
-        return FileManager.default.fileExists(atPath: volume.path())
-    }
-    
-    func createIcon(volume: TmpDiskVolume) {
-        if let icon = volume.icon {
-            if let data = Data(base64Encoded: icon) {
-                let image = NSImage(data: data)
-                NSWorkspace.shared.setIcon(image, forFile: volume.path())
-            }
-        }
     }
 }
