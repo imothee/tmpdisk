@@ -111,19 +111,16 @@ class TmpDiskManager {
             return onCreate(.exists)
         }
         
-        var task: String?
-        if FileSystemManager.isTmpFS(volume.fileSystem) {
-            task = try? self.createTmpFsTask(volume: volume)
-        } else {
-            task = self.createRamDiskTask(volume: volume)
-        }
+        let isTmpFS = FileSystemManager.isTmpFS(volume.fileSystem)
+        
+        let task = isTmpFS ? try? self.createTmpFsTask(volume: volume) : self.createRamDiskTask(volume: volume)
         
         guard let task = task else {
             return onCreate(.failed)
         }
         
-        if Util.checkHelperVersion() != nil {
-            // Run using the helper
+        if Util.checkHelperVersion() != nil && isTmpFS {
+            // Run using the helper only for TmpFS
             let client = XPCClient()
             
             client.createVolume(task) { error in
@@ -179,7 +176,7 @@ class TmpDiskManager {
             }
         }
         
-        if Util.checkHelperVersion() != nil {
+        if Util.checkHelperVersion() != nil && isTmpFS {
             // Run using the helper
             let client = XPCClient()
             
