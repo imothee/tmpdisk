@@ -68,7 +68,7 @@ class TmpDiskManager {
         // AutoCreate any saved TmpDisks
         for volume in self.getAutoCreateVolumes() {
             self.createTmpDisk(volume: volume) { error in
-                if let error = error {
+                if let _error = error {
                     // TODO: Add autocreate error
                 }
             }
@@ -81,26 +81,7 @@ class TmpDiskManager {
         var autoCreateVolumes: Set<TmpDiskVolume> = []
         if let autoCreate = UserDefaults.standard.object(forKey: "autoCreate") as? [Dictionary<String, Any>] {
             for vol in autoCreate {
-                if let name = vol["name"] as? String, let size = vol["size"] as? Int, let indexed = vol["indexed"] as? Bool, let hidden = vol["hidden"] as? Bool, let tmpFs = vol["tmpFs"] as? Bool {
-                    
-                    let caseSensitive = vol["caseSensitive"] as? Bool ?? false
-                    let journaled = vol["journaled"] as? Bool ?? false
-                    let warnOnEject = vol["warnOnEject"] as? Bool ?? false
-                    let folders = vol["folders"] as? [String] ?? []
-                    let icon = vol["icon"] as? String
-                    
-                    let volume = TmpDiskVolume(
-                        name: name,
-                        size: size,
-                        indexed: indexed,
-                        hidden: hidden,
-                        tmpFs: tmpFs,
-                        caseSensitive: caseSensitive,
-                        journaled: journaled,
-                        warnOnEject: warnOnEject,
-                        folders: folders,
-                        icon: icon
-                    )
+                if let volume = TmpDiskVolume(from: vol) {
                     autoCreateVolumes.insert(volume)
                 }
             }
@@ -136,7 +117,7 @@ class TmpDiskManager {
             let client = XPCClient()
             
             var task: String?
-            if volume.tmpFs {
+            if FileSystemManager.isTmpFS(volume.fileSystem) {
                 task = try? self.createTmpFsTask(volume: volume)
             } else {
                 task = self.createRamDiskTask(volume: volume)
@@ -159,7 +140,7 @@ class TmpDiskManager {
         // Old flow without the helper installed
         
         let task: Process?
-        if volume.tmpFs {
+        if FileSystemManager.isTmpFS(volume.fileSystem) {
             task = try? self.createTmpFs(volume: volume)
         } else {
             task = self.createRamDisk(volume: volume)
@@ -200,7 +181,7 @@ class TmpDiskManager {
             let ws = NSWorkspace()
             do {
                 try ws.unmountAndEjectDevice(at: volume.URL())
-                if volume.tmpFs {
+                if FileSystemManager.isTmpFS(volume.fileSystem) {
                     try FileManager.default.removeItem(atPath: volume.path())
                 }
                 DispatchQueue.main.async {
@@ -334,30 +315,49 @@ class TmpDiskManager {
              try FileManager.default.createDirectory(atPath: volume.path(), withIntermediateDirectories: true, attributes: nil)
         }
         
-        return "mount_tmpfs -s\(volume.size)M \(volume.path())"
+        return "mount_tmpfs -s\(volume.size)M \(volume.noExec ? "-o noexec " : "")\(volume.path())"
     }
     
     func createRamDiskTask(volume: TmpDiskVolume) -> String {
         let dSize = UInt64(volume.size) * 2048
         
-        let filesystem: String = {
-            switch (volume.caseSensitive, volume.journaled) {
-            case (false, false):
-                return "HFS+" // Mac OS Extended
-            case (true, false):
-                return "HFSX" // Mac OS Extended (Case-sensitive)
-            case (false, true):
-                return "JHFS+" // Mac OS Extended (Journaled)
-            case (true, true):
-                return "JHFSX" // Mac OS Extended (Case-sensitive, Journaled)
-            }
-        }()
+        let fileSystem = volume.fileSystem
         
-        if volume.hidden {
-            return "d=$(hdiutil attach -nomount ram://\(dSize)) && diskutil eraseDisk \(filesystem) %noformat% $d && newfs_hfs -v \"\(volume.name)\" \"$(echo $d | tr -d ' ')s1\" && hdiutil attach -nomount $d && hdiutil attach -nobrowse \"$(echo $d | tr -d ' ')s1\""
+        let format: String
+        if FileSystemManager.isAPFS(fileSystem) {
+            format = "newfs_apfs -v \"\(volume.name)\" \"$(echo $DISK_ID | tr -d ' ')s1\" && \\"
         } else {
-            return "diskutil eraseVolume \(filesystem) \"\(volume.name)\" `hdiutil attach -nomount ram://\(dSize)`"
+            format = "newfs_hfs -v \"\(volume.name)\" \"$(echo $DISK_ID | tr -d ' ')s1\" && \\"
         }
+        
+        let attach: String
+        if volume.noExec && volume.hidden {
+            attach = """
+            hdiutil attach -nomount $DISK_ID && \\
+            hdiutil attach -nobrowse "$(echo $DISK_ID | tr -d ' ')s1" && \\
+            mount -u -t hfs,apfs -o noexec "$(echo $DISK_ID | tr -d ' ')s1" /Volumes/\(volume.name)
+            """
+        } else if volume.noExec {
+            attach = """
+            hdiutil attach $DISK_ID && \\
+            mount -u -t hfs,apfs -o noexec "$(echo $DISK_ID | tr -d ' ')s1" /Volumes/\(volume.name)
+            """
+        } else if volume.hidden {
+            attach = """
+            hdiutil attach -nomount $DISK_ID && \\
+            hdiutil attach -nobrowse "$(echo $DISK_ID | tr -d ' ')s1"
+            """
+        } else {
+            attach = "hdiutil attach $DISK_ID"
+        }
+        
+        
+        return """
+        DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
+        diskutil eraseDisk \(fileSystem) %noformat% $DISK_ID && \\
+        \(format)
+        \(attach)
+        """
     }
     
     func createTmpFs(volume: TmpDiskVolume) throws -> Process {
@@ -401,7 +401,7 @@ class TmpDiskManager {
     }
     
     func exists(volume: TmpDiskVolume) -> Bool {
-        if volume.tmpFs {
+        if FileSystemManager.isTmpFS(volume.fileSystem) {
             // TODO: lookup mount instead of just the tmpdisk file
             return FileManager.default.fileExists(atPath: "\(volume.path())/.tmpdisk")
         }

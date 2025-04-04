@@ -25,7 +25,6 @@ import AppKit
 
 class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var diskName: NSTextField!
-    @IBOutlet weak var useTmpFs: NSButton!
     
     @IBOutlet weak var diskSizeLabel: NSTextField!
     @IBOutlet weak var diskSizeStepper: NSStepper!
@@ -40,8 +39,10 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var autoCreate: NSButton!
     @IBOutlet weak var index: NSButton!
     @IBOutlet weak var hidden: NSButton!
-    @IBOutlet weak var caseSensitive: NSButton!
-    @IBOutlet weak var journaled: NSButton!
+    @IBOutlet weak var noExec: NSButton!
+    
+    @IBOutlet weak var fileSystemLabel: NSTextField!
+    @IBOutlet weak var fileSystemButton: NSPopUpButton!
     
     var volume = TmpDiskVolume()
     var unitIndex = 0
@@ -54,6 +55,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         self.diskSize.delegate = self
         self.folders.delegate = self
         self.setDefaultUnits()
+        
+        self.fileSystemButton.addItems(withTitles: FileSystemManager.availableFileSystemDescriptions())
     }
     
     // MARK: - NSTextFieldDelegate
@@ -140,28 +143,21 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func onUseTmpFsChange(_ sender: NSButton) {
-        if sender.state == .on {
-            self.volume.tmpFs = true
+    @IBAction func onFileSystemChange(_ sender: NSPopUpButton) {
+        let index = sender.indexOfSelectedItem
+        let fileSystem = FileSystemManager.availableFileSystems()[index]
+        
+        self.volume.fileSystem = fileSystem.name
+        
+        if FileSystemManager.isTmpFS(fileSystem.name) {
             self.diskSizeLabel.stringValue = "Max Size"
             // Hidden button
             self.hidden.isHidden = true
             self.hidden.state = .off
             self.volume.hidden = false
-            // Case sensitive button
-            self.caseSensitive.isHidden = true
-            self.caseSensitive.state = .off
-            self.volume.caseSensitive = false
-            // Journaled button
-            self.journaled.isHidden = true
-            self.journaled.state = .off
-            self.volume.journaled = false
         } else {
-            self.volume.tmpFs = false
             self.diskSizeLabel.stringValue = "Disk Size"
             self.hidden.isHidden = false
-            self.caseSensitive.isHidden = false
-            self.journaled.isHidden = false
         }
     }
     
@@ -181,12 +177,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         self.volume.hidden = sender.state == .on
     }
     
-    @IBAction func onCaseSensitiveChange(_ sender: NSButton) {
-        self.volume.caseSensitive = sender.state == .on
-    }
-    
-    @IBAction func onJournaledChange(_ sender: NSButton) {
-        self.volume.journaled = sender.state == .on
+    @IBAction func onNoExecChange(_ sender: NSButton) {
+        self.volume.noExec = sender.state == .on
     }
     
     @IBAction func createTapped(_ sender: NSButton) {
@@ -199,7 +191,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         
         self.setVolumeSize()
         
-        if self.volume.tmpFs {
+        if FileSystemManager.isTmpFS(volume.fileSystem) {
             // Check if we've ever prompted them to install the helper
             let helperPrompted = UserDefaults.standard.object(forKey: "helperPromptShowns") as? Bool
             let helperVersion = Util.checkHelperVersion()
@@ -213,7 +205,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                 alert.addButton(withTitle: "OK")
                 alert.addButton(withTitle: "Don't ask again")
                 if alert.runModal() == .alertFirstButtonReturn {
-                    Util.installHelper()
+                    _ = Util.installHelper()
                 }
             }
         }
