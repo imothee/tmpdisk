@@ -46,6 +46,8 @@
 		22A69389277005B80040FDEF /* TmpDiskLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22A6935C277004E80040FDEF /* TmpDiskLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22A6938B27700B4B0040FDEF /* AutoCreateManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */; };
 		22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */; };
+		22B88C3F2DA3303E00952C95 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
+		22B88C402DA3303E00952C95 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
 		22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D93DBD27B85E0F0024FB53 /* WindowManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -158,6 +160,7 @@
 		22A69387277005840040FDEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCreateManagerViewController.swift; sourceTree = "<group>"; };
 		22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxTableCellView.swift; sourceTree = "<group>"; };
+		22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskSizeManager.swift; sourceTree = "<group>"; };
 		22D93DBD27B85E0F0024FB53 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				225587372B8FA74100136543 /* Constants.swift */,
+				22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */,
 				2283B6182D9F6B7B007A55F5 /* FileSystemManager.swift */,
 				225587392B8FA76500136543 /* Protocols.swift */,
 				225587452B8FB23300136543 /* TmpDiskVolume.swift */,
@@ -588,6 +592,7 @@
 				2264C5EE2765C34000C45CB8 /* NewTmpDiskViewController.swift in Sources */,
 				2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */,
 				22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */,
+				22B88C402DA3303E00952C95 /* DiskSizeManager.swift in Sources */,
 				2226C0D8294EAFF80043D2B7 /* IconUtil.swift in Sources */,
 				2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */,
 				22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */,
@@ -620,6 +625,7 @@
 				225587352B8FA71E00136543 /* XPCServer.swift in Sources */,
 				2283B6192D9F6B88007A55F5 /* FileSystemManager.swift in Sources */,
 				2255872A2B8EDB7900136543 /* main.swift in Sources */,
+				22B88C3F2DA3303E00952C95 /* DiskSizeManager.swift in Sources */,
 				225587382B8FA74100136543 /* Constants.swift in Sources */,
 				2255873A2B8FA76500136543 /* Protocols.swift in Sources */,
 			);

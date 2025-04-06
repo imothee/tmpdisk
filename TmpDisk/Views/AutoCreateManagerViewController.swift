@@ -102,16 +102,26 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
                 self.volumes[row].name = textField.stringValue
                 break
             case 1:
-                let newSize = textField.integerValue
-                if newSize > 0 {
-                    self.volumes[row].size = newSize
+                let currentSize = textField.doubleValue
+                let isTmpFS = FileSystemManager.isTmpFS(self.volumes[row].fileSystem)
+                let validation = DiskSizeManager.shared.validateDiskSize(currentSize, in: DiskSizeUnit.mb, isTmpFS: isTmpFS)
+                
+                if !validation.isValid {
+                    // Show warning
+                    if isTmpFS {
+                        DiskSizeManager.shared.showTmpFSSizeWarning()
+                    } else {
+                        DiskSizeManager.shared.showInsufficientRamWarning()
+                    }
+                    
+                    // Set to max allowed value formatted in the current unit
+                    textField.stringValue = DiskSizeManager.shared.formatSize(
+                        validation.correctedSizeMB,
+                        in: DiskSizeUnit.mb
+                    )
+                    self.volumes[row].size = Int(validation.correctedSizeMB)
                 } else {
-                    let alert = NSAlert()
-                    alert.messageText = "Size must be a positive number in megabytes"
-                    alert.alertStyle = .warning
-                    alert.addButton(withTitle: "OK")
-                    alert.runModal()
-                    return
+                    self.volumes[row].size = Int(currentSize)
                 }
                 break
             case 2:
