@@ -107,7 +107,7 @@ class TmpDiskManager {
             return onCreate(.invalidSize)
         }
         
-        if volumes.contains(where: { $0.name == volume.name }) || self.exists(volume: volume) {
+        if volumes.contains(where: { $0.name == volume.name || $0.path() == volume.path() }) || volume.isMounted() {
             return onCreate(.exists)
         }
         
@@ -202,6 +202,7 @@ class TmpDiskManager {
         // TODO: Move back to optioanlly handling workspace unmount
         self.runTask(task, needsRoot: isTmpFS) { status in
             if status == 16 {
+                // Disk in use
                 DispatchQueue.main.async {
                     self.ejectErrorDiskInUse(volume: volume, recreate: recreate)
                 }
@@ -213,8 +214,7 @@ class TmpDiskManager {
                 }
                 return
             }
-            
-            
+            onEjected()
         }
     }
     
@@ -248,7 +248,7 @@ class TmpDiskManager {
      */
     func diskEjected(path: String) -> Bool {
         for volume in self.volumes {
-            if volume.path() == path {
+            if volume.path().lowercased() == path.lowercased() {
                 self.volumes.remove(volume)
                 return true
             }
@@ -294,14 +294,6 @@ class TmpDiskManager {
     func indexVolume(volume: TmpDiskVolume) {
         let task = self.indexTask(volume: volume)
         self.runTask(task) { _ in }
-    }
-    
-    func exists(volume: TmpDiskVolume) -> Bool {
-        if FileSystemManager.isTmpFS(volume.fileSystem) {
-            // TODO: lookup mount instead of just the tmpdisk file
-            return FileManager.default.fileExists(atPath: "\(volume.path())/.tmpdisk")
-        }
-        return FileManager.default.fileExists(atPath: volume.path())
     }
     
     func createIcon(volume: TmpDiskVolume) {
@@ -379,25 +371,26 @@ class TmpDiskManager {
             format = "newfs_hfs -v \"\(volume.name)\" \"$(echo $DISK_ID | tr -d ' ')s1\" && \\"
         }
         
+        let path = volume.path()
+        
         let attach: String
         if volume.noExec && volume.hidden {
             attach = """
             hdiutil attach -nomount $DISK_ID && \\
-            hdiutil attach -nobrowse "$(echo $DISK_ID | tr -d ' ')s1" && \\
-            mount -u -t hfs,apfs -o noexec "$(echo $DISK_ID | tr -d ' ')s1" /Volumes/\(volume.name)
+            mount -t hfs,apfs -o noexec,nobrowse "$(echo $DISK_ID | tr -d ' ')s1" \(path)
             """
         } else if volume.noExec {
             attach = """
-            hdiutil attach $DISK_ID && \\
-            mount -u -t hfs,apfs -o noexec "$(echo $DISK_ID | tr -d ' ')s1" /Volumes/\(volume.name)
+            hdiutil attach $DISK_ID -mountpoint "\(path)" && \\
+            mount -u -t hfs,apfs -o noexec "$(echo $DISK_ID | tr -d ' ')s1" \(path)
             """
         } else if volume.hidden {
             attach = """
             hdiutil attach -nomount $DISK_ID && \\
-            hdiutil attach -nobrowse "$(echo $DISK_ID | tr -d ' ')s1"
+            hdiutil attach -nobrowse -mountpoint "\(path)" $DISK_ID
             """
         } else {
-            attach = "hdiutil attach $DISK_ID"
+            attach = "hdiutil attach -mountpoint \"\(path)\" $DISK_ID"
         }
         
         

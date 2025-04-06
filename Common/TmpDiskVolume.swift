@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 struct TmpDiskVolume: Hashable, Codable {
     var name: String = ""
@@ -18,6 +19,7 @@ struct TmpDiskVolume: Hashable, Codable {
     var warnOnEject: Bool = false
     var folders: [String] = []
     var icon: String?
+    var mountPoint: String?
     
     init() {
         self.fileSystem = FileSystemManager.availableFileSystems().first?.name ?? "HFS+"
@@ -40,7 +42,8 @@ struct TmpDiskVolume: Hashable, Codable {
         let folders = dictionary["folders"] as? [String] ?? []
         let icon = dictionary["icon"] as? String
         let noExec = dictionary["noExec"] as? Bool ?? false
-
+        let mountPoint = dictionary["mountPoint"] as? String
+        
         let fileSystem: String
         
         if let fs = dictionary["fileSystem"] as? String {
@@ -73,11 +76,18 @@ struct TmpDiskVolume: Hashable, Codable {
         self.noExec = noExec
         self.warnOnEject = warnOnEject
         self.folders = folders
-        self.icon = icon
+        if let icon = icon, icon != "" {
+            self.icon = icon
+        }
+        if let mountPoint = mountPoint, mountPoint != "" {
+            self.mountPoint = mountPoint
+        }
     }
     
     func path() -> String {
-        if FileSystemManager.isTmpFS(fileSystem) {
+        if let mountPoint = self.mountPoint {
+            return mountPoint
+        } else if FileSystemManager.isTmpFS(fileSystem) {
             return "\(TmpDiskManager.rootFolder)/\(name)"
         }
         return "/Volumes/\(name)"
@@ -98,6 +108,7 @@ struct TmpDiskVolume: Hashable, Codable {
             "warnOnEject": warnOnEject,
             "folders": folders,
             "icon": icon ?? "",
+            "mountPoint": mountPoint ?? ""
         ]
     }
     
@@ -110,5 +121,10 @@ struct TmpDiskVolume: Hashable, Codable {
             }
         }
         return false
+    }
+    
+    func isMounted() -> Bool {
+        let mountPoint = self.path()
+        return NSWorkspace.shared.isFilePackage(atPath: mountPoint) && FileManager.default.fileExists(atPath: mountPoint)
     }
 }

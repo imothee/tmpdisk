@@ -30,6 +30,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var diskSizeStepper: NSStepper!
     @IBOutlet weak var diskSize: NSTextField!
     @IBOutlet weak var folders: NSTextField!
+    @IBOutlet weak var mountPoint: NSTextField!
     
     @IBOutlet weak var icon: NSImageView!
     
@@ -54,6 +55,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         self.diskName.delegate = self
         self.diskSize.delegate = self
         self.folders.delegate = self
+        self.mountPoint.delegate = self
         self.setDefaultUnits()
         
         self.fileSystemButton.addItems(withTitles: FileSystemManager.availableFileSystemDescriptions())
@@ -64,12 +66,12 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     public func controlTextDidChange(_ obj: Notification) {
         if let textField = obj.object as? NSTextField, self.diskName.identifier == textField.identifier {
             self.volume.name = textField.stringValue
-        }
-        if let textField = obj.object as? NSTextField, self.diskSize.identifier == textField.identifier {
+        } else if let textField = obj.object as? NSTextField, self.diskSize.identifier == textField.identifier {
             self.setVolumeSize()
-        }
-        if let textField = obj.object as? NSTextField, self.folders.identifier == textField.identifier {
+        } else if let textField = obj.object as? NSTextField, self.folders.identifier == textField.identifier {
             self.volume.folders = textField.stringValue.split(separator: ",").map { String($0) }
+        } else if let textField = obj.object as? NSTextField, self.mountPoint.identifier == textField.identifier {
+            self.volume.mountPoint = textField.stringValue == "" ? nil : textField.stringValue
         }
     }
     

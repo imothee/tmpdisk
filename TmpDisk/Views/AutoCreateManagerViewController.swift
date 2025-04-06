@@ -53,6 +53,10 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? NSTableCellView
             cell?.textField?.stringValue = volume.folders.joined(separator: ",")
             return cell
+        case "mountpoint":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? NSTableCellView
+            cell?.textField?.stringValue = volume.mountPoint ?? ""
+            return cell
         case "filesystem":
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? DropdownTableCellView
             cell?.popupView.removeAllItems()
@@ -113,6 +117,9 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             case 2:
                 self.volumes[row].folders = textField.stringValue.split(separator: ",").map { String($0) }
                 break
+            case 3:
+                self.volumes[row].mountPoint = textField.stringValue == "" ? nil : textField.stringValue
+                break
             default:
                 return
             }
@@ -138,16 +145,16 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             let column = tableView.column(for: button)
             
             switch column {
-            case 4:
+            case 5:
                 self.volumes[row].indexed = button.state == .on
                 break
-            case 5:
+            case 6:
                 self.volumes[row].noExec = button.state == .on
                 break
-            case 6:
+            case 7:
                 self.volumes[row].hidden = button.state == .on
                 break
-            case 7:
+            case 8:
                 self.volumes[row].warnOnEject = button.state == .on
                 break
             default:
@@ -164,7 +171,7 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             
             if confirmRecreate() {
                 let volume = self.volumes[row]
-                if TmpDiskManager.shared.exists(volume: volume) {
+                if volume.isMounted() {
                     TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
                 } else {
                     TmpDiskManager.shared.createTmpDisk(volume: volume, onCreate: {_ in })
@@ -181,6 +188,12 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             TmpDiskManager.shared.saveAutoCreateVolumes(volumes: Set(self.volumes))
             self.tableView.reloadData()
         }
+    }
+    
+    @IBAction func addVolume(_ sender: AnyObject) {
+        self.volumes.append(TmpDiskVolume())
+        TmpDiskManager.shared.saveAutoCreateVolumes(volumes: Set(self.volumes))
+        self.tableView.reloadData()
     }
     
     func confirmRecreate() -> Bool {
