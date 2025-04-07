@@ -143,78 +143,73 @@ class TmpDiskManager {
         }
     }
     
-    func ejectAllTmpDisks(recreate: Bool) {
+    func ejectAllTmpDisks(recreate: Bool, onCompletion: (() -> Void)? = nil) {
         let names = self.volumes.map { $0.name }
-        self.ejectTmpDisksWithName(names: names, recreate: recreate)
+        self.ejectTmpDisksWithName(names: names, recreate: recreate, onCompletion: onCompletion)
     }
     
-    func ejectTmpDisksWithName(names: [String], recreate: Bool) {
+    func ejectTmpDisksWithName(names: [String], recreate: Bool, force: Bool = false, onCompletion: (() -> Void)? = nil) {
         let group = DispatchGroup()
         for volume in self.volumes.filter({ names.contains($0.name) }) {
             group.enter()
-            ejectVolume(volume: volume, recreate: recreate)
-            group.leave()
-        }
-        
-    }
-    
-    func ejectVolume(volume: TmpDiskVolume, recreate: Bool, force: Bool = false) {
-        let task = self.ejectTask(volume: volume, force: force)
-        let isTmpFS = FileSystemManager.isTmpFS(volume.fileSystem)
-        
-        let onEjected: () -> Void = {
-            DispatchQueue.main.async {
-                self.volumes.remove(volume)
-                
-                if recreate {
-                    // We've force ejected so recreate the TmpDisk
-                    self.createTmpDisk(volume: volume, onCreate: {_ in })
-                } else if isTmpFS {
-                    try? FileManager.default.removeItem(atPath: volume.path())
+            ejectVolume(volume: volume, force: force) { error in
+                if let error = error {
+                    DispatchQueue.main.async {
+                        if error == .inUse {
+                            self.ejectErrorDiskInUse(volume: volume, recreate: recreate)
+                        } else {
+                            self.ejectError(name: volume.name)
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.volumes.remove(volume)
+                        NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
+                        
+                        if recreate {
+                            // We've force ejected so recreate the TmpDisk
+                            self.createTmpDisk(volume: volume, onCreate: {_ in })
+                        } else if FileSystemManager.isTmpFS(volume.fileSystem) {
+                            try? FileManager.default.removeItem(atPath: volume.path())
+                        }
+                    }
                 }
-                NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
+                group.leave()
             }
         }
+        if onCompletion != nil {
+            _ = wait()
+            DispatchQueue.main.async {
+                onCompletion!()
+            }
+        }
+    }
+    
+    func ejectVolume(volume: TmpDiskVolume, force: Bool = false, onEjected: @escaping (TmpDiskError?) -> Void) {
+        let task = self.ejectTask(volume: volume, force: force)
+        let isTmpFS = FileSystemManager.isTmpFS(volume.fileSystem)
         
         if Util.checkHelperVersion() != nil && isTmpFS {
             // Run using the helper
             let client = XPCClient()
             
             client.ejectVolume(task) { error in
-                if let error = error {
-                    if error == .inUse {
-                        DispatchQueue.main.async {
-                            self.ejectErrorDiskInUse(volume: volume, recreate: recreate)
-                        }
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.ejectError(name: volume.name)
-                    }
-                    return
-                }
-                onEjected()
+                onEjected(error)
             }
             return
         }
         
         // We only need to do this for now if we're not using the helper
-        // TODO: Move back to optioanlly handling workspace unmount
+        // TODO: Move back to optionally handling workspace unmount
         self.runTask(task, needsRoot: isTmpFS) { status in
             if status == 16 {
-                // Disk in use
-                DispatchQueue.main.async {
-                    self.ejectErrorDiskInUse(volume: volume, recreate: recreate)
-                }
-                return
+                onEjected(TmpDiskError.inUse)
             } else if status != 0 {
                 // General error (not found etc)
-                DispatchQueue.main.async {
-                    self.ejectError(name: volume.name)
-                }
-                return
+                onEjected(TmpDiskError.failed)
+            } else {
+                onEjected(nil)
             }
-            onEjected()
         }
     }
     
@@ -228,7 +223,7 @@ class TmpDiskManager {
         alert.addButton(withTitle: NSLocalizedString("Force Eject", comment: ""))
         alert.addButton(withTitle: "Cancel")
         if alert.runModal() == .alertFirstButtonReturn {
-            self.ejectVolume(volume: volume, recreate: recreate, force: true)
+            self.ejectTmpDisksWithName(names: [volume.name], recreate: recreate, force: true)
         }
     }
     
@@ -376,8 +371,8 @@ class TmpDiskManager {
         let attach: String
         if volume.noExec && volume.hidden {
             attach = """
-            hdiutil attach -nomount $DISK_ID && \\
-            mount -t hfs,apfs -o noexec,nobrowse "$(echo $DISK_ID | tr -d ' ')s1" \(path)
+            hdiutil attach $DISK_ID -mountpoint "\(path)" && \\
+            mount -u -t hfs,apfs -o noexec,nobrowse "$(echo $DISK_ID | tr -d ' ')s1" \(path)
             """
         } else if volume.noExec {
             attach = """
@@ -386,7 +381,6 @@ class TmpDiskManager {
             """
         } else if volume.hidden {
             attach = """
-            hdiutil attach -nomount $DISK_ID && \\
             hdiutil attach -nobrowse -mountpoint "\(path)" $DISK_ID
             """
         } else {

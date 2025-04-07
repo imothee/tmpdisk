@@ -126,6 +126,11 @@ struct TmpDiskVolume: Hashable, Codable {
     
     func isMounted() -> Bool {
         let mountPoint = self.path()
-        return NSWorkspace.shared.isFilePackage(atPath: mountPoint) && FileManager.default.fileExists(atPath: mountPoint)
+        if let mountedVolumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: nil) {
+            let mountedPaths = mountedVolumes.map { $0.path }
+            return mountedPaths.contains { $0 == mountPoint }
+        }
+        
+        return false
     }
 }

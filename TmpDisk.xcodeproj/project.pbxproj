@@ -26,7 +26,6 @@
 		225587462B8FB23300136543 /* TmpDiskVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587452B8FB23300136543 /* TmpDiskVolume.swift */; };
 		225587482B8FB36900136543 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587472B8FB36900136543 /* Util.swift */; };
 		2255874A2B8FB38000136543 /* SecurityFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 225587492B8FB38000136543 /* SecurityFoundation.framework */; };
-		2255874D2B8FB65200136543 /* SMJobBlessUtil.py in Resources */ = {isa = PBXBuildFile; fileRef = 2255874C2B8FB65200136543 /* SMJobBlessUtil.py */; };
 		2255874E2B8FBA9200136543 /* com.imothee.TmpDiskHelper in CopyFiles */ = {isa = PBXBuildFile; fileRef = 225587272B8EDB7900136543 /* com.imothee.TmpDiskHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2264C5E1276553E600C45CB8 /* StatusBarController.swift */; };
 		2264C5E62765667500C45CB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2264C5E82765667500C45CB8 /* Localizable.strings */; };
@@ -159,7 +158,6 @@
 		225587452B8FB23300136543 /* TmpDiskVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpDiskVolume.swift; sourceTree = "<group>"; };
 		225587472B8FB36900136543 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		225587492B8FB38000136543 /* SecurityFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityFoundation.framework; path = System/Library/Frameworks/SecurityFoundation.framework; sourceTree = SDKROOT; };
-		2255874C2B8FB65200136543 /* SMJobBlessUtil.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = SMJobBlessUtil.py; sourceTree = "<group>"; };
 		2264C5E1276553E600C45CB8 /* StatusBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		2264C5E72765667500C45CB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2264C5E92765667700C45CB8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -292,7 +290,6 @@
 		220082542765505100A8524B /* TmpDiskTests */ = {
 			isa = PBXGroup;
 			children = (
-				2255874C2B8FB65200136543 /* SMJobBlessUtil.py */,
 				220082552765505100A8524B /* TmpDiskTests.swift */,
 			);
 			path = TmpDiskTests;
@@ -573,7 +570,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2255874D2B8FB65200136543 /* SMJobBlessUtil.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
