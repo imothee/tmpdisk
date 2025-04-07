@@ -7,7 +7,15 @@ TmpDisk is an Open Source simple RamDisk management tool. RamDisks are disks tha
 - Storing of temporary logs and files
 - Easily cleaning up tmp files
 
+## Support
+
+For support, tracking updates, announcement and to participate in the Imothee Community please join us on [Discord](https://discord.gg/5UgyRYaEq6)
+
+Maintaining TmpDisk for over [10 years](https://www.macupdate.com/app/mac/44022/tmpdisk) has been expensive and exhausting. If you can, please support us! We're looking for testers, volunteers, translators, advocates and donations.
+
 ## Installing
+
+After 2.2.0 TmpDisk supports a minimum MacOS version of 11.5 due to Xcode minimum build target. The code should still target earlier systems.
 
 After 2.0.4 TmpDisk supports a minimum MacOS version of 10.14.6.
 

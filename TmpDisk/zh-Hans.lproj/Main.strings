@@ -577,3 +577,6 @@
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "z6F-FW-3nz"; */
 "z6F-FW-3nz.title" = "Show Substitutions";
+
+/* Class = "NSTextFieldCell"; title = "Installing the TmpDiskCreator Helper can install TmpFS TmpDisks without asking for your root password. Requires Admin password to install"; ObjectID = "LLv-lK-dgg"; */
+"LLv-lK-dgg.title" = "安装 TmpDiskHelper 后，无需输入 root 密码即可创建 TmpFS 临时磁盘。安装时需要管理员密码";
