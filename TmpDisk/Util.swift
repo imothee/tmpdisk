@@ -87,4 +87,41 @@ struct Util {
         }
         return false
     }
+    
+    static func installCLI() -> String {
+        let fileManager = FileManager.default
+        let cliPath = Bundle.main.path(forResource: "TmpDiskCLI", ofType: nil)!
+        let linkPath = "/usr/local/bin/tmpdisk"
+        
+        if fileManager.fileExists(atPath: linkPath) {
+            return NSLocalizedString("Already installed at /usr/local/bin/tmpdisk", comment: "")
+        }
+        
+        return NSLocalizedString("Run the following command:\n sudo ln -s \(cliPath) \(linkPath)", comment: "")
+    }
+    
+    static func isMountedWith(path: String, flags: [String]) -> Bool {
+        let task = Process()
+        task.launchPath = "/sbin/mount"
+        
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        
+        task.launch()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        task.waitUntilExit()
+        
+        if let output = String(data: data, encoding: .utf8) {
+            // Find the line for this volume
+            let lines = output.components(separatedBy: "\n")
+            for line in lines {
+                if line.contains(path) {
+                    // Check if all required flags are present
+                    return flags.allSatisfy { line.contains($0) }
+                }
+            }
+        }
+        
+        return false
+    }
 }

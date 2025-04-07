@@ -53,36 +53,30 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? NSTableCellView
             cell?.textField?.stringValue = volume.folders.joined(separator: ",")
             return cell
-        case "tmpFs":
-            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
-            cell?.checkbox.state = volume.tmpFs ? .on : .off
+        case "mountpoint":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? NSTableCellView
+            cell?.textField?.stringValue = volume.mountPoint ?? ""
+            return cell
+        case "filesystem":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? DropdownTableCellView
+            cell?.popupView.removeAllItems()
+            cell?.popupView.addItems(withTitles: FileSystemManager.availableFileSystemDescriptions())
+            if let selected = FileSystemManager.description(for: volume.fileSystem) {
+                cell?.popupView.selectItem(withTitle: selected)
+            }
             return cell
         case "indexed":
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
             cell?.checkbox.state = volume.indexed ? .on : .off
             return cell
+        case "noexec":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
+            cell?.checkbox.state = volume.noExec ? .on : .off
+            return cell
         case "hidden":
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
             cell?.checkbox.state = volume.hidden ? .on : .off
-            if volume.tmpFs {
-                cell?.checkbox.isEnabled = false
-            } else {
-                cell?.checkbox.isEnabled = true
-            }
-            return cell
-        case "casesensitive":
-            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
-            cell?.checkbox.state = volume.caseSensitive ? .on : .off
-            if volume.tmpFs {
-                cell?.checkbox.isEnabled = false
-            } else {
-                cell?.checkbox.isEnabled = true
-            }
-            return cell
-        case "journaled":
-            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
-            cell?.checkbox.state = volume.journaled ? .on : .off
-            if volume.tmpFs {
+            if FileSystemManager.isTmpFS(volume.fileSystem) {
                 cell?.checkbox.isEnabled = false
             } else {
                 cell?.checkbox.isEnabled = true
@@ -108,20 +102,33 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
                 self.volumes[row].name = textField.stringValue
                 break
             case 1:
-                let newSize = textField.integerValue
-                if newSize > 0 {
-                    self.volumes[row].size = newSize
+                let currentSize = textField.doubleValue
+                let isTmpFS = FileSystemManager.isTmpFS(self.volumes[row].fileSystem)
+                let validation = DiskSizeManager.shared.validateDiskSize(currentSize, in: DiskSizeUnit.mb, isTmpFS: isTmpFS)
+                
+                if !validation.isValid {
+                    // Show warning
+                    if isTmpFS {
+                        DiskSizeManager.shared.showTmpFSSizeWarning()
+                    } else {
+                        DiskSizeManager.shared.showInsufficientRamWarning()
+                    }
+                    
+                    // Set to max allowed value formatted in the current unit
+                    textField.stringValue = DiskSizeManager.shared.formatSize(
+                        validation.correctedSizeMB,
+                        in: DiskSizeUnit.mb
+                    )
+                    self.volumes[row].size = Int(validation.correctedSizeMB)
                 } else {
-                    let alert = NSAlert()
-                    alert.messageText = "Size must be a positive number in megabytes"
-                    alert.alertStyle = .warning
-                    alert.addButton(withTitle: "OK")
-                    alert.runModal()
-                    return
+                    self.volumes[row].size = Int(currentSize)
                 }
                 break
             case 2:
                 self.volumes[row].folders = textField.stringValue.split(separator: ",").map { String($0) }
+                break
+            case 3:
+                self.volumes[row].mountPoint = textField.stringValue == "" ? nil : textField.stringValue
                 break
             default:
                 return
@@ -131,28 +138,31 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
         }
     }
     
+    @IBAction func popupButtonDidChange(_ sender: NSPopUpButton) {
+        let index = sender.indexOfSelectedItem
+        let fileSystem = FileSystemManager.availableFileSystems()[index]
+        
+        let row = tableView.row(for: sender)
+        self.volumes[row].fileSystem = fileSystem.name
+        
+        self.tableView.reloadData()
+        TmpDiskManager.shared.saveAutoCreateVolumes(volumes: Set(self.volumes))
+    }
+    
     @IBAction func checkboxDidChange(_ sender: AnyObject) {
         if let button = sender as? NSButton {
             let row = tableView.row(for: button)
             let column = tableView.column(for: button)
             
             switch column {
-            case 3:
-                self.volumes[row].tmpFs = button.state == .on
-                // Reload the table so the enabled state updates
-                self.tableView.reloadData()
-                break
-            case 4:
+            case 5:
                 self.volumes[row].indexed = button.state == .on
                 break
-            case 5:
-                self.volumes[row].hidden = button.state == .on
-                break
             case 6:
-                self.volumes[row].caseSensitive = button.state == .on
+                self.volumes[row].noExec = button.state == .on
                 break
             case 7:
-                self.volumes[row].journaled = button.state == .on
+                self.volumes[row].hidden = button.state == .on
                 break
             case 8:
                 self.volumes[row].warnOnEject = button.state == .on
@@ -171,7 +181,7 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             
             if confirmRecreate() {
                 let volume = self.volumes[row]
-                if TmpDiskManager.shared.exists(volume: volume) {
+                if volume.isMounted() {
                     TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
                 } else {
                     TmpDiskManager.shared.createTmpDisk(volume: volume, onCreate: {_ in })
@@ -188,6 +198,12 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             TmpDiskManager.shared.saveAutoCreateVolumes(volumes: Set(self.volumes))
             self.tableView.reloadData()
         }
+    }
+    
+    @IBAction func addVolume(_ sender: AnyObject) {
+        self.volumes.append(TmpDiskVolume())
+        TmpDiskManager.shared.saveAutoCreateVolumes(volumes: Set(self.volumes))
+        self.tableView.reloadData()
     }
     
     func confirmRecreate() -> Bool {

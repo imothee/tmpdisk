@@ -24,7 +24,6 @@ class XPCClient {
     }
     
     func createVolume(_ command: String, onCreate: @escaping (TmpDiskError?) -> Void) {
-        
         initConnection()
         connection?.resume()
         
@@ -43,6 +42,31 @@ class XPCClient {
                 onCreate(nil)
             } else {
                 onCreate(.failed)
+            }
+        }
+    }
+    
+    func ejectVolume(_ command: String, onEject: @escaping (TmpDiskError?) -> Void) {
+        initConnection()
+        connection?.resume()
+        
+        let creator = connection?.remoteObjectProxyWithErrorHandler({ error in
+            let e = error as NSError
+            if e.code == 4099 {
+                onEject(.helperFailed)
+            } else if e.code == 4097 {
+                onEject(.helperInvalidated)
+            } else {
+                onEject(.helperFailed)
+            }
+        }) as? TmpDiskCreator
+        creator?.ejectTmpDisk(command) { status in
+            if status == 16 {
+                onEject(.inUse)
+            } else if status != 0 {
+                onEject(.failed)
+            } else {
+                onEject(nil)
             }
         }
     }

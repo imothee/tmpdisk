@@ -22,6 +22,17 @@ class TmpDiskCreatorImpl: NSObject, TmpDiskCreator {
         onCreate(created)
     }
     
+    func ejectTmpDisk(_ command: String, onEject: @escaping (Int32) -> Void) {
+        NSLog("[SMJBS]: \(#function)")
+        
+        let task = Process()
+        task.launchPath = "/bin/sh"
+        task.arguments = ["-c", command]
+        task.launch()
+        task.waitUntilExit()
+        onEject(task.terminationStatus)
+    }
+    
     func uninstall() {
         try? FileManager.default.removeItem(atPath: "/Library/PrivilegedHelperTools/com.imothee.TmpDiskHelper")
         try? FileManager.default.removeItem(atPath: "/Library/LaunchDaemons/com.imothee.TmpDiskHelper.plist")
