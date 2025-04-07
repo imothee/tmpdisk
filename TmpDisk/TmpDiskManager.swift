@@ -134,7 +134,7 @@ class TmpDiskManager {
         }
         
         // Run using tasks
-        self.runTask(task, needsRoot: FileSystemManager.isTmpFS(volume.fileSystem)) { status in
+        self.runTask(task, needsRoot: isTmpFS) { status in
             if status != 0 {
                 return onCreate(.failed)
             }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,6 +48,8 @@
 		22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */; };
 		22B88C3F2DA3303E00952C95 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
 		22B88C402DA3303E00952C95 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
+		22B88C4D2DA3500500952C95 /* TmpDiskCLI in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B88C452DA3495300952C95 /* TmpDiskCLI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		22B88C4E2DA35D6100952C95 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283B6182D9F6B7B007A55F5 /* FileSystemManager.swift */; };
 		22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D93DBD27B85E0F0024FB53 /* WindowManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +81,7 @@
 		225587252B8EDB7900136543 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			dstPath = /usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
 			);
@@ -102,6 +104,25 @@
 			dstSubfolderSpec = 1;
 			files = (
 				22A69389277005B80040FDEF /* TmpDiskLauncher.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22B88C432DA3495300952C95 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		22B88C4C2DA34FFE00952C95 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				22B88C4D2DA3500500952C95 /* TmpDiskCLI in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,8 +182,13 @@
 		22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCreateManagerViewController.swift; sourceTree = "<group>"; };
 		22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxTableCellView.swift; sourceTree = "<group>"; };
 		22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskSizeManager.swift; sourceTree = "<group>"; };
+		22B88C452DA3495300952C95 /* TmpDiskCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TmpDiskCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D93DBD27B85E0F0024FB53 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		22B88C462DA3495300952C95 /* TmpDiskCLI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TmpDiskCLI; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2200823D2765504E00A8524B /* Frameworks */ = {
@@ -203,6 +229,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22B88C422DA3495300952C95 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -216,6 +249,7 @@
 				2200825E2765505100A8524B /* TmpDiskUITests */,
 				22A6935D277004E80040FDEF /* TmpDiskLauncher */,
 				225587282B8EDB7900136543 /* com.imothee.TmpDiskHelper */,
+				22B88C462DA3495300952C95 /* TmpDiskCLI */,
 				220082412765504E00A8524B /* Products */,
 				22A693552770014B0040FDEF /* Frameworks */,
 			);
@@ -229,6 +263,7 @@
 				2200825B2765505100A8524B /* TmpDiskUITests.xctest */,
 				22A6935C277004E80040FDEF /* TmpDiskLauncher.app */,
 				225587272B8EDB7900136543 /* com.imothee.TmpDiskHelper */,
+				22B88C452DA3495300952C95 /* TmpDiskCLI */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -354,6 +389,7 @@
 				2200823E2765504E00A8524B /* Resources */,
 				22A69388277005A00040FDEF /* CopyFiles */,
 				225587302B8EDBEC00136543 /* CopyFiles */,
+				22B88C4C2DA34FFE00952C95 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -439,6 +475,28 @@
 			productReference = 22A6935C277004E80040FDEF /* TmpDiskLauncher.app */;
 			productType = "com.apple.product-type.application";
 		};
+		22B88C442DA3495300952C95 /* TmpDiskCLI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22B88C492DA3495300952C95 /* Build configuration list for PBXNativeTarget "TmpDiskCLI" */;
+			buildPhases = (
+				22B88C412DA3495300952C95 /* Sources */,
+				22B88C422DA3495300952C95 /* Frameworks */,
+				22B88C432DA3495300952C95 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				22B88C462DA3495300952C95 /* TmpDiskCLI */,
+			);
+			name = TmpDiskCLI;
+			packageProductDependencies = (
+			);
+			productName = TmpDiskCLI;
+			productReference = 22B88C452DA3495300952C95 /* TmpDiskCLI */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -446,7 +504,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					2200823F2765504E00A8524B = {
@@ -465,6 +523,9 @@
 					};
 					22A6935B277004E80040FDEF = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					22B88C442DA3495300952C95 = {
+						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
@@ -491,6 +552,7 @@
 				2200825A2765505100A8524B /* TmpDiskUITests */,
 				22A6935B277004E80040FDEF /* TmpDiskLauncher */,
 				225587262B8EDB7900136543 /* com.imothee.TmpDiskHelper */,
+				22B88C442DA3495300952C95 /* TmpDiskCLI */,
 			);
 		};
 /* End PBXProject section */
@@ -636,6 +698,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A6935F277004E80040FDEF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22B88C412DA3495300952C95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22B88C4E2DA35D6100952C95 /* FileSystemManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,7 +905,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -869,7 +939,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDisk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -895,7 +965,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -921,7 +991,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -946,7 +1016,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -971,7 +1041,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -995,7 +1065,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				INFOPLIST_FILE = "$(SRCROOT)/com.imothee.TmpDiskHelper/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.2.0;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
@@ -1026,7 +1096,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				INFOPLIST_FILE = "$(SRCROOT)/com.imothee.TmpDiskHelper/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.2.0;
 				OTHER_LDFLAGS = (
 					"-sectcreate",
@@ -1065,7 +1135,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1098,12 +1168,47 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.imothee.TmpDiskLauncher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		22B88C4A2DA3495300952C95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		22B88C4B2DA3495300952C95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1165,6 +1270,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		22B88C492DA3495300952C95 /* Build configuration list for PBXNativeTarget "TmpDiskCLI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22B88C4A2DA3495300952C95 /* Debug */,
+				22B88C4B2DA3495300952C95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -1173,7 +1287,7 @@
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
+				minimumVersion = 2.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1588,7 +1589,7 @@
             <objects>
                 <viewController id="p4y-fC-51t" customClass="PreferencesViewController" customModule="TmpDisk" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="EJW-eF-umC">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="368"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6XO-mK-bhq">
@@ -1601,9 +1602,18 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YiI-JV-ocs">
-                                <rect key="frame" x="32" y="223" width="97" height="16"/>
+                                <rect key="frame" x="32" y="321" width="97" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="TmpDiskHelper" id="gwG-L6-BAO">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3iU-ZU-d1p">
+                                <rect key="frame" x="32" y="220" width="81" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="TmpDisk CLI" id="0xp-Me-cB1">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1618,19 +1628,8 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zvD-h3-10O">
-                                <rect key="frame" x="168" y="13" width="162" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Update Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aFz-gK-uoy">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="savePreferences:" target="p4y-fC-51t" id="wj8-Mf-WfW"/>
-                                </connections>
-                            </button>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="pJA-9b-PqG">
-                                <rect key="frame" x="83" y="60" width="332" height="60"/>
+                                <rect key="frame" x="74" y="56" width="332" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                 <textFieldCell key="cell" alignment="center" title="Change where your TmpFS mount points sit. Must be changed when you have no TmpFS volumes mounted." id="EYH-BL-kNS">
                                     <font key="font" metaFont="system"/>
@@ -1639,7 +1638,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="GJg-c6-PtQ">
-                                <rect key="frame" x="91" y="167" width="299" height="48"/>
+                                <rect key="frame" x="100" y="263" width="299" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                 <textFieldCell key="cell" alignment="center" id="LLv-lK-dgg">
                                     <font key="font" metaFont="system"/>
@@ -1649,7 +1648,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wBV-Uc-oE8">
-                                <rect key="frame" x="171" y="214" width="130" height="32"/>
+                                <rect key="frame" x="184" y="314" width="130" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Update Helper" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oIz-aS-Ulv">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1660,7 +1659,7 @@
                                 </connections>
                             </button>
                             <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9gP-Eq-qKM">
-                                <rect key="frame" x="346" y="220" width="73" height="24"/>
+                                <rect key="frame" x="346" y="318" width="73" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="pt1-DY-kC4">
                                     <font key="font" metaFont="system"/>
@@ -1673,9 +1672,30 @@
                                     <action selector="toggleHelper:" target="p4y-fC-51t" id="f2P-mU-U81"/>
                                 </connections>
                             </segmentedControl>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zvD-h3-10O">
+                                <rect key="frame" x="168" y="13" width="162" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Update Preferences" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aFz-gK-uoy">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="savePreferences:" target="p4y-fC-51t" id="wj8-Mf-WfW"/>
+                                </connections>
+                            </button>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="0CQ-0s-k1T">
+                                <rect key="frame" x="32" y="165" width="404" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <textFieldCell key="cell" selectable="YES" alignment="center" id="e3A-Oa-7mP">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="installCLI" destination="0CQ-0s-k1T" id="3tI-Br-8Al"/>
                         <outlet property="rootFolder" destination="4os-jd-sv5" id="8FX-qI-mrd"/>
                         <outlet property="updateHelper" destination="wBV-Uc-oE8" id="m68-tp-OvY"/>
                         <outlet property="useHelper" destination="9gP-Eq-qKM" id="VgN-g2-lQI"/>
@@ -1683,7 +1703,7 @@
                 </viewController>
                 <customObject id="L85-zs-ndx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1903" y="833"/>
+            <point key="canvasLocation" x="1956" y="887"/>
         </scene>
     </scenes>
     <resources>

@@ -26,7 +26,8 @@ class PreferencesViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var updateHelper: NSButton!
     @IBOutlet weak var useHelper: NSSegmentedControl!
     @IBOutlet weak var rootFolder: NSTextField!
-
+    @IBOutlet weak var installCLI: NSTextField!
+    
     var helperInstalled: Bool = false
     
     override public func viewDidAppear() {
@@ -42,6 +43,8 @@ class PreferencesViewController: NSViewController, NSTextFieldDelegate {
         } else {
             updateHelper.isHidden = true
         }
+        
+        installCLI.stringValue = Util.installCLI()
     }
     
     @IBAction func toggleHelper(_ sender: NSSegmentedControl) {

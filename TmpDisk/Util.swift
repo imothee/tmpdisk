@@ -87,4 +87,16 @@ struct Util {
         }
         return false
     }
+    
+    static func installCLI() -> String {
+        let fileManager = FileManager.default
+        let cliPath = Bundle.main.path(forResource: "TmpDiskCLI", ofType: nil)!
+        let linkPath = "/usr/local/bin/tmpdisk"
+        
+        if fileManager.fileExists(atPath: linkPath) {
+            return NSLocalizedString("Already installed at /usr/local/bin/tmpdisk", comment: "")
+        }
+        
+        return NSLocalizedString("Run the following command:\n sudo ln -s \(cliPath) \(linkPath)", comment: "")
+    }
 }

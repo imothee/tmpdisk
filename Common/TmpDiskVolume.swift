@@ -22,14 +22,15 @@ struct TmpDiskVolume: Hashable, Codable {
     var mountPoint: String?
     
     init() {
-        self.fileSystem = FileSystemManager.availableFileSystems().first?.name ?? "HFS+"
+        self.fileSystem = FileSystemManager.defaultFileSystemName()
     }
     
-    init(name: String, size: Int) {
+    init(name: String, size: Int, fileSystem: String? = nil) {
         self.name = name
         self.size = size
-        self.fileSystem = FileSystemManager.availableFileSystems().first?.name ?? "HFS+"
+        self.fileSystem = fileSystem ?? FileSystemManager.defaultFileSystemName()
     }
+
     
     init?(from dictionary: Dictionary<String, Any>) {
         guard let name = dictionary["name"] as? String,

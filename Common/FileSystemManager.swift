@@ -61,6 +61,11 @@ class FileSystemManager {
         return available
     }
     
+    // Get the default FS
+    static func defaultFileSystemName() -> String {
+        return self.availableFileSystems().first!.name
+    }
+    
     // Get the descriptions of avaialable file systems
     static func availableFileSystemDescriptions() -> [String] {
         return availableFileSystems().map(\.self.description)
