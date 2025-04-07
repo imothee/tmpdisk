@@ -74,6 +74,13 @@
 			remoteGlobalIDString = 225587262B8EDB7900136543;
 			remoteInfo = com.imothee.TmpDiskHelper;
 		};
+		22CC89182DA389E700C1DFF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 220082382765504E00A8524B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22B88C442DA3495300952C95;
+			remoteInfo = TmpDiskCLI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -391,6 +398,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				22CC89192DA389E700C1DFF8 /* PBXTargetDependency */,
 				225587502B8FBAA600136543 /* PBXTargetDependency */,
 			);
 			name = TmpDisk;
@@ -722,6 +730,11 @@
 			isa = PBXTargetDependency;
 			target = 225587262B8EDB7900136543 /* com.imothee.TmpDiskHelper */;
 			targetProxy = 2255874F2B8FBAA600136543 /* PBXContainerItemProxy */;
+		};
+		22CC89192DA389E700C1DFF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22B88C442DA3495300952C95 /* TmpDiskCLI */;
+			targetProxy = 22CC89182DA389E700C1DFF8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1187,6 +1200,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -1205,6 +1219,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 11.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
