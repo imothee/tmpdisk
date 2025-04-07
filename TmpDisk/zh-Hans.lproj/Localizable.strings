@@ -27,3 +27,5 @@
 "The volume \"%@\" wasn't ejected because one or more programs may be using it" = "无法推出卷 \"%@\" , 因为有一个或多个程序正在使用";
 "To eject the disk immediately, hit the Force Eject button" = "选择\"强制推出\"按钮以强制推出";
 "Force Eject" = "强制推出";
+"Do you wish to install TmpDiskHelper? It will require your admin password." = "您想安装 TmpDiskHelper 吗？需要管理员密码确认。";
+"There is an updated TmpDiskHelper, do you wish to install it? Requires admin password." = "有一个新版的 TmpDiskHelper，您想安装吗？需要管理员密码确认。";
