@@ -119,8 +119,6 @@ class TmpDiskManager {
             return onCreate(.failed)
         }
         
-        print(task)
-        
         if Util.checkHelperVersion() != nil && isTmpFS {
             // Run using the helper only for TmpFS
             let client = XPCClient()
