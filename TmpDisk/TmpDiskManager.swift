@@ -119,6 +119,8 @@ class TmpDiskManager {
             return onCreate(.failed)
         }
         
+        print(task)
+        
         if Util.checkHelperVersion() != nil && isTmpFS {
             // Run using the helper only for TmpFS
             let client = XPCClient()
@@ -356,42 +358,50 @@ class TmpDiskManager {
     
     func createRamDiskTask(volume: TmpDiskVolume) -> String {
         let dSize = UInt64(volume.size) * 2048
-        
         let fileSystem = volume.fileSystem
-        
-        let format: String
-        if FileSystemManager.isAPFS(fileSystem) {
-            format = "newfs_apfs -v \"\(volume.name)\" \"$(echo $DISK_ID | tr -d ' ')s1\" && \\"
-        } else {
-            format = "newfs_hfs -v \"\(volume.name)\" \"$(echo $DISK_ID | tr -d ' ')s1\" && \\"
-        }
-        
+        let volumeName = volume.name
         let path = volume.path()
-        
+
+        // Resolve the correct device to mount
+        let resolveMountDevice: String
+        if FileSystemManager.isAPFS(fileSystem) {
+            // Mount the synthesized container (diskY)
+            resolveMountDevice = """
+            MOUNT_DEV=$(diskutil list $DISK_ID | awk '/Apple_APFS Container/ {print $NF}') && \\
+            """
+        } else {
+            // Mount the single HFS+ partition (diskXs2)
+            resolveMountDevice = """
+            MOUNT_DEV=$(diskutil list $DISK_ID | awk '/Apple_HFS/ {print $NF}') && \\
+            """
+        }
+
+        // Build attach command
         let attach: String
         if volume.noExec && volume.hidden {
             attach = """
-            hdiutil attach $DISK_ID -mountpoint "\(path)" && \\
-            mount -u -t hfs,apfs -o noexec,nobrowse "$(echo $DISK_ID | tr -d ' ')s1" \(path)
+            hdiutil attach -mountpoint "\(path)" /dev/$MOUNT_DEV && \\
+            mount -u -t hfs,apfs -o noexec,nobrowse /dev/$MOUNT_DEV "\(path)"
             """
         } else if volume.noExec {
             attach = """
-            hdiutil attach $DISK_ID -mountpoint "\(path)" && \\
-            mount -u -t hfs,apfs -o noexec "$(echo $DISK_ID | tr -d ' ')s1" \(path)
+            hdiutil attach -mountpoint "\(path)" /dev/$MOUNT_DEV && \\
+            mount -u -t hfs,apfs -o noexec /dev/$MOUNT_DEV "\(path)"
             """
         } else if volume.hidden {
             attach = """
-            hdiutil attach -nobrowse -mountpoint "\(path)" $DISK_ID
+            hdiutil attach -nobrowse -mountpoint "\(path)" /dev/$MOUNT_DEV
             """
         } else {
-            attach = "hdiutil attach -mountpoint \"\(path)\" $DISK_ID"
+            attach = """
+            hdiutil attach -mountpoint "\(path)" /dev/$MOUNT_DEV
+            """
         }
-        
-        
+
         return """
         DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
-        diskutil eraseDisk \(fileSystem) %noformat% $DISK_ID && \\
-        \(format)
+        diskutil eraseDisk \(fileSystem) \(volumeName) $DISK_ID && \\
+        \(resolveMountDevice)
         \(attach)
         """
     }
