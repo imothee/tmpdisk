@@ -47,7 +47,7 @@ struct TmpDiskVolume: Hashable, Codable {
         
         let fileSystem: String
         
-        if let fs = dictionary["fileSystem"] as? String {
+        if let fs = dictionary["filesystem"] as? String {
             fileSystem = fs
         } else {
             let tmpFs = dictionary["tmpFs"] as? Bool
