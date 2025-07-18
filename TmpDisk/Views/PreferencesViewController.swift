@@ -26,7 +26,8 @@ class PreferencesViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var updateHelper: NSButton!
     @IBOutlet weak var useHelper: NSSegmentedControl!
     @IBOutlet weak var rootFolder: NSTextField!
-
+    @IBOutlet weak var installCLI: NSTextField!
+    
     var helperInstalled: Bool = false
     
     override public func viewDidAppear() {
@@ -42,6 +43,8 @@ class PreferencesViewController: NSViewController, NSTextFieldDelegate {
         } else {
             updateHelper.isHidden = true
         }
+        
+        installCLI.stringValue = Util.installCLI()
     }
     
     @IBAction func toggleHelper(_ sender: NSSegmentedControl) {
@@ -66,11 +69,11 @@ class PreferencesViewController: NSViewController, NSTextFieldDelegate {
     }
     
     @IBAction func updateHelper(_ sender: NSButton) {
-        Util.installHelper(update: true)
+        _ = Util.installHelper(update: true)
     }
     
     @IBAction func savePreferences(_ sender: NSButton) {
-        if !TmpDiskManager.shared.volumes.filter({ $0.tmpFs }).isEmpty {
+        if !TmpDiskManager.shared.volumes.filter({ FileSystemManager.isTmpFS($0.fileSystem) }).isEmpty {
             let alert = NSAlert()
             alert.messageText = NSLocalizedString("You can't change the root volume while tmpFS disks are mounted.", comment: "")
             alert.alertStyle = .warning

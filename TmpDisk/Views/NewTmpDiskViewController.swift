@@ -25,12 +25,12 @@ import AppKit
 
 class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var diskName: NSTextField!
-    @IBOutlet weak var useTmpFs: NSButton!
     
     @IBOutlet weak var diskSizeLabel: NSTextField!
     @IBOutlet weak var diskSizeStepper: NSStepper!
     @IBOutlet weak var diskSize: NSTextField!
     @IBOutlet weak var folders: NSTextField!
+    @IBOutlet weak var mountPoint: NSTextField!
     
     @IBOutlet weak var icon: NSImageView!
     
@@ -40,11 +40,13 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var autoCreate: NSButton!
     @IBOutlet weak var index: NSButton!
     @IBOutlet weak var hidden: NSButton!
-    @IBOutlet weak var caseSensitive: NSButton!
-    @IBOutlet weak var journaled: NSButton!
+    @IBOutlet weak var noExec: NSButton!
+    
+    @IBOutlet weak var fileSystemLabel: NSTextField!
+    @IBOutlet weak var fileSystemButton: NSPopUpButton!
     
     var volume = TmpDiskVolume()
-    var unitIndex = 0
+    var currentUnit: DiskSizeUnit = .mb
     
     // MARK: - View controller lifecycle
     
@@ -53,7 +55,10 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         self.diskName.delegate = self
         self.diskSize.delegate = self
         self.folders.delegate = self
+        self.mountPoint.delegate = self
         self.setDefaultUnits()
+        
+        self.fileSystemButton.addItems(withTitles: FileSystemManager.availableFileSystemDescriptions())
     }
     
     // MARK: - NSTextFieldDelegate
@@ -61,59 +66,71 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     public func controlTextDidChange(_ obj: Notification) {
         if let textField = obj.object as? NSTextField, self.diskName.identifier == textField.identifier {
             self.volume.name = textField.stringValue
-        }
-        if let textField = obj.object as? NSTextField, self.diskSize.identifier == textField.identifier {
+        } else if let textField = obj.object as? NSTextField, self.diskSize.identifier == textField.identifier {
             self.setVolumeSize()
-        }
-        if let textField = obj.object as? NSTextField, self.folders.identifier == textField.identifier {
+            _ = validateSize()
+        } else if let textField = obj.object as? NSTextField, self.folders.identifier == textField.identifier {
             self.volume.folders = textField.stringValue.split(separator: ",").map { String($0) }
+        } else if let textField = obj.object as? NSTextField, self.mountPoint.identifier == textField.identifier {
+            self.volume.mountPoint = textField.stringValue == "" ? nil : textField.stringValue
         }
     }
     
     // MARK: - IBActions
     
     @IBAction func sizeStepped(_ sender: NSStepper) {
-        if unitIndex == 0 {
+        if currentUnit == .mb {
             self.diskSize.stringValue = String(sender.integerValue)
         } else {
             let dSize = sender.integerValue / 1000
             self.diskSize.stringValue = String(format: "%.2f", dSize)
         }
+        _ = validateSize()
     }
     
     @IBAction func unitSelected(_ sender: NSPopUpButton) {
-        switch sender.indexOfSelectedItem {
-        case 0:
-            if unitIndex == 1 {
-                let dSize = self.diskSize.doubleValue * 1000
-                self.diskSize.stringValue = String(Int(dSize))
-                unitIndex = 0
-                UserDefaults.standard.set(unitIndex, forKey: "defaultUnits")
-            }
-            break
-        case 1:
-            if unitIndex == 0 {
-                let dSize = self.diskSize.doubleValue / 1000.0
-                self.diskSize.stringValue = String(format: "%.2f", dSize)
-                unitIndex = 1
-                UserDefaults.standard.set(unitIndex, forKey: "defaultUnits")
-            }
-            break
-        default:
-            return
+        let selectedUnit = DiskSizeUnit(rawValue: sender.indexOfSelectedItem) ?? .mb
+        
+        if selectedUnit != currentUnit {
+            // Convert the current value to the new unit
+            let currentSize = self.diskSize.doubleValue
+            let convertedSize = DiskSizeManager.shared.convertSize(
+                currentSize,
+                from: currentUnit,
+                to: selectedUnit
+            )
+            
+            // Update the display
+            self.diskSize.stringValue = DiskSizeManager.shared.formatSize(
+                convertedSize,
+                in: selectedUnit
+            )
+            
+            // Update the current unit
+            currentUnit = selectedUnit
+            UserDefaults.standard.set(currentUnit.rawValue, forKey: "defaultUnits")
         }
     }
     
     @IBAction func sizeSelected(_ sender: NSPopUpButton) {
         switch sender.indexOfSelectedItem {
         case 1, 2, 3, 4:
-            let percent = [0.1, 0.25, 0.5, 0.75][sender.indexOfSelectedItem - 1]
-            let dSize = (percent * Double(ProcessInfo.init().physicalMemory)) / 1024 / 1024
-            if unitIndex == 0 {
-                self.diskSize.stringValue = String(Int(dSize))
+            let percentages = DiskSizeManager.shared.commonRamSizePercentages()
+            let percentIndex = sender.indexOfSelectedItem - 1
+            let percent = percentages[percentIndex]
+            let ramSizeMB = DiskSizeManager.shared.ramSizeForPercentage(percent)
+            
+            // For TmpFS, limit to 50% RAM
+            if FileSystemManager.isTmpFS(volume.fileSystem) && percent > 0.5 {
+                // Show warning about exceeding limit
+                DiskSizeManager.shared.showTmpFSSizeWarning()
+                
+                // Set to 50% instead
+                let safeSize = DiskSizeManager.shared.maxTmpFSSizeMB
+                self.diskSize.stringValue = DiskSizeManager.shared.formatSize(safeSize, in: currentUnit)
             } else {
-                let newDSize = dSize / 1000.0
-                self.diskSize.stringValue = String(format: "%.2f", newDSize)
+                // Normal behavior for other filesystems or within limit
+                self.diskSize.stringValue = DiskSizeManager.shared.formatSize(ramSizeMB, in: currentUnit)
             }
             sender.selectItem(at: 0)
             break
@@ -140,29 +157,23 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         }
     }
     
-    @IBAction func onUseTmpFsChange(_ sender: NSButton) {
-        if sender.state == .on {
-            self.volume.tmpFs = true
-            self.diskSizeLabel.stringValue = "Max Size"
+    @IBAction func onFileSystemChange(_ sender: NSPopUpButton) {
+        let index = sender.indexOfSelectedItem
+        let fileSystem = FileSystemManager.availableFileSystems()[index]
+        
+        self.volume.fileSystem = fileSystem.name
+        
+        if FileSystemManager.isTmpFS(fileSystem.name) {
+            self.diskSizeLabel.stringValue = "Max Size (Limited to 50% Ram by MacOS)"
             // Hidden button
             self.hidden.isHidden = true
             self.hidden.state = .off
             self.volume.hidden = false
-            // Case sensitive button
-            self.caseSensitive.isHidden = true
-            self.caseSensitive.state = .off
-            self.volume.caseSensitive = false
-            // Journaled button
-            self.journaled.isHidden = true
-            self.journaled.state = .off
-            self.volume.journaled = false
         } else {
-            self.volume.tmpFs = false
             self.diskSizeLabel.stringValue = "Disk Size"
             self.hidden.isHidden = false
-            self.caseSensitive.isHidden = false
-            self.journaled.isHidden = false
         }
+        _ = self.validateSize()
     }
     
     @IBAction func onAutoCreateChange(_ sender: NSButton) {
@@ -181,12 +192,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         self.volume.hidden = sender.state == .on
     }
     
-    @IBAction func onCaseSensitiveChange(_ sender: NSButton) {
-        self.volume.caseSensitive = sender.state == .on
-    }
-    
-    @IBAction func onJournaledChange(_ sender: NSButton) {
-        self.volume.journaled = sender.state == .on
+    @IBAction func onNoExecChange(_ sender: NSButton) {
+        self.volume.noExec = sender.state == .on
     }
     
     @IBAction func createTapped(_ sender: NSButton) {
@@ -199,7 +206,11 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         
         self.setVolumeSize()
         
-        if self.volume.tmpFs {
+        if !validateSize() {
+            return
+        }
+        
+        if FileSystemManager.isTmpFS(volume.fileSystem) {
             // Check if we've ever prompted them to install the helper
             let helperPrompted = UserDefaults.standard.object(forKey: "helperPromptShowns") as? Bool
             let helperVersion = Util.checkHelperVersion()
@@ -213,7 +224,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                 alert.addButton(withTitle: "OK")
                 alert.addButton(withTitle: "Don't ask again")
                 if alert.runModal() == .alertFirstButtonReturn {
-                    Util.installHelper()
+                    _ = Util.installHelper()
                 }
             }
         }
@@ -234,7 +245,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                         self.showError(message: NSLocalizedString("A volume with this name already exists", comment: ""))
                         break;
                     case .invalidSize:
-                        if self.unitIndex == 0 {
+                        if self.currentUnit == .mb {
                             self.showError(message: NSLocalizedString("Size must be a number of megabytes > 0", comment: ""))
                         } else {
                             self.showError(message: NSLocalizedString("Size must be a number of gigabytes >= 0.01", comment: ""))
@@ -249,6 +260,8 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                     case .helperFailed:
                         self.showError(message: NSLocalizedString("The helper crashed, please check TmpDisk logs in the Console app and log a bug.", comment: ""))
                         break;
+                    case .inUse:
+                        break;
                     }
                 }
                 return
@@ -262,19 +275,19 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     // MARK: - Internal functions
     
     func setVolumeSize() {
-        if unitIndex == 0 {
+        if currentUnit == .mb {
             self.volume.size = self.diskSize.integerValue
-        } else if unitIndex == 1 {
-            self.volume.size = Int(self.diskSize.doubleValue * 1000)
+        } else if currentUnit == .gb {
+            self.volume.size = Int(DiskSizeManager.shared.convertGBtoMB(self.diskSize.doubleValue))
         }
     }
     
     func setDefaultUnits() {
-        if let defaultUnits = UserDefaults.standard.object(forKey: "defaultUnits") as? Int {
-            if defaultUnits == 1 {
-                // Default units is now GB
+        func setDefaultUnits() {
+            if let defaultUnits = UserDefaults.standard.object(forKey: "defaultUnits") as? Int,
+               let unit = DiskSizeUnit(rawValue: defaultUnits) {
                 diskUnitSelector.selectItem(at: defaultUnits)
-                self.unitIndex = defaultUnits
+                self.currentUnit = unit
             }
         }
     }
@@ -285,5 +298,33 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
         alert.alertStyle = .warning
         alert.addButton(withTitle: "OK")
         alert.runModal()
+    }
+    
+    func validateSize() -> Bool {
+        let currentSize = self.diskSize.doubleValue
+        let isTmpFS = FileSystemManager.isTmpFS(volume.fileSystem)
+        
+        // Validate using the DiskSizeManager
+        let validation = DiskSizeManager.shared.validateDiskSize(currentSize, in: currentUnit, isTmpFS: isTmpFS)
+        
+        if !validation.isValid {
+            // Show warning
+            if isTmpFS {
+                DiskSizeManager.shared.showTmpFSSizeWarning()
+            } else {
+                DiskSizeManager.shared.showInsufficientRamWarning()
+            }
+            
+            // Set to max allowed value formatted in the current unit
+            self.diskSize.stringValue = DiskSizeManager.shared.formatSize(
+                validation.correctedSizeMB,
+                in: currentUnit
+            )
+            
+            // Update volume size
+            self.setVolumeSize()
+            return false
+        }
+        return true
     }
 }
