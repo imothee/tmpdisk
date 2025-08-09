@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  TmpDisk
+
+  Translated by maboroshin. (2025-08-08)
+  
+*/
+
+"New TmpDisk" = "新規 TmpDisk";
+"Current TmpDisks" = "現在の TmpDisks";
+"Recreate All" = "すべて再作成";
+"AutoCreate Manager" = "自動作成の管理";
+"Always Start on Login" = "ログイン時に起動する";
+"Check for Updates" = "更新確認";
+"About TmpDisk" = "TmpDisk について";
+"Quit" = "終了";
+"Your TmpDisk must have a name" = "TmpDisk には名前が必要です";
+"A volume with this name already exists" = "この名前のボリュームは既に存在します";
+"Size must be a number of megabytes > 0" = "メガバイトのサイズは 0 以上の数字にしてください";
+"Size must be a number of gigabytes >= 0.01" = "ギガバイトのサイズは 0.01 以上の数字にしてください";
+"Failed to create TmpDisk" = "TmpDisk 作成に失敗";
+"Preferences" = "設定";
+"You can't change the root volume while tmpFS disks are mounted." = "tmpFS ディスクがマウントされている間は、ルートボリュームを変更できません。";
+"Icon must be square" = "アイコンは正方形にしてください";
+"Could not convert image to icon" = "画像をアイコンに変換できません";
+"Failed to eject \"%@\"" = "取り出しに失敗 \"%@\"";
+"The volume \"%@\" wasn't ejected because one or more programs may be using it" = "ボリューム \"%@\" を取り出せません。1つ以上のアプリが使用中です";
+"To eject the disk immediately, hit the Force Eject button" = "すぐにこのディスクを取り出すには、強制的に取り出しボタンを押してください";
+"Force Eject" = "強制的に取り出し";
