@@ -27,3 +27,5 @@
 "The volume \"%@\" wasn't ejected because one or more programs may be using it" = "The volume \"%@\" wasn't ejected because one or more programs may be using it";
 "To eject the disk immediately, hit the Force Eject button" = "To eject the disk immediately, hit the Force Eject button";
 "Force Eject" = "Force Eject";
+"Some volumes could not be ejected: %@" = "Some volumes could not be ejected: %@";
+"Eject on Quit" = "Eject on Quit";

@@ -17,6 +17,7 @@ struct TmpDiskVolume: Hashable, Codable {
     var noExec: Bool = false
     var hidden: Bool = false
     var warnOnEject: Bool = false
+    var autoEjectOnExit: Bool = false
     var folders: [String] = []
     var icon: String?
     var mountPoint: String?
@@ -40,6 +41,7 @@ struct TmpDiskVolume: Hashable, Codable {
         else { return nil }
         
         let warnOnEject = dictionary["warnOnEject"] as? Bool ?? false
+        let autoEjectOnExit = dictionary["autoEjectOnExit"] as? Bool ?? false
         let folders = dictionary["folders"] as? [String] ?? []
         let icon = dictionary["icon"] as? String
         let noExec = dictionary["noExec"] as? Bool ?? false
@@ -76,6 +78,7 @@ struct TmpDiskVolume: Hashable, Codable {
         self.hidden = hidden
         self.noExec = noExec
         self.warnOnEject = warnOnEject
+        self.autoEjectOnExit = autoEjectOnExit
         self.folders = folders
         if let icon = icon, icon != "" {
             self.icon = icon
@@ -107,6 +110,7 @@ struct TmpDiskVolume: Hashable, Codable {
             "filesystem": fileSystem,
             "noExec": noExec,
             "warnOnEject": warnOnEject,
+            "autoEjectOnExit": autoEjectOnExit,
             "folders": folders,
             "icon": icon ?? "",
             "mountPoint": mountPoint ?? ""

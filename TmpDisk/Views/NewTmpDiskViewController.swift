@@ -41,6 +41,7 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet weak var index: NSButton!
     @IBOutlet weak var hidden: NSButton!
     @IBOutlet weak var noExec: NSButton!
+    @IBOutlet weak var autoEjectOnExit: NSButton!
     
     @IBOutlet weak var fileSystemLabel: NSTextField!
     @IBOutlet weak var fileSystemButton: NSPopUpButton!
@@ -195,7 +196,11 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
     @IBAction func onNoExecChange(_ sender: NSButton) {
         self.volume.noExec = sender.state == .on
     }
-    
+
+    @IBAction func onAutoEjectOnExitChange(_ sender: NSButton) {
+        self.volume.autoEjectOnExit = sender.state == .on
+    }
+
     @IBAction func createTapped(_ sender: NSButton) {
         let spinner = NSProgressIndicator(frame: NSRect(x: 58.5, y: 7.5, width: 13, height: 13))
         spinner.style = .spinning

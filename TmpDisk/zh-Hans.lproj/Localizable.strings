@@ -29,3 +29,5 @@
 "Force Eject" = "强制推出";
 "Do you wish to install TmpDiskHelper? It will require your admin password." = "您想安装 TmpDiskHelper 吗？需要管理员密码确认。";
 "There is an updated TmpDiskHelper, do you wish to install it? Requires admin password." = "有一个新版的 TmpDiskHelper，您想安装吗？需要管理员密码确认。";
+"Some volumes could not be ejected: %@" = "部分卷无法推出: %@";
+"Eject on Quit" = "退出时推出";

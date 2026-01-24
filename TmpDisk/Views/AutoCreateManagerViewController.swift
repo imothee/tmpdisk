@@ -86,6 +86,10 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
             cell?.checkbox.state = volume.warnOnEject ? .on : .off
             return cell
+        case "autoeject":
+            let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? CheckboxTableCellView
+            cell?.checkbox.state = volume.autoEjectOnExit ? .on : .off
+            return cell
         default:
             let cell = tableView.makeView(withIdentifier: (tableColumn!.identifier), owner: self) as? NSTableCellView
             return cell
@@ -166,6 +170,9 @@ class AutoCreateManagerViewController: NSViewController, NSTableViewDelegate, NS
                 break
             case 8:
                 self.volumes[row].warnOnEject = button.state == .on
+                break
+            case 9:
+                self.volumes[row].autoEjectOnExit = button.state == .on
                 break
             default:
                 return

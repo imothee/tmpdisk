@@ -876,6 +876,17 @@
                                     <action selector="onHiddenChange:" target="4AE-e9-iwB" id="w3P-fw-NpD"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJq-On-Qt1">
+                                <rect key="frame" x="124" y="21" width="110" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Eject on Quit" bezelStyle="regularSquare" imagePosition="left" inset="2" id="eJq-Bc-Qt2">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onAutoEjectOnExitChange:" target="4AE-e9-iwB" id="eJq-Ac-Qt3"/>
+                                </connections>
+                            </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1T3-Bk-PAe">
                                 <rect key="frame" x="123" y="175" width="48" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -962,6 +973,7 @@
                         <outlet property="index" destination="89U-9t-wcc" id="MHd-H7-P8w"/>
                         <outlet property="mountPoint" destination="Twy-EH-Fbv" id="KqO-dE-a3Z"/>
                         <outlet property="noExec" destination="55n-4C-Ikh" id="mGg-TA-YIx"/>
+                        <outlet property="autoEjectOnExit" destination="eJq-On-Qt1" id="eJq-Ot-Qt4"/>
                     </connections>
                 </viewController>
                 <customObject id="VfP-7U-KJY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1321,6 +1333,40 @@
                                                             </subviews>
                                                             <connections>
                                                                 <outlet property="checkbox" destination="YHl-cU-Cf8" id="0BA-4l-OVR"/>
+                                                            </connections>
+                                                        </tableCellView>
+                                                    </prototypeCellViews>
+                                                </tableColumn>
+                                                <tableColumn identifier="autoeject" width="40" minWidth="10" maxWidth="3.4028234663852886e+38" id="aEj-Qt-001">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Eject">
+                                                        <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </tableHeaderCell>
+                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="aEj-Dc-002">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                    <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                    <prototypeCellViews>
+                                                        <tableCellView id="aEj-Cv-003" customClass="CheckboxTableCellView" customModule="TmpDisk" customModuleProvider="target">
+                                                            <rect key="frame" x="1061.5" y="0.0" width="40" height="24"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aEj-Bt-004">
+                                                                    <rect key="frame" x="11.5" y="3" width="18" height="18"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aEj-Bc-005">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="checkboxDidChange:" target="DDA-FB-V6k" id="aEj-Ac-006"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <connections>
+                                                                <outlet property="checkbox" destination="aEj-Bt-004" id="aEj-Oc-007"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>

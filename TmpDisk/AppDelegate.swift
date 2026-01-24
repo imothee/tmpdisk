@@ -20,7 +20,7 @@
 //  along with TmpDisk.  If not, see <http://www.gnu.org/licenses/>.
 
 import Cocoa
-
+import UserNotifications
 import ServiceManagement
 
 extension Notification.Name {
@@ -68,7 +68,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+        // Eject volumes marked with autoEjectOnExit
+        let volumesToEject = TmpDiskManager.shared.volumes.filter { $0.autoEjectOnExit && $0.isMounted() }
+
+        if volumesToEject.isEmpty {
+            return
+        }
+
+        var failedVolumes: [String] = []
+
+        for volume in volumesToEject {
+            let volumeURL = URL(fileURLWithPath: volume.path())
+
+            do {
+                // Attempt unmount using NSWorkspace (non-force)
+                try NSWorkspace.shared.unmountAndEjectDevice(at: volumeURL)
+            } catch {
+                failedVolumes.append(volume.name)
+            }
+        }
+
+        // Show notification if some volumes failed to eject
+        if !failedVolumes.isEmpty {
+            showEjectFailureNotification(volumeNames: failedVolumes)
+        }
+    }
+
+    private func showEjectFailureNotification(volumeNames: [String]) {
+        let content = UNMutableNotificationContent()
+        content.title = "TmpDisk"
+        content.body = String(format: NSLocalizedString("Some volumes could not be ejected: %@", comment: ""), volumeNames.joined(separator: ", "))
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
