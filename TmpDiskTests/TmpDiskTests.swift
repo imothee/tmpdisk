@@ -21,7 +21,7 @@ class TmpDiskTests: XCTestCase {
     // MARK: - TmpDisk
     
     func testCreateTmpDiskSucceedsAndEjects() throws {
-        let volume = TmpDiskVolume(name: "testvolume", size: 8)
+        let volume = TmpDiskVolume(name: "testvolume", size: 128)
         let expectation = self.expectation(description: "Creating")
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
             XCTAssertNil(error)
@@ -37,7 +37,7 @@ class TmpDiskTests: XCTestCase {
     }
     
     func testCreateFolders() throws {
-        var volume = TmpDiskVolume(name: "testwithfolders", size: 8)
+        var volume = TmpDiskVolume(name: "testwithfolders", size: 128)
         volume.folders = ["folder1", "folder2/subfolder1"]
         let expectation = self.expectation(description: "Creating")
         
@@ -56,7 +56,7 @@ class TmpDiskTests: XCTestCase {
     }
     
     func testCreateAlreadyExists() throws {
-        let volume = TmpDiskVolume(name: "testexists", size: 8)
+        let volume = TmpDiskVolume(name: "testexists", size: 128)
         let expectation = self.expectation(description: "Creating")
         
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
@@ -78,7 +78,7 @@ class TmpDiskTests: XCTestCase {
     // MARK: - Tmpfs
     
     func testCreateTmpfsSucceedsAndEjects() throws {
-        let volume = TmpDiskVolume(name: "testtmpfsvolume", size: 8, fileSystem: "TMPFS")
+        let volume = TmpDiskVolume(name: "testtmpfsvolume", size: 128, fileSystem: "TMPFS")
         let expectation = self.expectation(description: "Creating")
         
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
@@ -97,7 +97,7 @@ class TmpDiskTests: XCTestCase {
     }
     
     func testCreateTmpfsFolders() throws {
-        var volume = TmpDiskVolume(name: "testtmpfsvolumefolders", size: 8, fileSystem: "TMPFS")
+        var volume = TmpDiskVolume(name: "testtmpfsvolumefolders", size: 128, fileSystem: "TMPFS")
         volume.folders = ["folder1", "folder2/subfolder1"]
         let expectation = self.expectation(description: "Creating")
         
@@ -114,35 +114,35 @@ class TmpDiskTests: XCTestCase {
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
-    
+
     func testCreateTmpfsExists() throws {
-        let volume = TmpDiskVolume(name: "testexists", size: 8, fileSystem: "TMPFS")
+        let volume = TmpDiskVolume(name: "testexists", size: 128, fileSystem: "TMPFS")
         let expectation = self.expectation(description: "Creating")
-        
+
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
             XCTAssertNil(error)
             sleep(1)
             XCTAssertTrue(volume.isMounted(), "Volume should exist")
-            
+
             TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
                 XCTAssertNotNil(error)
                 XCTAssertEqual(error!, TmpDiskError.exists)
-                
+
                 TmpDiskManager.shared.ejectVolume(volume: volume) { error in
                     try? FileManager.default.removeItem(atPath: volume.path())
                     expectation.fulfill()
                 }
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     // MARK: - Hidden Volume Tests
 
     func testCreateHiddenVolumeSucceedsAndEjectsAPFS() throws {
-        var volume = TmpDiskVolume(name: "testhiddenvolume", size: 8)
+        var volume = TmpDiskVolume(name: "testhiddenvolume", size: 128)
         volume.hidden = true
         let expectation = self.expectation(description: "Creating hidden volume")
         
@@ -161,7 +161,7 @@ class TmpDiskTests: XCTestCase {
     }
     
     func testCreateHiddenVolumeSucceedsAndEjectsHFS() throws {
-        var volume = TmpDiskVolume(name: "testhiddenvolume", size: 8, fileSystem: "HFS+")
+        var volume = TmpDiskVolume(name: "testhiddenhfs", size: 128, fileSystem: "HFS+")
         volume.hidden = true
         let expectation = self.expectation(description: "Creating hidden volume")
         
@@ -182,7 +182,7 @@ class TmpDiskTests: XCTestCase {
     // MARK: - Case Sensitive Tests
 
     func testCreateCaseSensitiveAPFSVolumeSucceeds() throws {
-        let volume = TmpDiskVolume(name: "testcasesensitivevolume", size: 8, fileSystem: "APFSX")
+        let volume = TmpDiskVolume(name: "testcasesensitivevolume", size: 128, fileSystem: "APFSX")
         let expectation = self.expectation(description: "Creating case-sensitive volume")
         
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
@@ -208,7 +208,7 @@ class TmpDiskTests: XCTestCase {
     }
     
     func testCreateCaseSensitiveHFSVolumeSucceeds() throws {
-        let volume = TmpDiskVolume(name: "testcasesensitivevolume", size: 8, fileSystem: "HFSX")
+        let volume = TmpDiskVolume(name: "testcasesensitivehfs", size: 128, fileSystem: "HFSX")
         let expectation = self.expectation(description: "Creating case-sensitive volume")
         
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
@@ -235,27 +235,30 @@ class TmpDiskTests: XCTestCase {
     
     // MARK: - NoExec Tes ts
 
-    func testCreateNoExecVolumeSucceeds() throws {
-        var volume = TmpDiskVolume(name: "testnoexecvolume", size: 8)
+    func testCreateNoExecVolumeSucceedsAPFS() throws {
+        var volume = TmpDiskVolume(name: "testnoexecvolume", size: 128)
         volume.noExec = true
         let expectation = self.expectation(description: "Creating noexec volume")
-        
+
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
             XCTAssertNil(error)
             XCTAssertTrue(volume.isMounted(), "NoExec volume should exist")
-            
+
+            // Verify noexec mount flag
+            XCTAssertTrue(Util.isMountedWith(path: volume.path(), flags: ["noexec"]), "Volume should have noexec flag")
+
             // Create a test script that should not be executable
             let scriptPath = "\(volume.path())/test.sh"
             let scriptContent = "#!/bin/bash\necho 'This should not run'\n"
             try? scriptContent.write(toFile: scriptPath, atomically: true, encoding: .utf8)
-            
+
             // Make it executable (this should normally make it executable)
             try? FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: scriptPath)
-            
+
             // Try to execute it - this should fail on a noexec volume
             let process = Process()
             process.executableURL = URL(fileURLWithPath: scriptPath)
-            
+
             do {
                 try process.run()
                 process.waitUntilExit()
@@ -264,51 +267,69 @@ class TmpDiskTests: XCTestCase {
                 // Expected behavior - script execution should fail
                 XCTAssertTrue(true, "Script execution failed as expected on noexec volume")
             }
-            
+
             TmpDiskManager.shared.ejectVolume(volume: volume) { error in
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
+    }
+
+    func testCreateNoExecVolumeSucceedsHFS() throws {
+        var volume = TmpDiskVolume(name: "testnoexecvolumehfs", size: 128, fileSystem: "HFS+")
+        volume.noExec = true
+        let expectation = self.expectation(description: "Creating noexec HFS+ volume")
+
+        TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
+            XCTAssertNil(error)
+            XCTAssertTrue(volume.isMounted(), "NoExec HFS+ volume should exist")
+
+            XCTAssertTrue(Util.isMountedWith(path: volume.path(), flags: ["noexec"]), "Volume should have noexec flag")
+
+            TmpDiskManager.shared.ejectVolume(volume: volume) { error in
+                expectation.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 30, handler: nil)
     }
 
     // MARK: - NoExec and Hidden
-    
+
     func testNoExecAndHiddenVolumeSucceedsAPFS() throws {
-        var volume = TmpDiskVolume(name: "testnoexecandhiddenvolume", size: 8)
+        var volume = TmpDiskVolume(name: "testnoexecandhiddenvolume", size: 128)
         volume.noExec = true
         volume.hidden = true
         let expectation = self.expectation(description: "Creating noexec and hidden volume")
-        
+
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
             XCTAssertNil(error)
             XCTAssertTrue(volume.isMounted(), "NoExec and hidden volume should exist")
-            
+
             XCTAssertTrue(Util.isMountedWith(path: volume.path(), flags: ["nobrowse", "noexec"]), "Volume should have nobrowse and noexec")
-            
+
             TmpDiskManager.shared.ejectVolume(volume: volume) { error in
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
-    
+
     func testNoExecAndHiddenVolumeSucceedsHFS() throws {
-        var volume = TmpDiskVolume(name: "testnoexecandhiddenvolume", size: 8, fileSystem: "HFS+")
+        var volume = TmpDiskVolume(name: "testnoexecandhiddenhfs", size: 128, fileSystem: "HFS+")
         volume.noExec = true
         volume.hidden = true
         let expectation = self.expectation(description: "Creating noexec and hidden volume")
-        
+
         TmpDiskManager.shared.createTmpDisk(volume: volume) {error in
             XCTAssertNil(error)
             XCTAssertTrue(volume.isMounted(), "NoExec and hidden volume should exist")
-            
+
             XCTAssertTrue(Util.isMountedWith(path: volume.path(), flags: ["nobrowse", "noexec"]), "Volume should have nobrowse and noexec")
-            
+
             TmpDiskManager.shared.ejectVolume(volume: volume) { error in
                 expectation.fulfill()
             }
         }
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
 }

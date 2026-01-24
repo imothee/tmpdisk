@@ -45,6 +45,7 @@
 		22A69389277005B80040FDEF /* TmpDiskLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22A6935C277004E80040FDEF /* TmpDiskLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22A6938B27700B4B0040FDEF /* AutoCreateManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */; };
 		22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */; };
+		22B7D3152F24561A00BF2250 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B7D3142F24561A00BF2250 /* Logger.swift */; };
 		22B88C3F2DA3303E00952C95 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
 		22B88C402DA3303E00952C95 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
 		22B88C4D2DA3500500952C95 /* TmpDiskCLI in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B88C452DA3495300952C95 /* TmpDiskCLI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -186,6 +187,7 @@
 		22A69387277005840040FDEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		22A6938A27700B4B0040FDEF /* AutoCreateManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCreateManagerViewController.swift; sourceTree = "<group>"; };
 		22A6938C27702BDF0040FDEF /* CheckBoxTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxTableCellView.swift; sourceTree = "<group>"; };
+		22B7D3142F24561A00BF2250 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskSizeManager.swift; sourceTree = "<group>"; };
 		22B88C452DA3495300952C95 /* TmpDiskCLI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TmpDiskCLI; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D93DBD27B85E0F0024FB53 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		220082422765504E00A8524B /* TmpDisk */ = {
 			isa = PBXGroup;
 			children = (
+				22B7D3142F24561A00BF2250 /* Logger.swift */,
 				2264C5EA27657A7E00C45CB8 /* Views */,
 				220082432765504E00A8524B /* AppDelegate.swift */,
 				2226C0D7294EAFF80043D2B7 /* IconUtil.swift */,
@@ -510,7 +513,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1630;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					2200823F2765504E00A8524B = {
 						CreatedOnToolsVersion = 13.1;
@@ -659,6 +662,7 @@
 				2264C5EC27657AAC00C45CB8 /* TmpDiskManager.swift in Sources */,
 				22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */,
 				22B88C402DA3303E00952C95 /* DiskSizeManager.swift in Sources */,
+				22B7D3152F24561A00BF2250 /* Logger.swift in Sources */,
 				2226C0D8294EAFF80043D2B7 /* IconUtil.swift in Sources */,
 				2264C5E2276553E600C45CB8 /* StatusBarController.swift in Sources */,
 				22A6938D27702BDF0040FDEF /* CheckBoxTableCellView.swift in Sources */,
@@ -808,6 +812,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -829,6 +834,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -871,6 +877,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -885,6 +892,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -901,7 +909,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1019;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDisk/Info.plist;
@@ -935,7 +943,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1019;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDisk/Info.plist;
@@ -961,13 +969,11 @@
 		220082692765505100A8524B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -987,13 +993,11 @@
 		2200826A2765505100A8524B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1013,12 +1017,10 @@
 		2200826C2765505100A8524B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1038,12 +1040,10 @@
 		2200826D2765505100A8524B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1068,7 +1068,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1099,7 +1098,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 5;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1132,8 +1130,9 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 10;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDiskLauncher/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -1165,7 +1164,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 10;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TmpDiskLauncher/Info.plist;
@@ -1193,7 +1192,6 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -1212,7 +1210,6 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;

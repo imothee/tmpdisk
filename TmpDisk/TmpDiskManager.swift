@@ -42,14 +42,17 @@ class TmpDiskManager {
                 let tmpdiskFilePath = "/Volumes/\(vol)/.tmpdisk"
                 if FileManager.default.fileExists(atPath: tmpdiskFilePath) {
                     if let jsonData = FileManager.default.contents(atPath: tmpdiskFilePath) {
-                        if let volume = try? JSONDecoder().decode(TmpDiskVolume.self, from: jsonData) {
+                        do {
+                            let volume = try JSONDecoder().decode(TmpDiskVolume.self, from: jsonData)
                             self.volumes.insert(volume)
+                        } catch {
+                            Logger.shared.error("Failed to decode volume metadata at \(tmpdiskFilePath): \(error.localizedDescription)")
                         }
                     }
                 }
             }
         }
-        
+
         // Check for existing tmpfs
         if let vols = try? FileManager.default.contentsOfDirectory(atPath: TmpDiskManager.rootFolder) {
             for vol in vols {
@@ -57,18 +60,26 @@ class TmpDiskManager {
                 let tmpdiskFilePath = "\(TmpDiskManager.rootFolder)/\(vol)/.tmpdisk"
                 if FileManager.default.fileExists(atPath: tmpdiskFilePath) {
                     if let jsonData = FileManager.default.contents(atPath: tmpdiskFilePath) {
-                        if let volume = try? JSONDecoder().decode(TmpDiskVolume.self, from: jsonData) {
+                        do {
+                            let volume = try JSONDecoder().decode(TmpDiskVolume.self, from: jsonData)
                             self.volumes.insert(volume)
+                        } catch {
+                            Logger.shared.error("Failed to decode volume metadata at \(tmpdiskFilePath): \(error.localizedDescription)")
                         }
                     }
                 }
             }
         }
-        
+
         // AutoCreate any saved TmpDisks
         for volume in self.getAutoCreateVolumes() {
             self.createTmpDisk(volume: volume) { error in
-                // TODO: Add autocreate error
+                if let error = error {
+                    Logger.shared.error("Failed to auto-create volume '\(volume.name)': \(error.localizedDescription)")
+                    DispatchQueue.main.async {
+                        self.autoCreateError(name: volume.name, error: error)
+                    }
+                }
             }
         }
     }
@@ -134,7 +145,9 @@ class TmpDiskManager {
         }
         
         // Run using tasks
-        self.runTask(task, needsRoot: isTmpFS) { status in
+        // noExec requires root to remount with mount -u -o noexec
+        let needsRoot = isTmpFS || volume.noExec
+        self.runTask(task, needsRoot: needsRoot) { status in
             if status != 0 {
                 return onCreate(.failed)
             }
@@ -178,7 +191,7 @@ class TmpDiskManager {
             }
         }
         if onCompletion != nil {
-            _ = wait()
+            group.wait()
             DispatchQueue.main.async {
                 onCompletion!()
             }
@@ -221,7 +234,7 @@ class TmpDiskManager {
         alert.informativeText = NSLocalizedString("To eject the disk immediately, hit the Force Eject button", comment: "")
         alert.alertStyle = .warning
         alert.addButton(withTitle: NSLocalizedString("Force Eject", comment: ""))
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: NSLocalizedString("Cancel", comment: ""))
         if alert.runModal() == .alertFirstButtonReturn {
             self.ejectTmpDisksWithName(names: [volume.name], recreate: recreate, force: true)
         }
@@ -231,7 +244,16 @@ class TmpDiskManager {
         let alert = NSAlert()
         alert.messageText = String(format: NSLocalizedString("Failed to eject \"%@\"", comment: ""), name)
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment: ""))
+        alert.runModal()
+    }
+
+    func autoCreateError(name: String, error: TmpDiskError) {
+        let alert = NSAlert()
+        alert.messageText = String(format: NSLocalizedString("Failed to auto-create \"%@\"", comment: ""), name)
+        alert.informativeText = error.localizedDescription
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: NSLocalizedString("OK", comment: ""))
         alert.runModal()
     }
     
@@ -252,9 +274,12 @@ class TmpDiskManager {
     }
     
     func diskCreated(volume: TmpDiskVolume) {
-        if let jsonData = try? JSONEncoder().encode(volume) {
+        do {
+            let jsonData = try JSONEncoder().encode(volume)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            try? jsonString.write(toFile: "\(volume.path())/.tmpdisk", atomically: true, encoding: .utf8)
+            try jsonString.write(toFile: "\(volume.path())/.tmpdisk", atomically: true, encoding: .utf8)
+        } catch {
+            Logger.shared.error("Failed to write metadata for volume '\(volume.name)': \(error.localizedDescription)")
         }
             
         if volume.indexed {
@@ -273,15 +298,19 @@ class TmpDiskManager {
         
         DispatchQueue.main.async {
             self.volumes.insert(volume)
+            NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
         }
-        NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
     }
     
     func createFolders(volume: TmpDiskVolume) {
         for folder in volume.folders {
             let path = "\(volume.path())/\(folder)"
             if !FileManager.default.fileExists(atPath: path) {
-                try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                do {
+                    try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    Logger.shared.error("Failed to create folder '\(folder)' in volume '\(volume.name)': \(error.localizedDescription)")
+                }
             }
         }
     }
@@ -328,8 +357,12 @@ class TmpDiskManager {
     func runAppleScript(_ command: String) -> Process {
         let task = Process()
         task.launchPath = "/usr/bin/osascript"
+        // Escape backslashes and quotes for AppleScript string
+        let escapedCommand = command
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "\"", with: "\\\"")
         let script = """
-            do shell script "\(command)" with administrator privileges
+            do shell script "\(escapedCommand)" with administrator privileges
         """
         task.arguments = ["-e", script]
         return task
@@ -374,33 +407,61 @@ class TmpDiskManager {
             """
         }
 
-        // Build attach command
-        let attach: String
-        if volume.noExec && volume.hidden {
-            attach = """
-            hdiutil attach -mountpoint "\(path)" /dev/$MOUNT_DEV && \\
-            mount -u -t hfs,apfs -o noexec,nobrowse /dev/$MOUNT_DEV "\(path)"
-            """
-        } else if volume.noExec {
-            attach = """
-            hdiutil attach -mountpoint "\(path)" /dev/$MOUNT_DEV && \\
-            mount -u -t hfs,apfs -o noexec /dev/$MOUNT_DEV "\(path)"
-            """
-        } else if volume.hidden {
-            attach = """
-            hdiutil attach -nobrowse -mountpoint "\(path)" /dev/$MOUNT_DEV
-            """
+        // noExec requires remounting with mount -u -o noexec
+        // For hidden volumes, we need to preserve nobrowse when adding noexec
+        let noExecLine: String
+        if volume.noExec {
+            if volume.hidden {
+                noExecLine = " && \\\nmount -u -o nobrowse,noexec \"\(path)\""
+            } else {
+                noExecLine = " && \\\nmount -u -o noexec \"\(path)\""
+            }
         } else {
-            attach = """
-            hdiutil attach -mountpoint "\(path)" /dev/$MOUNT_DEV
+            noExecLine = ""
+        }
+
+        let script: String
+
+        if FileSystemManager.isAPFS(fileSystem) || FileSystemManager.isHFS(fileSystem) {
+            if volume.hidden {
+                // For hidden volumes: diskutil eraseDisk auto-mounts at /Volumes/name,
+                // so we unmount from there, then re-attach with -nobrowse
+                if FileSystemManager.isAPFS(fileSystem) {
+                    // For APFS: use the original disk ID to re-attach the whole container
+                    script = """
+                    DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
+                    diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID && \\
+                    diskutil unmount "/Volumes/\(volumeName)" && \\
+                    hdiutil attach -nobrowse -mountpoint "\(path)" $DISK_ID\(noExecLine)
+                    """
+                } else {
+                    // For HFS+: use the specific HFS partition
+                    script = """
+                    DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
+                    diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID && \\
+                    \(resolveMountDevice)
+                    diskutil unmount "/Volumes/\(volumeName)" && \\
+                    hdiutil attach -nobrowse -mountpoint "\(path)" /dev/$MOUNT_DEV\(noExecLine)
+                    """
+                }
+            } else {
+                // For non-hidden: diskutil eraseDisk mounts at /Volumes/name,
+                // which is already the correct location for standard volumes
+                script = """
+                DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
+                diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID\(noExecLine)
+                """
+            }
+        } else {
+            // Fallback for any other filesystem
+            let hiddenFlag = volume.hidden ? "-nobrowse " : ""
+            script = """
+            DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
+            diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID && \\
+            hdiutil attach \(hiddenFlag)-mountpoint "\(path)" $DISK_ID\(noExecLine)
             """
         }
 
-        return """
-        DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
-        diskutil eraseDisk \(fileSystem) \(volumeName) $DISK_ID && \\
-        \(resolveMountDevice)
-        \(attach)
-        """
+        return script
     }
 }

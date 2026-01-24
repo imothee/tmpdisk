@@ -94,6 +94,10 @@ class StatusBarController {
         let preferencesItem = NSMenuItem(title: NSLocalizedString("Preferences", comment: ""), action: #selector(preferences(sender:)), keyEquivalent: "")
         preferencesItem.target = self
         statusMenu.addItem(preferencesItem)
+
+        let viewLogsItem = NSMenuItem(title: NSLocalizedString("View Logs", comment: ""), action: #selector(viewLogs(sender:)), keyEquivalent: "")
+        viewLogsItem.target = self
+        statusMenu.addItem(viewLogsItem)
         
         // Separator
         statusMenu.addItem(NSMenuItem.separator())
@@ -199,6 +203,10 @@ class StatusBarController {
     
     @objc func about(sender: AnyObject) {
         windowManager.showAboutWindow()
+    }
+
+    @objc func viewLogs(sender: AnyObject) {
+        Logger.openLogFile()
     }
     
     @objc func quit(sender: AnyObject) {

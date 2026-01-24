@@ -66,7 +66,7 @@ class FileSystemManager {
         return self.availableFileSystems().first!.name
     }
     
-    // Get the descriptions of avaialable file systems
+    // Get the descriptions of available file systems
     static func availableFileSystemDescriptions() -> [String] {
         return availableFileSystems().map(\.self.description)
     }
@@ -77,6 +77,10 @@ class FileSystemManager {
     
     static func isAPFS(_ fileSystemName: String) -> Bool {
         return fileSystemName == "APFS" || fileSystemName == "APFSX"
+    }
+    
+    static func isHFS(_ fileSystemName: String) -> Bool {
+        return fileSystemName == "HFS+" || fileSystemName == "HFSX" || fileSystemName == "JHFS+" || fileSystemName == "JHFSX"
     }
     
     static func description(for fileSystemName: String) -> String? {
