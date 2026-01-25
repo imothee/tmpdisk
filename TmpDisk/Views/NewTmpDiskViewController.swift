@@ -215,16 +215,18 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
             return
         }
         
-        if FileSystemManager.isTmpFS(volume.fileSystem) {
+        // TMPFS and noExec both require elevated privileges
+        let needsHelper = FileSystemManager.isTmpFS(volume.fileSystem) || volume.noExec
+        if needsHelper {
             // Check if we've ever prompted them to install the helper
-            let helperPrompted = UserDefaults.standard.object(forKey: "helperPromptShowns") as? Bool
+            let helperPrompted = UserDefaults.standard.object(forKey: "helperPromptShown") as? Bool
             let helperVersion = Util.checkHelperVersion()
-            
+
             if helperPrompted == nil && helperVersion == nil {
                 UserDefaults.standard.set(true, forKey: "helperPromptShown")
-                
+
                 let alert = NSAlert()
-                alert.messageText = NSLocalizedString("You can now install the TmpDiskHelper to create TmpFS volumes without entering a password each time. The helper can be managed in TmpDisk preferences and requires your Admin Password to install.", comment: "")
+                alert.messageText = NSLocalizedString("You can install the TmpDiskHelper to create privileged volumes (TMPFS and noexec) without entering a password each time. The helper can be managed in TmpDisk preferences and requires your Admin Password to install.", comment: "")
                 alert.alertStyle = .warning
                 alert.addButton(withTitle: "OK")
                 alert.addButton(withTitle: "Don't ask again")

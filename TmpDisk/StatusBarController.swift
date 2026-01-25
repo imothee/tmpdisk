@@ -150,23 +150,69 @@ class StatusBarController {
     func buildCurrentTmpDiskMenu() {
         self.currentTmpDisksMenu.removeAllItems()
         for volume in TmpDiskManager.shared.volumes {
-            let volumeItem = TmpDiskMenuItem.init(title: volume.name, action: nil, keyEquivalent: "", clickHandler: {
-                NSWorkspace.shared.open(volume.URL())
-                self.statusMenu.cancelTracking()
-            }, recreateHandler: {
-                if self.confirmEject(volume: volume) {
-                    TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
-                }
-                self.statusMenu.cancelTracking()
-            }, ejectHandler: {
-                if self.confirmEject(volume: volume) {
-                    TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: false)
-                }
-                self.statusMenu.cancelTracking()
-            })
+            let volumeItem = TmpDiskMenuItem.init(
+                title: volume.name,
+                action: nil,
+                keyEquivalent: "",
+                hasSyncSource: volume.hasSyncSource,
+                clickHandler: {
+                    NSWorkspace.shared.open(volume.URL())
+                    self.statusMenu.cancelTracking()
+                },
+                recreateHandler: {
+                    if self.confirmEject(volume: volume) {
+                        TmpDiskManager.shared.ejectTmpDisksWithName(names: [volume.name], recreate: true)
+                    }
+                    self.statusMenu.cancelTracking()
+                },
+                ejectHandler: {
+                    if self.confirmEject(volume: volume) {
+                        TmpDiskManager.shared.ejectVolumeWithSync(volume: volume, recreate: false) { error in
+                            if error == nil {
+                                DispatchQueue.main.async {
+                                    TmpDiskManager.shared.volumes.remove(volume)
+                                    NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
+                                    if FileSystemManager.isTmpFS(volume.fileSystem) {
+                                        try? FileManager.default.removeItem(atPath: volume.path())
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    self.statusMenu.cancelTracking()
+                },
+                saveHandler: volume.hasSyncSource ? {
+                    TmpDiskManager.shared.syncToSource(volume: volume) { success in
+                        if success {
+                            self.showSaveSuccess(volume: volume)
+                        } else {
+                            self.showSaveError(volume: volume)
+                        }
+                    }
+                    self.statusMenu.cancelTracking()
+                } : nil
+            )
             volumeItem.target = self
             self.currentTmpDisksMenu.addItem(volumeItem)
         }
+    }
+
+    func showSaveSuccess(volume: TmpDiskVolume) {
+        let alert = NSAlert()
+        alert.messageText = String(format: NSLocalizedString("Saved \"%@\"", comment: ""), volume.name)
+        alert.informativeText = String(format: NSLocalizedString("Contents saved to \"%@\"", comment: ""), volume.syncSource ?? "")
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: NSLocalizedString("OK", comment: ""))
+        alert.runModal()
+    }
+
+    func showSaveError(volume: TmpDiskVolume) {
+        let alert = NSAlert()
+        alert.messageText = String(format: NSLocalizedString("Failed to save \"%@\"", comment: ""), volume.name)
+        alert.informativeText = NSLocalizedString("Check the logs for more details.", comment: "")
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: NSLocalizedString("OK", comment: ""))
+        alert.runModal()
     }
     
     // MARK: - Actions

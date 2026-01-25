@@ -6,7 +6,13 @@
 //
 
 import Foundation
-import AppKit
+
+/// Save-on-eject mode for synced volumes
+enum SaveOnEjectMode: String, Codable {
+    case no = "no"
+    case yes = "yes"
+    case prompt = "prompt"
+}
 
 struct TmpDiskVolume: Hashable, Codable {
     var name: String = ""
@@ -21,6 +27,16 @@ struct TmpDiskVolume: Hashable, Codable {
     var folders: [String] = []
     var icon: String?
     var mountPoint: String?
+
+    // Sync properties
+    var syncSource: String?              // Path to sync from/to
+    var syncInterval: Int = 0            // Sync interval in minutes (0 = manual only)
+    var saveOnEject: SaveOnEjectMode = .prompt  // Whether to save back on eject
+
+    /// Returns true if this volume has sync configured
+    var hasSyncSource: Bool {
+        return syncSource != nil && !syncSource!.isEmpty
+    }
     
     init() {
         self.fileSystem = FileSystemManager.defaultFileSystemName()
@@ -39,23 +55,29 @@ struct TmpDiskVolume: Hashable, Codable {
               let indexed = dictionary["indexed"] as? Bool,
               let hidden = dictionary["hidden"] as? Bool
         else { return nil }
-        
+
         let warnOnEject = dictionary["warnOnEject"] as? Bool ?? false
         let autoEjectOnExit = dictionary["autoEjectOnExit"] as? Bool ?? false
         let folders = dictionary["folders"] as? [String] ?? []
         let icon = dictionary["icon"] as? String
         let noExec = dictionary["noExec"] as? Bool ?? false
         let mountPoint = dictionary["mountPoint"] as? String
-        
+
+        // Sync properties
+        let syncSource = dictionary["syncSource"] as? String
+        let syncInterval = dictionary["syncInterval"] as? Int ?? 0
+        let saveOnEjectStr = dictionary["saveOnEject"] as? String ?? "prompt"
+        let saveOnEject = SaveOnEjectMode(rawValue: saveOnEjectStr) ?? .prompt
+
         let fileSystem: String
-        
+
         if let fs = dictionary["filesystem"] as? String {
             fileSystem = fs
         } else {
             let tmpFs = dictionary["tmpFs"] as? Bool
             let caseSensitive = dictionary["caseSensitive"] as? Bool
             let journaled = dictionary["journaled"] as? Bool
-            
+
             // We're going to use HSF+ for legacy tmpdisks
             if tmpFs ?? false {
                 fileSystem = "TMPFS"
@@ -69,7 +91,7 @@ struct TmpDiskVolume: Hashable, Codable {
                 fileSystem = "HFS+"
             }
         }
-        
+
         self.name = name
         self.size = size
         self.autoCreate = true
@@ -86,13 +108,18 @@ struct TmpDiskVolume: Hashable, Codable {
         if let mountPoint = mountPoint, mountPoint != "" {
             self.mountPoint = mountPoint
         }
+        if let syncSource = syncSource, !syncSource.isEmpty {
+            self.syncSource = syncSource
+        }
+        self.syncInterval = syncInterval
+        self.saveOnEject = saveOnEject
     }
     
     func path() -> String {
         if let mountPoint = self.mountPoint {
             return mountPoint
         } else if FileSystemManager.isTmpFS(fileSystem) {
-            return "\(TmpDiskManager.rootFolder)/\(name)"
+            return "\(TmpDiskConfig.rootFolder)/\(name)"
         }
         return "/Volumes/\(name)"
     }
@@ -113,7 +140,10 @@ struct TmpDiskVolume: Hashable, Codable {
             "autoEjectOnExit": autoEjectOnExit,
             "folders": folders,
             "icon": icon ?? "",
-            "mountPoint": mountPoint ?? ""
+            "mountPoint": mountPoint ?? "",
+            "syncSource": syncSource ?? "",
+            "syncInterval": syncInterval,
+            "saveOnEject": saveOnEject.rawValue
         ]
     }
     

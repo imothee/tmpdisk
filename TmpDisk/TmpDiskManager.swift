@@ -22,53 +22,28 @@
 import Foundation
 import AppKit
 
-let TmpDiskHome = "\(NSHomeDirectory())/.tmpdisk"
-
 class TmpDiskManager {
-    
+
     static let shared: TmpDiskManager = {
         let instance = TmpDiskManager()
         // setup code
         return instance
     }()
- 
-    static var rootFolder = UserDefaults.standard.object(forKey: "rootFolder") as? String ?? TmpDiskHome
-    var volumes: Set<TmpDiskVolume> = []
-    
-    init() {
-        // Check for existing tmpdisks
-        if let vols = try? FileManager.default.contentsOfDirectory(atPath: "/Volumes") {
-            for vol in vols {
-                let tmpdiskFilePath = "/Volumes/\(vol)/.tmpdisk"
-                if FileManager.default.fileExists(atPath: tmpdiskFilePath) {
-                    if let jsonData = FileManager.default.contents(atPath: tmpdiskFilePath) {
-                        do {
-                            let volume = try JSONDecoder().decode(TmpDiskVolume.self, from: jsonData)
-                            self.volumes.insert(volume)
-                        } catch {
-                            Logger.shared.error("Failed to decode volume metadata at \(tmpdiskFilePath): \(error.localizedDescription)")
-                        }
-                    }
-                }
-            }
-        }
 
-        // Check for existing tmpfs
-        if let vols = try? FileManager.default.contentsOfDirectory(atPath: TmpDiskManager.rootFolder) {
-            for vol in vols {
-                // For now we don't check if it's mounted, just check for the tmpdisk file
-                let tmpdiskFilePath = "\(TmpDiskManager.rootFolder)/\(vol)/.tmpdisk"
-                if FileManager.default.fileExists(atPath: tmpdiskFilePath) {
-                    if let jsonData = FileManager.default.contents(atPath: tmpdiskFilePath) {
-                        do {
-                            let volume = try JSONDecoder().decode(TmpDiskVolume.self, from: jsonData)
-                            self.volumes.insert(volume)
-                        } catch {
-                            Logger.shared.error("Failed to decode volume metadata at \(tmpdiskFilePath): \(error.localizedDescription)")
-                        }
-                    }
-                }
-            }
+    /// Root folder for TMPFS volumes - uses TmpDiskConfig for consistent behavior
+    static var rootFolder: String {
+        return TmpDiskConfig.rootFolder
+    }
+
+    var volumes: Set<TmpDiskVolume> = []
+
+    // Sync timers for periodic sync
+    private var syncTimers: [String: Timer] = [:]
+
+    init() {
+        // Discover existing volumes using shared logic
+        for volume in DiskOperations.findAllVolumes() {
+            self.volumes.insert(volume)
         }
 
         // AutoCreate any saved TmpDisks
@@ -113,27 +88,32 @@ class TmpDiskManager {
         if volume.name.isEmpty  {
             return onCreate(.noName)
         }
-        
+
         if volume.size <= 0 {
             return onCreate(.invalidSize)
         }
-        
+
         if volumes.contains(where: { $0.name == volume.name || $0.path() == volume.path() }) || volume.isMounted() {
             return onCreate(.exists)
         }
-        
+
         let isTmpFS = FileSystemManager.isTmpFS(volume.fileSystem)
-        
-        let task = isTmpFS ? try? self.createTmpFsTask(volume: volume) : self.createRamDiskTask(volume: volume)
-        
-        guard let task = task else {
+        let needsRoot = isTmpFS || volume.noExec
+
+        // Use DiskOperations for command generation (include chown for privileged operations)
+        let task: String
+        do {
+            task = isTmpFS
+                ? try DiskOperations.createTmpFsCommand(volume: volume, fixOwnership: needsRoot)
+                : DiskOperations.createRamDiskCommand(volume: volume, fixOwnership: needsRoot)
+        } catch {
             return onCreate(.failed)
         }
-        
-        if Util.checkHelperVersion() != nil && isTmpFS {
-            // Run using the helper only for TmpFS
+
+        if Util.checkHelperVersion() != nil && needsRoot {
+            // Run using the helper for privileged operations (TMPFS or noexec)
             let client = XPCClient()
-            
+
             client.createVolume(task) { error in
                 if error != nil {
                     return onCreate(error)
@@ -143,10 +123,8 @@ class TmpDiskManager {
             }
             return
         }
-        
-        // Run using tasks
-        // noExec requires root to remount with mount -u -o noexec
-        let needsRoot = isTmpFS || volume.noExec
+
+        // Run using tasks (AppleScript prompt for admin)
         self.runTask(task, needsRoot: needsRoot) { status in
             if status != 0 {
                 return onCreate(.failed)
@@ -199,19 +177,20 @@ class TmpDiskManager {
     }
     
     func ejectVolume(volume: TmpDiskVolume, force: Bool = false, onEjected: @escaping (TmpDiskError?) -> Void) {
-        let task = self.ejectTask(volume: volume, force: force)
+        // Use DiskOperations for command generation
+        let task = DiskOperations.ejectCommand(volume: volume, force: force)
         let isTmpFS = FileSystemManager.isTmpFS(volume.fileSystem)
-        
+
         if Util.checkHelperVersion() != nil && isTmpFS {
             // Run using the helper
             let client = XPCClient()
-            
+
             client.ejectVolume(task) { error in
                 onEjected(error)
             }
             return
         }
-        
+
         // We only need to do this for now if we're not using the helper
         // TODO: Move back to optionally handling workspace unmount
         self.runTask(task, needsRoot: isTmpFS) { status in
@@ -274,49 +253,42 @@ class TmpDiskManager {
     }
     
     func diskCreated(volume: TmpDiskVolume) {
-        do {
-            let jsonData = try JSONEncoder().encode(volume)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
-            try jsonString.write(toFile: "\(volume.path())/.tmpdisk", atomically: true, encoding: .utf8)
-        } catch {
-            Logger.shared.error("Failed to write metadata for volume '\(volume.name)': \(error.localizedDescription)")
-        }
-            
+        // Use DiskOperations for metadata and folder creation
+        DiskOperations.writeMetadata(volume: volume)
+
         if volume.indexed {
             self.indexVolume(volume: volume)
         }
-        
+
         // Create the folders if there are any set
-        self.createFolders(volume: volume)
-        
-        // Create the icon if there is one set
+        DiskOperations.createFolders(volume: volume)
+
+        // Create the icon if there is one set (AppKit-specific)
         self.createIcon(volume: volume)
-        
+
+        // Sync from source if configured
+        if volume.hasSyncSource {
+            self.syncFromSource(volume: volume)
+        }
+
         if volume.autoCreate {
             self.addAutoCreateVolume(volume: volume)
         }
-        
+
+        // Start sync timer if periodic sync is configured
+        if volume.hasSyncSource && volume.syncInterval > 0 {
+            self.startSyncTimer(for: volume)
+        }
+
         DispatchQueue.main.async {
             self.volumes.insert(volume)
             NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
         }
     }
-    
-    func createFolders(volume: TmpDiskVolume) {
-        for folder in volume.folders {
-            let path = "\(volume.path())/\(folder)"
-            if !FileManager.default.fileExists(atPath: path) {
-                do {
-                    try FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
-                } catch {
-                    Logger.shared.error("Failed to create folder '\(folder)' in volume '\(volume.name)': \(error.localizedDescription)")
-                }
-            }
-        }
-    }
-    
+
     func indexVolume(volume: TmpDiskVolume) {
-        let task = self.indexTask(volume: volume)
+        // Use DiskOperations for command generation
+        let task = DiskOperations.indexCommand(volume: volume)
         self.runTask(task) { _ in }
     }
     
@@ -368,100 +340,148 @@ class TmpDiskManager {
         return task
     }
     
-    // MARK: - Tasks
-    
-    func ejectTask(volume: TmpDiskVolume, force: Bool) -> String {
-        return "/usr/bin/hdiutil detach \(force ? "-force" : "") \"\(volume.path())\""
-    }
-    
-    func indexTask(volume: TmpDiskVolume) -> String {
-        return "mdutil -i on \"\(volume.path())\""
-    }
-    
-    func createTmpFsTask(volume: TmpDiskVolume) throws -> String {
-        // Setup the volume mount folder
-        if !FileManager.default.fileExists(atPath: volume.path()) {
-             try FileManager.default.createDirectory(atPath: volume.path(), withIntermediateDirectories: true, attributes: nil)
-        }
-        
-        return "mount_tmpfs -s\(volume.size)M \(volume.noExec ? "-o noexec " : "")\(volume.path())"
-    }
-    
-    func createRamDiskTask(volume: TmpDiskVolume) -> String {
-        let dSize = UInt64(volume.size) * 2048
-        let fileSystem = volume.fileSystem
-        let volumeName = volume.name
-        let path = volume.path()
+    // MARK: - Volume Discovery
 
-        // Resolve the correct device to mount
-        let resolveMountDevice: String
-        if FileSystemManager.isAPFS(fileSystem) {
-            // Mount the synthesized container (diskY)
-            resolveMountDevice = """
-            MOUNT_DEV=$(diskutil list $DISK_ID | awk '/Apple_APFS Container/ {print $NF}') && \\
-            """
-        } else {
-            // Mount the single HFS+ partition (diskXs2)
-            resolveMountDevice = """
-            MOUNT_DEV=$(diskutil list $DISK_ID | awk '/Apple_HFS/ {print $NF}') && \\
-            """
+    /// Add a volume that was created externally (e.g., by CLI)
+    func addExternalVolume(_ volume: TmpDiskVolume) {
+        if !volumes.contains(where: { $0.name == volume.name }) {
+            volumes.insert(volume)
+            NotificationCenter.default.post(name: .tmpDiskMounted, object: nil)
         }
+    }
 
-        // noExec requires remounting with mount -u -o noexec
-        // For hidden volumes, we need to preserve nobrowse when adding noexec
-        let noExecLine: String
-        if volume.noExec {
-            if volume.hidden {
-                noExecLine = " && \\\nmount -u -o nobrowse,noexec \"\(path)\""
+    /// Check if a path is a TmpDisk volume and add it if so
+    func checkForExternalTmpDisk(at path: String) {
+        let tmpdiskFilePath = "\(path)/.tmpdisk"
+        if FileManager.default.fileExists(atPath: tmpdiskFilePath),
+           let jsonData = FileManager.default.contents(atPath: tmpdiskFilePath),
+           let volume = try? JSONDecoder().decode(TmpDiskVolume.self, from: jsonData) {
+            addExternalVolume(volume)
+        }
+    }
+
+    // MARK: - Sync Operations
+
+    /// Sync from source folder to RAM disk
+    func syncFromSource(volume: TmpDiskVolume) {
+        guard volume.hasSyncSource else { return }
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            let result = DiskOperations.syncFromSource(volume: volume)
+            if !result.success {
+                Logger.shared.error("Sync from source failed for '\(volume.name)': \(result.message ?? "Unknown error")")
             } else {
-                noExecLine = " && \\\nmount -u -o noexec \"\(path)\""
+                Logger.shared.info("Synced from source for '\(volume.name)'")
             }
-        } else {
-            noExecLine = ""
+        }
+    }
+
+    /// Sync RAM disk back to source folder
+    func syncToSource(volume: TmpDiskVolume, completion: ((Bool) -> Void)? = nil) {
+        guard volume.hasSyncSource else {
+            completion?(false)
+            return
         }
 
-        let script: String
+        DispatchQueue.global(qos: .userInitiated).async {
+            let result = DiskOperations.syncToSource(volume: volume)
+            if !result.success {
+                Logger.shared.error("Sync to source failed for '\(volume.name)': \(result.message ?? "Unknown error")")
+            } else {
+                Logger.shared.info("Saved '\(volume.name)' to source")
+            }
+            DispatchQueue.main.async {
+                completion?(result.success)
+            }
+        }
+    }
 
-        if FileSystemManager.isAPFS(fileSystem) || FileSystemManager.isHFS(fileSystem) {
-            if volume.hidden {
-                // For hidden volumes: diskutil eraseDisk auto-mounts at /Volumes/name,
-                // so we unmount from there, then re-attach with -nobrowse
-                if FileSystemManager.isAPFS(fileSystem) {
-                    // For APFS: use the original disk ID to re-attach the whole container
-                    script = """
-                    DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
-                    diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID && \\
-                    diskutil unmount "/Volumes/\(volumeName)" && \\
-                    hdiutil attach -nobrowse -mountpoint "\(path)" $DISK_ID\(noExecLine)
-                    """
-                } else {
-                    // For HFS+: use the specific HFS partition
-                    script = """
-                    DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
-                    diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID && \\
-                    \(resolveMountDevice)
-                    diskutil unmount "/Volumes/\(volumeName)" && \\
-                    hdiutil attach -nobrowse -mountpoint "\(path)" /dev/$MOUNT_DEV\(noExecLine)
-                    """
+    /// Start periodic sync timer for a volume
+    func startSyncTimer(for volume: TmpDiskVolume) {
+        guard volume.syncInterval > 0 else { return }
+
+        // Cancel existing timer if any
+        stopSyncTimer(for: volume.name)
+
+        let interval = TimeInterval(volume.syncInterval * 60) // Convert minutes to seconds
+        let timer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+            self?.syncToSource(volume: volume, completion: nil)
+        }
+        syncTimers[volume.name] = timer
+        Logger.shared.info("Started sync timer for '\(volume.name)' (every \(volume.syncInterval) min)")
+    }
+
+    /// Stop sync timer for a volume
+    func stopSyncTimer(for name: String) {
+        if let timer = syncTimers[name] {
+            timer.invalidate()
+            syncTimers.removeValue(forKey: name)
+        }
+    }
+
+    /// Handle save-on-eject for a volume
+    /// Returns true if eject should proceed, false if cancelled
+    func handleSaveOnEject(volume: TmpDiskVolume, completion: @escaping (Bool) -> Void) {
+        guard volume.hasSyncSource else {
+            completion(true)
+            return
+        }
+
+        switch volume.saveOnEject {
+        case .no:
+            completion(true)
+        case .yes:
+            syncToSource(volume: volume) { _ in
+                completion(true)
+            }
+        case .prompt:
+            DispatchQueue.main.async {
+                let alert = NSAlert()
+                alert.messageText = String(format: NSLocalizedString("Save changes to \"%@\"?", comment: ""), volume.name)
+                alert.informativeText = String(format: NSLocalizedString("Do you want to save the contents back to \"%@\" before ejecting?", comment: ""), volume.syncSource ?? "")
+                alert.alertStyle = .warning
+                alert.addButton(withTitle: NSLocalizedString("Save", comment: ""))
+                alert.addButton(withTitle: NSLocalizedString("Don't Save", comment: ""))
+                alert.addButton(withTitle: NSLocalizedString("Cancel", comment: ""))
+
+                let response = alert.runModal()
+                switch response {
+                case .alertFirstButtonReturn:
+                    // Save
+                    self.syncToSource(volume: volume) { _ in
+                        completion(true)
+                    }
+                case .alertSecondButtonReturn:
+                    // Don't Save
+                    completion(true)
+                default:
+                    // Cancel
+                    completion(false)
                 }
-            } else {
-                // For non-hidden: diskutil eraseDisk mounts at /Volumes/name,
-                // which is already the correct location for standard volumes
-                script = """
-                DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
-                diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID\(noExecLine)
-                """
+            }
+        }
+    }
+
+    /// Eject with save-on-eject handling
+    func ejectVolumeWithSync(volume: TmpDiskVolume, force: Bool = false, recreate: Bool = false, onEjected: @escaping (TmpDiskError?) -> Void) {
+        // Stop any sync timer
+        stopSyncTimer(for: volume.name)
+
+        // Handle save-on-eject if not recreating (recreate preserves the purpose of the sync)
+        if !recreate {
+            handleSaveOnEject(volume: volume) { shouldProceed in
+                if shouldProceed {
+                    self.ejectVolume(volume: volume, force: force, onEjected: onEjected)
+                } else {
+                    // User cancelled - restart timer if needed
+                    if volume.syncInterval > 0 {
+                        self.startSyncTimer(for: volume)
+                    }
+                    onEjected(nil) // Not an error, just cancelled
+                }
             }
         } else {
-            // Fallback for any other filesystem
-            let hiddenFlag = volume.hidden ? "-nobrowse " : ""
-            script = """
-            DISK_ID=$(hdiutil attach -nomount ram://\(dSize)) && \\
-            diskutil eraseDisk \(fileSystem) "\(volumeName)" $DISK_ID && \\
-            hdiutil attach \(hiddenFlag)-mountpoint "\(path)" $DISK_ID\(noExecLine)
-            """
+            ejectVolume(volume: volume, force: force, onEjected: onEjected)
         }
-
-        return script
     }
 }

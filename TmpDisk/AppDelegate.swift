@@ -48,6 +48,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
             }
         }
+
+        // Listen for volume mounts to discover CLI-created TmpDisk volumes
+        NSWorkspace.shared.notificationCenter.addObserver(forName: NSWorkspace.didMountNotification, object: nil, queue: .main) { notification in
+            if let path = notification.userInfo?["NSDevicePath"] as? String {
+                TmpDiskManager.shared.checkForExternalTmpDisk(at: path)
+            }
+        }
         
         // Kill the launcher app if it's around
         let launcherAppId = "com.imothee.TmpDiskLauncher"
@@ -95,12 +102,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func showEjectFailureNotification(volumeNames: [String]) {
-        let content = UNMutableNotificationContent()
-        content.title = "TmpDisk"
-        content.body = String(format: NSLocalizedString("Some volumes could not be ejected: %@", comment: ""), volumeNames.joined(separator: ", "))
+        let message = String(format: NSLocalizedString("Some volumes could not be ejected: %@", comment: ""), volumeNames.joined(separator: ", "))
 
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-        UNUserNotificationCenter.current().add(request)
+        if #available(macOS 10.14, *) {
+            let content = UNMutableNotificationContent()
+            content.title = "TmpDisk"
+            content.body = message
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+            UNUserNotificationCenter.current().add(request)
+        } else {
+            // Fallback for older macOS - use deprecated NSUserNotification
+            let notification = NSUserNotification()
+            notification.title = "TmpDisk"
+            notification.informativeText = message
+            NSUserNotificationCenter.default.deliver(notification)
+        }
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {

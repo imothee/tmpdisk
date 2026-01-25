@@ -20,7 +20,6 @@
 //  along with TmpDisk.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
-import AppKit
 
 enum DiskSizeUnit: Int {
     case mb = 0  // Megabytes
@@ -121,22 +120,5 @@ class DiskSizeManager {
         }
         
         return (true, sizeInMB)
-    }
-    
-    /// Shows a warning alert about the TmpFS size limitation
-    func showTmpFSSizeWarning() {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("TmpFS volumes are limited to 50% of RAM. Setting to maximum allowed value.", comment: "")
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
-    }
-    
-    func showInsufficientRamWarning() {
-        let alert = NSAlert()
-        alert.messageText = NSLocalizedString("Insufficient RAM to allocate to TmpDisk. Please reduce the size.", comment: "")
-        alert.alertStyle = .warning
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
     }
 }

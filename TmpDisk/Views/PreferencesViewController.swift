@@ -35,15 +35,15 @@ class PreferencesViewController: NSViewController, NSTextFieldDelegate {
         if let root = UserDefaults.standard.object(forKey: "rootFolder") as? String {
             self.rootFolder.stringValue = root
         }
-        self.rootFolder.placeholderString = TmpDiskHome
-        
+        self.rootFolder.placeholderString = TmpDiskConfig.tmpDiskHome
+
         if Util.checkHelperVersion() != nil {
             helperInstalled = true
             useHelper.setSelected(true, forSegment: 1)
         } else {
             updateHelper.isHidden = true
         }
-        
+
         installCLI.stringValue = Util.installCLI()
     }
     
@@ -81,16 +81,12 @@ class PreferencesViewController: NSViewController, NSTextFieldDelegate {
             alert.runModal()
             return
         }
-        
+
         if rootFolder.stringValue.isEmpty {
             UserDefaults.standard.removeObject(forKey: "rootFolder")
-            TmpDiskManager.rootFolder = TmpDiskHome
-            self.view.window?.close()
-            return
+        } else {
+            UserDefaults.standard.set(rootFolder.stringValue, forKey: "rootFolder")
         }
-        
-        UserDefaults.standard.set(rootFolder.stringValue, forKey: "rootFolder")
-        TmpDiskManager.rootFolder = rootFolder.stringValue
         self.view.window?.close()
     }
 }

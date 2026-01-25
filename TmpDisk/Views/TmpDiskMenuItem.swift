@@ -28,17 +28,22 @@ class TmpDiskMenuItem: NSMenuItem {
     let clickHandler: () -> Void
     let recreateHandler: () -> Void
     let ejectHandler: () -> Void
-    
-    required init(title string: String, action selector: Selector?, keyEquivalent charCode: String, clickHandler: @escaping () -> Void, recreateHandler: @escaping () -> Void, ejectHandler: @escaping () -> Void) {
+    let saveHandler: (() -> Void)?
+
+    required init(title string: String, action selector: Selector?, keyEquivalent charCode: String, hasSyncSource: Bool = false, clickHandler: @escaping () -> Void, recreateHandler: @escaping () -> Void, ejectHandler: @escaping () -> Void, saveHandler: (() -> Void)? = nil) {
         self.clickHandler = clickHandler
         self.recreateHandler = recreateHandler
         self.ejectHandler = ejectHandler
-        
-        super.init(title: string, action: selector, keyEquivalent: charCode)
-        
-        let view = NSView.init(frame: NSRect(x: 0, y: 0, width: 200, height: 25))
+        self.saveHandler = saveHandler
 
-        let label = NSButton(frame: NSRect(x: 20, y: 2.5, width: 140, height: 20))
+        super.init(title: string, action: selector, keyEquivalent: charCode)
+
+        // Calculate width based on whether we have a save button
+        let viewWidth: CGFloat = hasSyncSource ? 220 : 200
+        let view = NSView.init(frame: NSRect(x: 0, y: 0, width: viewWidth, height: 25))
+
+        let labelWidth: CGFloat = hasSyncSource ? 120 : 140
+        let label = NSButton(frame: NSRect(x: 20, y: 2.5, width: labelWidth, height: 20))
         label.action = #selector(onClick(sender:))
         label.target = self
         label.title = title
@@ -46,7 +51,26 @@ class TmpDiskMenuItem: NSMenuItem {
         label.alignment = .left
         view.addSubview(label)
 
-        let recreate = NSButton(frame: NSRect(x: 160, y: 5, width: 15, height: 15))
+        var buttonX: CGFloat = hasSyncSource ? 140 : 160
+
+        // Add save button if sync source is configured
+        if hasSyncSource {
+            let save = NSButton(frame: NSRect(x: buttonX, y: 5, width: 15, height: 15))
+            save.action = #selector(onSave(sender:))
+            save.target = self
+            if #available(macOS 11.0, *) {
+                save.image = NSImage(systemSymbolName: "arrow.down.doc", accessibilityDescription: "Save")
+            } else {
+                save.title = "↓"
+            }
+            save.imagePosition = .imageOnly
+            save.isBordered = false
+            save.toolTip = NSLocalizedString("Save to source folder", comment: "")
+            view.addSubview(save)
+            buttonX += 20
+        }
+
+        let recreate = NSButton(frame: NSRect(x: buttonX, y: 5, width: 15, height: 15))
         recreate.action = #selector(onRecreate(sender:))
         recreate.target = self
         recreate.image = NSImage(named: "recreate_a")
@@ -54,8 +78,9 @@ class TmpDiskMenuItem: NSMenuItem {
         recreate.imagePosition = .imageOnly
         recreate.isBordered = false
         view.addSubview(recreate)
+        buttonX += 20
 
-        let eject = NSButton(frame: NSRect(x: 180, y: 5, width: 15, height: 15))
+        let eject = NSButton(frame: NSRect(x: buttonX, y: 5, width: 15, height: 15))
         eject.action = #selector(onEject(sender:))
         eject.target = self
         eject.image = NSImage(named: "eject")
@@ -66,21 +91,25 @@ class TmpDiskMenuItem: NSMenuItem {
 
         self.view = view
     }
-    
+
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Actions
-    
+
     @objc func onClick(sender: NSButton) {
         self.clickHandler()
     }
-    
+
+    @objc func onSave(sender: NSButton) {
+        self.saveHandler?()
+    }
+
     @objc func onRecreate(sender: NSButton) {
         self.recreateHandler()
     }
-    
+
     @objc func onEject(sender: NSButton) {
         self.ejectHandler()
     }
