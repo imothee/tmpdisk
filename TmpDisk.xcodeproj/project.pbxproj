@@ -50,7 +50,6 @@
 		22B88C402DA3303E00952C95 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
 		22B88C4D2DA3500500952C95 /* TmpDiskCLI in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B88C452DA3495300952C95 /* TmpDiskCLI */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		22B88C4E2DA35D6100952C95 /* FileSystemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2283B6182D9F6B7B007A55F5 /* FileSystemManager.swift */; };
-		22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D93DBD27B85E0F0024FB53 /* WindowManager.swift */; };
 		22CDE0012F24570100000001 /* TmpDiskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDE0002F24570100000001 /* TmpDiskConfig.swift */; };
 		22CDE0022F24570100000002 /* TmpDiskConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDE0002F24570100000001 /* TmpDiskConfig.swift */; };
 		22CDE0032F24570100000003 /* DiskOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDE0002F24570100000003 /* DiskOperations.swift */; };
@@ -59,6 +58,7 @@
 		22CDE0062F24570100000006 /* TmpDiskVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225587452B8FB23300136543 /* TmpDiskVolume.swift */; };
 		22CDE0072F24570100000007 /* DiskSizeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22B88C3E2DA3303700952C95 /* DiskSizeManager.swift */; };
 		22CDE0082F24570100000008 /* DiskSizeManagerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CDE0002F24570100000008 /* DiskSizeManagerUI.swift */; };
+		22D93DBE27B85E0F0024FB53 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D93DBD27B85E0F0024FB53 /* WindowManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -926,7 +926,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TmpDisk/TmpDisk.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1019;
@@ -960,11 +959,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TmpDisk/TmpDisk.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1019;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = AGZ3AP53DM;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1147,7 +1146,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TmpDiskLauncher/TmpDiskLauncher.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 10;
@@ -1181,7 +1179,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TmpDiskLauncher/TmpDiskLauncher.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 10;
