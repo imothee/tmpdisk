@@ -37,6 +37,29 @@ struct TmpDiskVolume: Hashable, Codable {
     var hasSyncSource: Bool {
         return syncSource != nil && !syncSource!.isEmpty
     }
+
+    /// Characters permitted in a volume name. Restricted to a conservative
+    /// allowlist because the name is interpolated into shell commands that may
+    /// run as root via the privileged helper — any shell metacharacter (`;`,
+    /// `"`, `` ` ``, `$`, `/`, newlines, …) could otherwise enable command
+    /// injection. See DiskOperations.createTmpFsCommand / createRamDiskCommand.
+    static let allowedNameCharacters = CharacterSet(charactersIn:
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 _-.")
+
+    /// Returns true if `name` is safe to use for a volume: non-empty, not a
+    /// directory traversal token, and free of any character outside the
+    /// allowlist.
+    static func isValidName(_ name: String) -> Bool {
+        if name.isEmpty || name == "." || name == ".." {
+            return false
+        }
+        return name.unicodeScalars.allSatisfy { allowedNameCharacters.contains($0) }
+    }
+
+    /// Convenience: whether this volume's name passes `isValidName`.
+    var hasValidName: Bool {
+        return TmpDiskVolume.isValidName(name)
+    }
     
     init() {
         self.fileSystem = FileSystemManager.defaultFileSystemName()

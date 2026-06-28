@@ -13,6 +13,7 @@ struct Constant {
 
 enum TmpDiskError: Error {
     case noName
+    case invalidName
     case exists
     case invalidSize
     case failed

@@ -89,6 +89,10 @@ class TmpDiskManager {
             return onCreate(.noName)
         }
 
+        if !volume.hasValidName {
+            return onCreate(.invalidName)
+        }
+
         if volume.size <= 0 {
             return onCreate(.invalidSize)
         }
