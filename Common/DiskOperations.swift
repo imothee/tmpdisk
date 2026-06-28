@@ -150,7 +150,7 @@ class DiskOperations {
             try FileManager.default.createDirectory(atPath: volume.path(), withIntermediateDirectories: true, attributes: nil)
         }
 
-        var command = "mount_tmpfs -s\(volume.size)M \(volume.noExec ? "-o noexec " : "")\(volume.path())"
+        var command = "mount_tmpfs -s\(volume.size)M \(volume.noExec ? "-o noexec " : "")\"\(volume.path())\""
 
         // Fix ownership if running with elevated privileges
         if fixOwnership {
@@ -255,6 +255,10 @@ class DiskOperations {
         // Validation
         if volume.name.isEmpty {
             return .failure(.noName, message: "Volume name is required")
+        }
+
+        if !volume.hasValidName {
+            return .failure(.invalidName, message: "Volume name may only contain letters, numbers, spaces, and . _ -")
         }
 
         if volume.size <= 0 {

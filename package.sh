@@ -15,5 +15,5 @@ npx appdmg@latest ./appdmg.json ./build/TmpDisk.dmg
 # Find the sparkle-project folder
 sparkle=$(find ~/Library/Developer/Xcode/DerivedData -maxdepth 1 -type d -print | grep -m1 'TmpDisk-')
 
-# Sign the dmg
-"$sparkle"/SourcePackages/artifacts/sparkle/Sparkle/bin/generate_appcast -f ./keys/dsa_priv.pem ./build
+# Generate appcast (uses EdDSA key from Keychain; import via keys/sparkle-keys.sh)
+"$sparkle"/SourcePackages/artifacts/sparkle/Sparkle/bin/generate_appcast ./build

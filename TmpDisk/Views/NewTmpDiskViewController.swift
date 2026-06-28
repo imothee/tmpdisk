@@ -248,6 +248,9 @@ class NewTmpDiskViewController: NSViewController, NSTextFieldDelegate {
                     case .noName:
                         self.showError(message: NSLocalizedString("Your TmpDisk must have a name", comment: ""))
                         break;
+                    case .invalidName:
+                        self.showError(message: NSLocalizedString("Volume name may only contain letters, numbers, spaces, and . _ -", comment: ""))
+                        break;
                     case .exists:
                         self.showError(message: NSLocalizedString("A volume with this name already exists", comment: ""))
                         break;

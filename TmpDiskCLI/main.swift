@@ -126,6 +126,20 @@ func executeEject(options: CLIOptions) {
         exit(1)
     }
 
+    // Honour warn-on-eject (#58): if the volume was created with --warn and still
+    // contains files, confirm before ejecting. --force skips the prompt for scripts.
+    if !options.force,
+       let volume = DiskOperations.findVolumeByName(volumeName),
+       volume.showWarning() {
+        print("Volume '\(volumeName)' has warn-on-eject enabled and still contains files.")
+        print("Eject anyway? [y/N] ", terminator: "")
+        let answer = readLine()?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ?? ""
+        if answer != "y" && answer != "yes" {
+            print("Eject cancelled.")
+            exit(0)
+        }
+    }
+
     let result = DiskOperations.ejectVolumeByName(volumeName, force: options.force)
 
     if result.success {

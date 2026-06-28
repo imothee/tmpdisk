@@ -10,11 +10,9 @@
 	<key>SUEnableSystemProfiling</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://appable.xyz/updates/tmpdisk.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
+	<string>https://cmdline.io/appcast/tmpdisk.xml</string>
 	<key>SUPublicEDKey</key>
-	<string>cHYVa9jmyIHtzvsj9w8WQ/L19rbBklLx75GNou5ipjw=</string>
+	<string>Oj76xpgCiiykzzZm+ISCAS7G+XKFUGRDDZq0ylbGXiM=</string>
 	<key>TmpDiskHelperVersion</key>
 	<string>5</string>
 </dict>

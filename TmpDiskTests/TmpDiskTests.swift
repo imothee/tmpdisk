@@ -17,7 +17,46 @@ class TmpDiskTests: XCTestCase {
             XCTAssertEqual(error!, TmpDiskError.noName)
         }
     }
-    
+
+    // MARK: - Volume name validation (shell-injection guard)
+
+    func testValidNamesAreAccepted() throws {
+        let valid = ["testvolume", "My Disk", "build.cache", "a-b_c.1", "RAM 2", "v2.3.0"]
+        for name in valid {
+            XCTAssertTrue(TmpDiskVolume.isValidName(name), "\"\(name)\" should be valid")
+        }
+    }
+
+    func testNamesWithShellMetacharactersAreRejected() throws {
+        // Each of these could break out of the shell commands run by the
+        // privileged helper as root if it were allowed through.
+        let invalid = [
+            "", ".", "..",
+            "a;b", "a\"b", "a`b", "a$b", "a/b", "a\\b",
+            "a&b", "a|b", "a(b)", "a>b", "a*b", "a'b",
+            "x; touch /tmp/pwned",
+            "$(whoami)",
+            "a\nb",
+        ]
+        for name in invalid {
+            XCTAssertFalse(TmpDiskVolume.isValidName(name), "\"\(name)\" should be rejected")
+        }
+    }
+
+    func testCreateTmpDiskRejectsInjectionName() throws {
+        let volume = TmpDiskVolume(name: "x; touch /tmp/tmpdisk_injection_test", size: 16)
+        var received: TmpDiskError?
+        // Invalid names short-circuit before any disk operation, so this
+        // callback runs synchronously.
+        TmpDiskManager.shared.createTmpDisk(volume: volume) { error in
+            received = error
+        }
+        XCTAssertEqual(received, TmpDiskError.invalidName)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: "/tmp/tmpdisk_injection_test"),
+                       "Injected command must not have executed")
+    }
+
+
     // MARK: - TmpDisk
     
     func testCreateTmpDiskSucceedsAndEjects() throws {
