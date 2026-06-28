@@ -10,7 +10,7 @@
 	<key>SUEnableSystemProfiling</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://appable.xyz/updates/tmpdisk.xml</string>
+	<string>https://cmdline.io/appcast/tmpdisk.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>Oj76xpgCiiykzzZm+ISCAS7G+XKFUGRDDZq0ylbGXiM=</string>
 	<key>TmpDiskHelperVersion</key>
