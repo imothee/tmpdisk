@@ -1,0 +1,11 @@
+{
+  "name": "tmpdisk-release-tools",
+  "private": true,
+  "scripts": {
+    "appcast:render": "sh BuildScripts/appcast.sh render all",
+    "appcast:publish": "sh BuildScripts/appcast.sh publish"
+  },
+  "devDependencies": {
+    "twinkle-appcast": "https://github.com/cosmicglue-io/twinkle/archive/8fdf6eb74ca51ba9d5d587d3c94e1032b68c79eb.tar.gz"
+  }
+}
