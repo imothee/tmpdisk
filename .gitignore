@@ -19,3 +19,4 @@ devenv.local.nix
 .pre-commit-config.yaml
 
 node_modules/
+appcast/dist/
