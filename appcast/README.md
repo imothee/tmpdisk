@@ -24,3 +24,13 @@ AWS_PROFILE=cg-prod npm run appcast:publish
 ```
 
 Publishing validates both manifests before any upload. Published objects are versioned in S3; CloudFront caches them for five minutes.
+
+## Offline metrics
+
+Download the retained CloudFront logs and generate local JSON and HTML reports:
+
+```sh
+AWS_PROFILE=cg-prod npm run appcast:report
+```
+
+Outputs are written to the gitignored `appcast/report/` directory. Raw logs remain local in `appcast/logs/`. The report counts update checks and estimates version adoption; it does not measure installations or completed downloads.

@@ -3,9 +3,10 @@
   "private": true,
   "scripts": {
     "appcast:render": "sh BuildScripts/appcast.sh render all",
-    "appcast:publish": "sh BuildScripts/appcast.sh publish"
+    "appcast:publish": "sh BuildScripts/appcast.sh publish",
+    "appcast:report": "sh BuildScripts/appcast-report.sh"
   },
   "devDependencies": {
-    "twinkle-appcast": "https://github.com/cosmicglue-io/twinkle/archive/8fdf6eb74ca51ba9d5d587d3c94e1032b68c79eb.tar.gz"
+    "twinkle-appcast": "https://github.com/cosmicglue-io/twinkle/archive/e45e3be7f9bf684ee123c9b790e9850feef14ae0.tar.gz"
   }
 }

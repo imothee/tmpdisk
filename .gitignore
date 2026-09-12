@@ -20,3 +20,5 @@ devenv.local.nix
 
 node_modules/
 appcast/dist/
+appcast/logs/
+appcast/report/
