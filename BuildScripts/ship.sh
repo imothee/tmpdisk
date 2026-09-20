@@ -106,7 +106,7 @@ else
   head_sha=$(git rev-parse HEAD)
   run_id=""
   for _ in $(seq 1 90); do
-    eval "$(python3 BuildScripts/asc.py "ciProducts/$ci_product/buildRuns?limit=5" 2>/dev/null \
+    eval "$(python3 BuildScripts/asc.py "ciProducts/$ci_product/buildRuns?limit=5&sort=-number" 2>/dev/null \
       | python3 -c "
 import json, sys
 sha = '$head_sha'
