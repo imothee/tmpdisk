@@ -49,11 +49,11 @@ class TmpDiskManager {
         // AutoCreate any saved TmpDisks
         for volume in self.getAutoCreateVolumes() {
             self.createTmpDisk(volume: volume) { error in
-                if let error = error {
-                    Logger.shared.error("Failed to auto-create volume '\(volume.name)': \(error.localizedDescription)")
-                    DispatchQueue.main.async {
-                        self.autoCreateError(name: volume.name, error: error)
-                    }
+                // .exists means the disk is already mounted, e.g. after an update relaunch — that is the goal state
+                guard let error = error, error != .exists else { return }
+                Logger.shared.error("Failed to auto-create volume '\(volume.name)': \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.autoCreateError(name: volume.name, error: error)
                 }
             }
         }
