@@ -71,7 +71,28 @@ struct TmpDiskVolume: Hashable, Codable {
         self.fileSystem = fileSystem ?? FileSystemManager.defaultFileSystemName()
     }
 
-    
+    // Tolerant decoding: .tmpdisk files written by older versions lack keys
+    // added later, and synthesized Codable treats missing non-optional keys as
+    // fatal. Only name is required.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        name = try c.decode(String.self, forKey: .name)
+        size = try c.decodeIfPresent(Int.self, forKey: .size) ?? 16
+        autoCreate = try c.decodeIfPresent(Bool.self, forKey: .autoCreate) ?? false
+        fileSystem = try c.decodeIfPresent(String.self, forKey: .fileSystem) ?? FileSystemManager.defaultFileSystemName()
+        indexed = try c.decodeIfPresent(Bool.self, forKey: .indexed) ?? false
+        noExec = try c.decodeIfPresent(Bool.self, forKey: .noExec) ?? false
+        hidden = try c.decodeIfPresent(Bool.self, forKey: .hidden) ?? false
+        warnOnEject = try c.decodeIfPresent(Bool.self, forKey: .warnOnEject) ?? false
+        autoEjectOnExit = try c.decodeIfPresent(Bool.self, forKey: .autoEjectOnExit) ?? false
+        folders = try c.decodeIfPresent([String].self, forKey: .folders) ?? []
+        icon = try c.decodeIfPresent(String.self, forKey: .icon)
+        mountPoint = try c.decodeIfPresent(String.self, forKey: .mountPoint)
+        syncSource = try c.decodeIfPresent(String.self, forKey: .syncSource)
+        syncInterval = try c.decodeIfPresent(Int.self, forKey: .syncInterval) ?? 0
+        saveOnEject = try c.decodeIfPresent(SaveOnEjectMode.self, forKey: .saveOnEject) ?? .prompt
+    }
+
     init?(from dictionary: Dictionary<String, Any>) {
         guard let name = dictionary["name"] as? String,
               let size = dictionary["size"] as? Int,

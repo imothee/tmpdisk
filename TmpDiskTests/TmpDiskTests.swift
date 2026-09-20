@@ -61,8 +61,25 @@ class TmpDiskTests: XCTestCase {
     }
 
 
+    // MARK: - Metadata decoding
+
+    func testDecodesPreSyncMetadataFile() throws {
+        // .tmpdisk files written by versions predating the sync/auto-eject
+        // fields must still decode — synthesized Codable treats missing
+        // non-optional keys as fatal, which hid already-mounted disks.
+        let json = """
+        {"name":"Tmp","size":512,"autoCreate":true,"fileSystem":"APFS","indexed":false,"noExec":false,"hidden":false,"warnOnEject":false,"folders":[]}
+        """.data(using: .utf8)!
+        let volume = try JSONDecoder().decode(TmpDiskVolume.self, from: json)
+        XCTAssertEqual(volume.name, "Tmp")
+        XCTAssertEqual(volume.fileSystem, "APFS")
+        XCTAssertFalse(volume.autoEjectOnExit)
+        XCTAssertEqual(volume.syncInterval, 0)
+        XCTAssertEqual(volume.saveOnEject, .prompt)
+    }
+
     // MARK: - TmpDisk
-    
+
     func testCreateTmpDiskSucceedsAndEjects() throws {
         let volume = TmpDiskVolume(name: "testvolume", size: 128)
         let expectation = self.expectation(description: "Creating")
