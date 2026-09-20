@@ -152,6 +152,7 @@ if [ -n "${SKIP_DMG:-}" ] && [ -f build/TmpDisk.dmg ]; then
   echo "== dmg: reusing build/TmpDisk.dmg =="
 else
   echo "== dmg =="
+  rm -f build/TmpDisk.dmg
   npx appdmg@latest ./appdmg.json ./build/TmpDisk.dmg
   if [ -n "${SKIP_NOTARIZE:-}" ]; then
     echo "== notarize: skipped (app exported notarized) =="
