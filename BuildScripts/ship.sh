@@ -3,7 +3,7 @@
 # Ship a TmpDisk release end to end:
 #   roll versions -> push -> Xcode Cloud archive -> download xcarchive ->
 #   export (Developer ID) -> dmg -> notarize -> sign for Sparkle ->
-#   commit+tag+push -> GitHub release -> publish appcasts
+#   tag+push -> GitHub release -> publish appcasts
 #
 #   sh BuildScripts/ship.sh 2.3.1
 #
@@ -165,27 +165,25 @@ else
 fi
 
 # --- sparkle signature -> current feed enclosure -----------------------------
-if ! grep -q '"edSignature"' appcast/current.json; then
-  echo "== sign for sparkle =="
-  sig_out=$("$sparkle_bin/sign_update" build/TmpDisk.dmg)
-  ed_sig=$(echo "$sig_out" | sed -n 's/.*sparkle:edSignature="\([^"]*\)".*/\1/p')
-  length=$(echo "$sig_out" | sed -n 's/.*length="\([0-9]*\)".*/\1/p')
-  [ -n "$ed_sig" ] && [ -n "$length" ] || die "could not parse sign_update output"
-  dmg_url="https://github.com/imothee/tmpdisk/releases/download/$tag/TmpDisk.dmg"
-  python3 - "$dmg_url" "$length" "$ed_sig" <<'EOF'
+# Committed manifests stay templates; the signed enclosure goes into a
+# throwaway manifest under gitignored appcast/dist/ at publish time.
+echo "== sign for sparkle =="
+sig_out=$("$sparkle_bin/sign_update" build/TmpDisk.dmg)
+ed_sig=$(echo "$sig_out" | sed -n 's/.*sparkle:edSignature="\([^"]*\)".*/\1/p')
+length=$(echo "$sig_out" | sed -n 's/.*length="\([0-9]*\)".*/\1/p')
+[ -n "$ed_sig" ] && [ -n "$length" ] || die "could not parse sign_update output"
+dmg_url="https://github.com/imothee/tmpdisk/releases/download/$tag/TmpDisk.dmg"
+mkdir -p appcast/dist
+python3 - "$dmg_url" "$length" "$ed_sig" <<'EOF'
 import json, sys
 url, length, sig = sys.argv[1:4]
-path = "appcast/current.json"
-data = json.load(open(path))
+data = json.load(open("appcast/current.json"))
 rel = data["releases"][0]
 rel.pop("downloadPageUrl", None)
 rel.update(url=url, length=int(length),
            mimeType="application/octet-stream", edSignature=sig)
-json.dump(data, open(path, "w"), indent=2)
+json.dump(data, open("appcast/dist/current.json", "w"), indent=2)
 EOF
-  git add appcast/current.json
-  git commit -m "chore: $tag sparkle enclosure" -- appcast/current.json 2>/dev/null || true
-fi
 
 # --- tag, push, github release ----------------------------------------------
 git tag -f "$tag" >/dev/null
@@ -200,8 +198,8 @@ fi
 
 # --- publish appcasts --------------------------------------------------------
 echo "== publish appcasts =="
-npm run appcast:render
-AWS_PROFILE="$aws_profile" npm run appcast:publish -- all
+CURRENT_MANIFEST="$project_dir/appcast/dist/current.json" \
+  AWS_PROFILE="$aws_profile" npm run appcast:publish -- all
 
 # --- verify ------------------------------------------------------------------
 echo "== verify =="

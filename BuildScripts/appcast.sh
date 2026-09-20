@@ -29,15 +29,21 @@ mkdir -p "$output_dir"
 
 for feed in current legacy; do
   output_name="tmpdisk.xml"
+  manifest="$project_dir/appcast/$feed.json"
   if [ "$feed" = "legacy" ]; then
     output_name="tmpdisk-legacy.xml"
+  elif [ -n "${CURRENT_MANIFEST:-}" ]; then
+    manifest="$CURRENT_MANIFEST"
   fi
   "$project_dir/node_modules/.bin/twinkle" render \
-    "$project_dir/appcast/$feed.json" \
+    "$manifest" \
     "$output_dir/$output_name"
 done
 
 if [ "$action" = "publish" ]; then
+  if [ -z "${CURRENT_MANIFEST:-}" ]; then
+    echo "warning: current feed publishing without signed enclosure (template)" >&2
+  fi
   for feed in $feeds; do
     output_name="tmpdisk.xml"
     if [ "$feed" = "legacy" ]; then
