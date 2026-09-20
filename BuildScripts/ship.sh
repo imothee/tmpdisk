@@ -136,13 +136,19 @@ for a in json.load(sys.stdin)['data']:
   [ -n "$archive_url" ] || die "no xcarchive artifact on build $run_id"
 
   echo "== download + export =="
-  rm -rf build/TmpDisk.xcarchive build/export build/cloud-archive.zip
+  rm -rf build/*.xcarchive build/export build/cloud-archive.zip
   curl -fsSL "$archive_url" -o build/cloud-archive.zip
   ditto -x -k build/cloud-archive.zip build/
-  xcarchive=$(find build -maxdepth 2 -name '*.xcarchive' | head -1)
+  xcarchive=$(find build -maxdepth 1 -name '*.xcarchive' | head -1)
   [ -n "$xcarchive" ] || die "downloaded zip had no .xcarchive"
   xcodebuild -exportArchive -archivePath "$xcarchive" \
     -exportOptionsPlist BuildScripts/ExportOptions.plist -exportPath build/export
+  exported_build=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" \
+    build/export/TmpDisk.app/Contents/Info.plist)
+  expected_build=$(sed -n 's/.*CURRENT_PROJECT_VERSION = \([0-9][0-9]*\);/\1/p' \
+    TmpDisk.xcodeproj/project.pbxproj | sort -rn | head -1)
+  [ "$exported_build" = "$expected_build" ] \
+    || die "exported app is build $exported_build, expected $expected_build — wrong archive?"
   rm -rf TmpDisk.app
   mv build/export/TmpDisk.app .
 fi
