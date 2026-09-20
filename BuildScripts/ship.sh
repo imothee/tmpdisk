@@ -1,10 +1,15 @@
 #!/bin/sh
 
 # Ship a TmpDisk release end to end:
-#   roll versions -> archive -> export (Developer ID) -> dmg -> notarize ->
-#   sign for Sparkle -> commit+tag+push -> GitHub release -> publish appcasts
+#   roll versions -> push -> Xcode Cloud archive -> download xcarchive ->
+#   export (Developer ID) -> dmg -> notarize -> sign for Sparkle ->
+#   commit+tag+push -> GitHub release -> publish appcasts
 #
 #   sh BuildScripts/ship.sh 2.3.1
+#
+# The archive runs on Xcode Cloud because the project's 10.13 deployment
+# target is rejected by Xcode 27+. The workflow is pinned to Xcode 26.6;
+# the .xcarchive artifact is exported locally with the Developer ID cert.
 #
 # Re-runnable: finished phases are skipped when their artifacts exist.
 #   SKIP_BUILD=1     reuse ./TmpDisk.app
@@ -86,14 +91,57 @@ else
 fi
 
 # --- build -------------------------------------------------------------------
+# The project targets macOS 10.13, which Xcode 27 refuses to build — releases
+# ride the Xcode Cloud "Default" workflow (pinned to Xcode 26.6) and we export
+# the cloud archive with the local Developer ID cert.
+ci_product="C11173BB-E1DF-4610-A792-1C67C837FF8A"
+
 if [ -n "${SKIP_BUILD:-}" ] && [ -d "TmpDisk.app" ]; then
   echo "== archive: reusing ./TmpDisk.app =="
 else
-  echo "== archive =="
-  rm -rf build/TmpDisk.xcarchive build/export
-  xcodebuild -project TmpDisk.xcodeproj -scheme TmpDisk -configuration Release \
-    -archivePath build/TmpDisk.xcarchive -allowProvisioningUpdates archive
-  xcodebuild -exportArchive -archivePath build/TmpDisk.xcarchive \
+  echo "== push (triggers xcode cloud) =="
+  git push origin main
+
+  echo "== xcode cloud build =="
+  head_sha=$(git rev-parse HEAD)
+  run_id=""
+  for _ in $(seq 1 90); do
+    eval "$(python3 BuildScripts/asc.py "ciProducts/$ci_product/buildRuns?limit=5" 2>/dev/null \
+      | python3 -c "
+import json, sys
+sha = '$head_sha'
+for r in json.load(sys.stdin)['data']:
+    if r['attributes']['sourceCommit']['commitSha'] != sha:
+        continue
+    a = r['attributes']
+    print('run_id=%s' % r['id'])
+    print('run_progress=%s' % a['executionProgress'])
+    print('run_status=%s' % (a['completionStatus'] or ''))
+    break
+" 2>/dev/null)"
+    [ "${run_progress:-}" = "COMPLETE" ] && break
+    sleep 10
+  done
+  [ -n "$run_id" ] || die "no cloud build found for $head_sha — check App Store Connect"
+  [ "${run_status:-}" = "SUCCEEDED" ] || die "cloud build $run_id ended: ${run_status:-unknown}"
+  echo "cloud build $run_id succeeded"
+
+  action_id=$(python3 BuildScripts/asc.py "ciBuildRuns/$run_id/actions" 2>/dev/null \
+    | python3 -c "import json,sys; print(json.load(sys.stdin)['data'][0]['id'])")
+  archive_url=$(python3 BuildScripts/asc.py "ciBuildActions/$action_id/artifacts" 2>/dev/null \
+    | python3 -c "import json,sys
+for a in json.load(sys.stdin)['data']:
+    if a['attributes']['fileType'] == 'ARCHIVE':
+        print(a['attributes']['downloadUrl']); break")
+  [ -n "$archive_url" ] || die "no xcarchive artifact on build $run_id"
+
+  echo "== download + export =="
+  rm -rf build/TmpDisk.xcarchive build/export build/cloud-archive.zip
+  curl -fsSL "$archive_url" -o build/cloud-archive.zip
+  ditto -x -k build/cloud-archive.zip build/
+  xcarchive=$(find build -maxdepth 2 -name '*.xcarchive' | head -1)
+  [ -n "$xcarchive" ] || die "downloaded zip had no .xcarchive"
+  xcodebuild -exportArchive -archivePath "$xcarchive" \
     -exportOptionsPlist BuildScripts/ExportOptions.plist -exportPath build/export
   rm -rf TmpDisk.app
   mv build/export/TmpDisk.app .
