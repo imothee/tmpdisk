@@ -7,7 +7,10 @@
       "publishedAt": "2026-06-28T22:25:06Z",
       "minimumSystemVersion": "10.13",
       "description": "TmpDisk 2.3.1 uses a rotated Sparkle signing key. If you are upgrading from an older release, download and replace the app manually once. Future updates will work normally.",
-      "downloadPageUrl": "https://github.com/imothee/tmpdisk/releases/tag/v2.3.1"
+      "url": "https://github.com/imothee/tmpdisk/releases/download/v2.3.1/TmpDisk.dmg",
+      "length": 8310586,
+      "mimeType": "application/octet-stream",
+      "edSignature": "fRnoAERBFbSyztOHBCRz5rKFm2RrDKDZaEl2Hi39OYOHtLq6gwTarxx5hGUFa/dEY7JMs9nPUb2u8mVW/r2fBw=="
     }
   ]
 }
